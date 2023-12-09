@@ -10,6 +10,11 @@ config_version=5
 
 [application]
 
-config/name="The Gallery Heist"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/name="Project Gallery"
+run/main_scene="res://Scenes/Main.tscn"
+config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

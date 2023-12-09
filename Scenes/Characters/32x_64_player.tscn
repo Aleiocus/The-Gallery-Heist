@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxvwe4qf418wf"]
+
+[ext_resource type="Script" path="res://Scripts/Playermovement.gd" id="1_w1q02"]
+[ext_resource type="Texture2D" uid="uid://rwc5jta86mgb" path="res://Art Assets/TEST ASSETS/32x64 placeholder.png" id="2_al54x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_756lt"]
+size = Vector2(32, 64)
+
+[node name="32x64 Player" type="CharacterBody2D"]
+script = ExtResource("1_w1q02")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_al54x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
+shape = SubResource("RectangleShape2D_756lt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreText" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0

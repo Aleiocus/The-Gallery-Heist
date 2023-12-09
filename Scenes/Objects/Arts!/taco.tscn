@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcg204fjqwgyj"]
+
+[ext_resource type="Texture2D" uid="uid://diknbc5ehstp1" path="res://Art Assets/Submitted Arts/Taco (Kipparok).png" id="1_vst84"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xlk5v"]
+size = Vector2(32, 32)
+
+[node name="Taco" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xlk5v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vst84")
