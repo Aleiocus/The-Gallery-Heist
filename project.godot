@@ -13,3 +13,10 @@ config_version=5
 config/name="The Gallery Heist"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=180
+window/size/resizable=false
+window/stretch/mode="canvas_items"
