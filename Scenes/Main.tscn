@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=3 uid="uid://37v553op2e5w"]
+[gd_scene load_steps=13 format=3 uid="uid://37v553op2e5w"]
 
-[ext_resource type="PackedScene" uid="uid://dn62tcimhrunj" path="res://Scenes/Characters/32x_48_player.tscn" id="1_du2on"]
 [ext_resource type="Texture2D" uid="uid://bwemdou1f7s6l" path="res://Art Assets/TEST ASSETS/Testtiles V1.png" id="2_4nl6y"]
 [ext_resource type="PackedScene" uid="uid://c7syapdr50u6l" path="res://Scenes/Objects/Arts!/mountain_view.tscn" id="3_87iwf"]
 [ext_resource type="PackedScene" uid="uid://dun8fy7g16jkw" path="res://Scenes/Objects/Arts!/pizza.tscn" id="3_wqc1f"]
@@ -9,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bga4fy61gu3n7" path="res://Scenes/Objects/Arts!/the_moon_berry.tscn" id="7_38air"]
 [ext_resource type="Script" path="res://Scripts/coin.gd" id="8_6et1m"]
 [ext_resource type="PackedScene" uid="uid://bpvpxaasgitog" path="res://Scenes/Objects/Arts!/bounty_of_the_forest.tscn" id="8_dn603"]
+[ext_resource type="PackedScene" uid="uid://k2awgkbabx7v" path="res://Scenes/Characters/32x_32_player.tscn" id="9_thegr"]
+[ext_resource type="PackedScene" uid="uid://bh05qlx4rmlm0" path="res://Scenes/Objects/Arts!/stormy_cloud.tscn" id="10_y6vvb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0136i"]
 texture = ExtResource("2_4nl6y")
@@ -129,7 +130,7 @@ position = Vector2(219, -5)
 position = Vector2(414, -85)
 
 [node name="Taco" parent="." instance=ExtResource("5_dr3w4")]
-position = Vector2(279, 0)
+position = Vector2(276, 5)
 
 [node name="Mountain View" parent="." instance=ExtResource("3_87iwf")]
 position = Vector2(354, -90)
@@ -141,5 +142,8 @@ position = Vector2(167, 7)
 position = Vector2(-43, 1)
 script = ExtResource("8_6et1m")
 
-[node name="32x48 Player" parent="." instance=ExtResource("1_du2on")]
-position = Vector2(32, 3)
+[node name="Stormy Cloud" parent="." instance=ExtResource("10_y6vvb")]
+position = Vector2(350, 4)
+
+[node name="32x32 Player" parent="." instance=ExtResource("9_thegr")]
+position = Vector2(51, 12)
