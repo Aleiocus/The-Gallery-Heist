@@ -1,23 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://k2awgkbabx7v"]
 
-[ext_resource type="Script" path="res://Scripts/player_movement.gd" id="1_vqj8n"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_8gmhn"]
 [ext_resource type="Texture2D" uid="uid://dyj04axd7scdn" path="res://Resources/Textures/PLACEHOLDERS/Saul_32_px By June.png" id="2_0gp6m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m23qb"]
 radius = 13.0
 
-[node name="32x32 Player" type="CharacterBody2D"]
-script = ExtResource("1_vqj8n")
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_8gmhn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_m23qb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0gp6m")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -55)
-zoom = Vector2(3, 3)
+zoom = Vector2(0.5, 0.5)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

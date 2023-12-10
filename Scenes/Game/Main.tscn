@@ -1,17 +1,18 @@
 [gd_scene load_steps=13 format=3 uid="uid://bf0h4cvoovrh2"]
 
-[ext_resource type="Texture2D" uid="uid://bwemdou1f7s6l" path="res://Resources/Textures/PLACEHOLDERS/Testtiles V1.png" id="2_4nl6y"]
-[ext_resource type="PackedScene" uid="uid://c7syapdr50u6l" path="res://Scenes/Objects/Artwork/mountain_view.tscn" id="3_87iwf"]
-[ext_resource type="PackedScene" uid="uid://dun8fy7g16jkw" path="res://Scenes/Objects/Artwork/pizza.tscn" id="3_wqc1f"]
-[ext_resource type="PackedScene" uid="uid://blmuclkduuwpb" path="res://Scenes/Objects/Artwork/snowy_day.tscn" id="4_bit4y"]
-[ext_resource type="PackedScene" uid="uid://bcg204fjqwgyj" path="res://Scenes/Objects/Artwork/taco.tscn" id="5_dr3w4"]
-[ext_resource type="PackedScene" uid="uid://bga4fy61gu3n7" path="res://Scenes/Objects/Artwork/the_moon_berry.tscn" id="7_38air"]
-[ext_resource type="PackedScene" uid="uid://bpvpxaasgitog" path="res://Scenes/Objects/Artwork/bounty_of_the_forest.tscn" id="8_dn603"]
-[ext_resource type="PackedScene" uid="uid://k2awgkbabx7v" path="res://Scenes/Characters/Saul/32x_32_player.tscn" id="9_thegr"]
-[ext_resource type="PackedScene" uid="uid://bh05qlx4rmlm0" path="res://Scenes/Objects/Artwork/stormy_cloud.tscn" id="10_y6vvb"]
+[ext_resource type="Texture2D" uid="uid://bwemdou1f7s6l" path="res://Resources/Textures/PLACEHOLDERS/Testtiles V1.png" id="1_qcl3m"]
+[ext_resource type="PackedScene" uid="uid://dveolvcg42tyv" path="res://Scenes/Objects/artwork.tscn" id="3_vwxbb"]
+[ext_resource type="Texture2D" uid="uid://vv8ikhyjkbuy" path="res://Resources/Textures/Artwork/Bounty of the Forest (Val).png" id="4_fsxsu"]
+[ext_resource type="Texture2D" uid="uid://c6e64ypdwau7x" path="res://Resources/Textures/Artwork/The Moon Berry (starizo).png" id="5_nl1qt"]
+[ext_resource type="Texture2D" uid="uid://f86vigbom1np" path="res://Resources/Textures/Artwork/Pizza(MrHasuu).png" id="6_s5fdt"]
+[ext_resource type="Texture2D" uid="uid://diknbc5ehstp1" path="res://Resources/Textures/Artwork/Taco (Kipparok).png" id="7_bk118"]
+[ext_resource type="Texture2D" uid="uid://cgxdbe1fqpde" path="res://Resources/Textures/Artwork/Stormy Cloud (PineappleUDH).png" id="8_jwvs0"]
+[ext_resource type="PackedScene" uid="uid://k2awgkbabx7v" path="res://Scenes/Characters/Saul/32x_32_player.tscn" id="9_3cgxl"]
+[ext_resource type="Texture2D" uid="uid://d0f6vjjd1tao8" path="res://Resources/Textures/Artwork/Mountain View (Brianna).png" id="9_3kh2e"]
+[ext_resource type="Texture2D" uid="uid://cp5jukr84ecrt" path="res://Resources/Textures/Artwork/Snowy_day_32_px(June).png" id="10_1jnkv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0136i"]
-texture = ExtResource("2_4nl6y")
+texture = ExtResource("1_qcl3m")
 texture_region_size = Vector2i(18, 18)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -115,31 +116,6 @@ tile_size = Vector2i(18, 18)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0136i")
 
-[sub_resource type="GDScript" id="GDScript_esq7t"]
-script/source = "extends Area2D
-
-#Set range/speed of coinbob
-var bob_height : float = 5.0
-var bob_speed : float = 5.0
-
-#Establish Start location and variables for sinwave
-@onready var start_y : float = global_position.y
-var t : float = 0.0
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	#Calculation for sinwave bob
-	t += delta
-	var d = (sin(t * bob_speed) + 1) / 2
-	global_position.y = start_y + (d * bob_height)
-
-#Call function for body being entered and increase score when collected by player
-func _on_body_entered(body):
-	if body.is_in_group(\"Player\"):
-		body.add_score(1)
-		queue_free()
-"
-
 [node name="Main" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -147,27 +123,35 @@ tile_set = SubResource("TileSet_0b7ta")
 format = 2
 layer_0/tile_data = PackedInt32Array(196605, 131072, 1, 196606, 131072, 1, 196607, 131072, 1, 131072, 131072, 1, 131073, 131072, 1, 131074, 131072, 1, 131075, 131072, 1, 262141, 131072, 2, 262142, 131072, 2, 262143, 131072, 2, 196608, 131072, 2, 196609, 131072, 2, 196610, 131072, 2, 196611, 131072, 2, 196604, 65536, 1, 262140, 65536, 2, 131076, 196608, 1, 196612, 196608, 2, 131081, 131072, 1, 131082, 131072, 1, 131083, 131072, 1, 131084, 131072, 1, 131085, 131072, 1, 131086, 131072, 1, 131087, 131072, 1, 131088, 131072, 1, 131089, 131072, 1, 131090, 131072, 1, 131091, 131072, 1, 131092, 131072, 1, 131093, 131072, 1, 131094, 131072, 1, 131095, 131072, 1, 131096, 131072, 1, 131097, 131072, 1, -196589, 131072, 1, -196588, 131072, 1, -196587, 131072, 1, -196586, 131072, 1, -131053, 131072, 2, -131052, 131072, 2, -131051, 131072, 2, -131050, 131072, 2, -131049, 196608, 2, -196585, 196608, 1, -131054, 65536, 2, -196590, 65536, 1, 131080, 65536, 1, 196616, 65536, 2, 131098, 196608, 1, 196634, 196608, 2, 196633, 131072, 2, 196632, 131072, 2, 196631, 131072, 2, 196630, 131072, 2, 196629, 131072, 2, 196628, 131072, 2, 196627, 131072, 2, 196626, 131072, 2, 196625, 131072, 2, 196624, 131072, 2, 196623, 131072, 2, 196622, 131072, 2, 196621, 131072, 2, 196620, 131072, 2, 196619, 131072, 2, 196618, 131072, 2, 196617, 131072, 2)
 
-[node name="Pizza" parent="." instance=ExtResource("3_wqc1f")]
-position = Vector2(219, -5)
+[node name="Art" type="Node2D" parent="."]
 
-[node name="Snowy Day" parent="." instance=ExtResource("4_bit4y")]
-position = Vector2(414, -85)
-
-[node name="Taco" parent="." instance=ExtResource("5_dr3w4")]
-position = Vector2(276, 5)
-
-[node name="Mountain View" parent="." instance=ExtResource("3_87iwf")]
-position = Vector2(354, -90)
-
-[node name="The Moon Berry" parent="." instance=ExtResource("7_38air")]
-position = Vector2(167, 7)
-
-[node name="Bounty of the Forest" parent="." instance=ExtResource("8_dn603")]
+[node name="Artwork" parent="Art" instance=ExtResource("3_vwxbb")]
 position = Vector2(-43, 1)
-script = SubResource("GDScript_esq7t")
+_texture = ExtResource("4_fsxsu")
 
-[node name="Stormy Cloud" parent="." instance=ExtResource("10_y6vvb")]
+[node name="Artwork2" parent="Art" instance=ExtResource("3_vwxbb")]
+position = Vector2(167, 7)
+_texture = ExtResource("5_nl1qt")
+
+[node name="Artwork3" parent="Art" instance=ExtResource("3_vwxbb")]
+position = Vector2(219, -5)
+_texture = ExtResource("6_s5fdt")
+
+[node name="Artwork4" parent="Art" instance=ExtResource("3_vwxbb")]
+position = Vector2(276, 5)
+_texture = ExtResource("7_bk118")
+
+[node name="Artwork5" parent="Art" instance=ExtResource("3_vwxbb")]
 position = Vector2(350, 4)
+_texture = ExtResource("8_jwvs0")
 
-[node name="32x32 Player" parent="." instance=ExtResource("9_thegr")]
+[node name="Artwork6" parent="Art" instance=ExtResource("3_vwxbb")]
+position = Vector2(354, -90)
+_texture = ExtResource("9_3kh2e")
+
+[node name="Artwork7" parent="Art" instance=ExtResource("3_vwxbb")]
+position = Vector2(414, -85)
+_texture = ExtResource("10_1jnkv")
+
+[node name="Player" parent="." instance=ExtResource("9_3cgxl")]
 position = Vector2(51, 12)

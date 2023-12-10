@@ -11,9 +11,18 @@ config_version=5
 [application]
 
 config/name="Project Gallery"
-run/main_scene="res://Scenes/Main.tscn"
+run/main_scene="res://Scenes/Game/Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=180
+window/size/resizable=false
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
 
 [input]
 
