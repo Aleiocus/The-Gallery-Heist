@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diknbc5ehstp1"
-path="res://.godot/imported/Taco (Kipparok).png-8021c3406e405c31a73fbe667ef6df47.ctex"
+uid="uid://bwemdou1f7s6l"
+path="res://.godot/imported/Testtiles V1.png-5c79366ca7a00cadc7dc7804503099d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/Submitted Arts/Taco (Kipparok).png"
-dest_files=["res://.godot/imported/Taco (Kipparok).png-8021c3406e405c31a73fbe667ef6df47.ctex"]
+source_file="res://Resources/Textures/PLACEHOLDERS/Testtiles V1.png"
+dest_files=["res://.godot/imported/Testtiles V1.png-5c79366ca7a00cadc7dc7804503099d6.ctex"]
 
 [params]
 

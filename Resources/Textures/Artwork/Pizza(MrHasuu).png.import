@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwemdou1f7s6l"
-path="res://.godot/imported/Testtiles V1.png-82571cc98cd2967535dd811b9143ea98.ctex"
+uid="uid://f86vigbom1np"
+path="res://.godot/imported/Pizza(MrHasuu).png-c0c5e85004d4529b0af237a4de073a23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/TEST ASSETS/Testtiles V1.png"
-dest_files=["res://.godot/imported/Testtiles V1.png-82571cc98cd2967535dd811b9143ea98.ctex"]
+source_file="res://Resources/Textures/Artwork/Pizza(MrHasuu).png"
+dest_files=["res://.godot/imported/Pizza(MrHasuu).png-c0c5e85004d4529b0af237a4de073a23.ctex"]
 
 [params]
 
