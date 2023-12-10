@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6e64ypdwau7x"
-path="res://.godot/imported/The Moon Berry (starizo).png-6cdead9c36a31b63a04e2d60ac83b8fd.ctex"
+uid="uid://d0f6vjjd1tao8"
+path="res://.godot/imported/Mountain View (Brianna).png-36d4a7ae82482090cd286eb24757d0af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/Submitted Arts/The Moon Berry (starizo).png"
-dest_files=["res://.godot/imported/The Moon Berry (starizo).png-6cdead9c36a31b63a04e2d60ac83b8fd.ctex"]
+source_file="res://Resources/Textures/Artwork/Mountain View (Brianna).png"
+dest_files=["res://.godot/imported/Mountain View (Brianna).png-36d4a7ae82482090cd286eb24757d0af.ctex"]
 
 [params]
 

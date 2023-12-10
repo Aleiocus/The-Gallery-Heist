@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp5jukr84ecrt"
-path="res://.godot/imported/Snowy_day_32_px(June).png-77ab366014ab8958851684484513c8f3.ctex"
+uid="uid://diknbc5ehstp1"
+path="res://.godot/imported/Taco (Kipparok).png-26a86457ec6602ae4c36825af38c72a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/Submitted Arts/Snowy_day_32_px(June).png"
-dest_files=["res://.godot/imported/Snowy_day_32_px(June).png-77ab366014ab8958851684484513c8f3.ctex"]
+source_file="res://Resources/Textures/Artwork/Taco (Kipparok).png"
+dest_files=["res://.godot/imported/Taco (Kipparok).png-26a86457ec6602ae4c36825af38c72a0.ctex"]
 
 [params]
 

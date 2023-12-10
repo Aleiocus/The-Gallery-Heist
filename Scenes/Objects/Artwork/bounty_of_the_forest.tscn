@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bpvpxaasgitog"]
 
-[ext_resource type="Texture2D" uid="uid://vv8ikhyjkbuy" path="res://Art Assets/Submitted Arts/Bounty of the Forest (Val).png" id="1_ramuf"]
+[ext_resource type="Texture2D" uid="uid://vv8ikhyjkbuy" path="res://Resources/Textures/Artwork/Bounty of the Forest (Val).png" id="1_ramuf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wndj"]
 size = Vector2(48, 48)

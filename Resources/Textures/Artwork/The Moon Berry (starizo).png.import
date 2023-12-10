@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyj04axd7scdn"
-path="res://.godot/imported/Saul_32_px By June.png-8e16adecd883702e61ce6e8a1c364d5d.ctex"
+uid="uid://c6e64ypdwau7x"
+path="res://.godot/imported/The Moon Berry (starizo).png-da251c530d4daa8332ab8aede62d2a00.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/TEST ASSETS/Saul_32_px By June.png"
-dest_files=["res://.godot/imported/Saul_32_px By June.png-8e16adecd883702e61ce6e8a1c364d5d.ctex"]
+source_file="res://Resources/Textures/Artwork/The Moon Berry (starizo).png"
+dest_files=["res://.godot/imported/The Moon Berry (starizo).png-da251c530d4daa8332ab8aede62d2a00.ctex"]
 
 [params]
 

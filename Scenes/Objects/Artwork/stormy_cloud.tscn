@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bh05qlx4rmlm0"]
 
-[ext_resource type="Texture2D" uid="uid://cgxdbe1fqpde" path="res://Art Assets/Submitted Arts/Stormy Cloud (PineappleUDH).png" id="1_i27or"]
+[ext_resource type="Texture2D" uid="uid://cgxdbe1fqpde" path="res://Resources/Textures/Artwork/Stormy Cloud (PineappleUDH).png" id="1_i27or"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t0rq"]
 size = Vector2(32, 32)

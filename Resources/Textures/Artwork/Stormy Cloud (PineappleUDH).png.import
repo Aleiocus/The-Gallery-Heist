@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f86vigbom1np"
-path="res://.godot/imported/Pizza(MrHasuu).png-bc8101a08aa54525adafb237efe8c1f8.ctex"
+uid="uid://cgxdbe1fqpde"
+path="res://.godot/imported/Stormy Cloud (PineappleUDH).png-d04fac426f13654ca028a8f0f032b65f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/Submitted Arts/Pizza(MrHasuu).png"
-dest_files=["res://.godot/imported/Pizza(MrHasuu).png-bc8101a08aa54525adafb237efe8c1f8.ctex"]
+source_file="res://Resources/Textures/Artwork/Stormy Cloud (PineappleUDH).png"
+dest_files=["res://.godot/imported/Stormy Cloud (PineappleUDH).png-d04fac426f13654ca028a8f0f032b65f.ctex"]
 
 [params]
 

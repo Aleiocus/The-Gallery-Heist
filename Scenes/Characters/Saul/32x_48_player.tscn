@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dn62tcimhrunj"]
 
-[ext_resource type="Script" path="res://Scripts/Playermovement.gd" id="1_bh4qe"]
-[ext_resource type="Texture2D" uid="uid://dgq5y4hdxgyqo" path="res://Art Assets/TEST ASSETS/32x48.png" id="2_clyhr"]
+[ext_resource type="Script" path="res://scripts/Playermovement.gd" id="1_bh4qe"]
+[ext_resource type="Texture2D" uid="uid://dgq5y4hdxgyqo" path="res://Resources/Textures/PLACEHOLDERS/32x48.png" id="2_clyhr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_csikw"]
 size = Vector2(32, 48)

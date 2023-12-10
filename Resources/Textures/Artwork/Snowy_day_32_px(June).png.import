@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0f6vjjd1tao8"
-path="res://.godot/imported/Mountain View (Brianna).png-165323b22238399ad6204e18a0b32112.ctex"
+uid="uid://cp5jukr84ecrt"
+path="res://.godot/imported/Snowy_day_32_px(June).png-e7a5462a790647c18ce144cdb966118a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/Submitted Arts/Mountain View (Brianna).png"
-dest_files=["res://.godot/imported/Mountain View (Brianna).png-165323b22238399ad6204e18a0b32112.ctex"]
+source_file="res://Resources/Textures/Artwork/Snowy_day_32_px(June).png"
+dest_files=["res://.godot/imported/Snowy_day_32_px(June).png-e7a5462a790647c18ce144cdb966118a.ctex"]
 
 [params]
 
