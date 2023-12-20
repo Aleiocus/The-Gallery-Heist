@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1kjxca7t8px"]
+
+[ext_resource type="Script" path="res://Scenes/autoloads/scene_manager.gd" id="1_2ux1k"]
+[ext_resource type="Shader" path="res://Resources/Shaders/scene_transition.gdshader" id="2_oaiko"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rephp"]
+frequency = 0.0045
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7ksfy"]
+seamless = true
+noise = SubResource("FastNoiseLite_rephp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwehv"]
+shader = ExtResource("2_oaiko")
+shader_parameter/factor = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_7ksfy")
+
+[node name="SceneManager" type="CanvasLayer"]
+layer = 99
+script = ExtResource("1_2ux1k")
+
+[node name="ScreenTransition" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_vwehv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 2
+stretch_mode = 5
