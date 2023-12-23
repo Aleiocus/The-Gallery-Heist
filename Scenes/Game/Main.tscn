@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bf0h4cvoovrh2"]
+[gd_scene load_steps=18 format=3 uid="uid://bf0h4cvoovrh2"]
 
 [ext_resource type="Texture2D" uid="uid://bwemdou1f7s6l" path="res://Resources/Textures/PLACEHOLDERS/Testtiles V1.png" id="1_qcl3m"]
 [ext_resource type="PackedScene" uid="uid://dveolvcg42tyv" path="res://Scenes/Objects/artwork.tscn" id="3_vwxbb"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://c7k15n6052spa" path="res://Resources/Textures/Artwork/Scorpion (AxelMode).png" id="10_hf5hi"]
 [ext_resource type="Texture2D" uid="uid://c7qup0kqr60tw" path="res://Resources/Textures/Artwork/smoll ufo (Mars1234).png" id="11_tob3f"]
 [ext_resource type="Texture2D" uid="uid://cevcuyittonlh" path="res://Resources/Textures/Artwork/Pond Parasite (DissonantVoid).png" id="12_fjbsr"]
+[ext_resource type="Texture2D" uid="uid://bip6gmg7uo21f" path="res://Resources/Textures/Artwork/FoxG17 (MiKEY - STUDIO G17).png" id="13_i66l0"]
+[ext_resource type="Texture2D" uid="uid://xojkn21ppik" path="res://Resources/Textures/Artwork/Dude (LavraSource).png" id="14_6618f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0136i"]
 texture = ExtResource("1_qcl3m")
@@ -167,6 +169,14 @@ _texture = ExtResource("11_tob3f")
 [node name="Artwork10" parent="Art" instance=ExtResource("3_vwxbb")]
 position = Vector2(1144, 0)
 _texture = ExtResource("12_fjbsr")
+
+[node name="Artwork11" parent="Art" instance=ExtResource("3_vwxbb")]
+position = Vector2(1375, -14)
+_texture = ExtResource("13_i66l0")
+
+[node name="Artwork12" parent="Art" instance=ExtResource("3_vwxbb")]
+position = Vector2(1411, -2)
+_texture = ExtResource("14_6618f")
 
 [node name="Player" parent="." instance=ExtResource("9_3cgxl")]
 position = Vector2(51, 12)
