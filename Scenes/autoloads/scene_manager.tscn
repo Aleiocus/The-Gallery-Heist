@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b1kjxca7t8px"]
 
-[ext_resource type="Script" path="res://Scenes/autoloads/scene_manager.gd" id="1_2ux1k"]
+[ext_resource type="Script" path="res://Scripts/scene_manager.gd" id="1_2ux1k"]
 [ext_resource type="Shader" path="res://Resources/Shaders/scene_transition.gdshader" id="2_oaiko"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_rephp"]

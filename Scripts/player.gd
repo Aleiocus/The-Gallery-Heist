@@ -3,16 +3,21 @@ extends CharacterBody2D
 
 
 # Set Variables for overall control feel
-const _max_move_speed : float = 95.0
-const _accel : float = 120.0
-const _decel : float = 160.0
-const _jump_force : float = 180.0
-const _gravity : float = 500.0
+const _max_move_speed : float = 160.0
+const _accel : float = 180.0
+const _decel : float = 350.0
+const _jump_force : float = 185.0
+var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 const _death_height_y : float = 150.0
 @onready var _coyote_timer : Timer = $CoyoteTimer
 @onready var _jump_buffer_timer : Timer = $JumpBufferTimer
-
 var _state_machine : StateMachine = StateMachine.new()
+
+# Setup signals for camera stability.
+signal is_in_air()
+signal is_on_ground()
+signal face_right()
+signal face_left()
 
 # Establish the score variable and display on ui requires CanvasLayer/ScoreText nodes to be setup.
 var _score : int = 0
@@ -44,6 +49,7 @@ func _state_normal_ph_precess(delta : float):
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
 	
+	
 	# Allow player to jump
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or not _coyote_timer.is_stopped():
@@ -54,6 +60,12 @@ func _state_normal_ph_precess(delta : float):
 	# Engage physics engine
 	move_and_slide()
 	
+	# Emit signals to camera
+	if is_on_floor() == false:
+		emit_signal("is_in_air")
+	elif is_on_floor() == true:
+		emit_signal("is_on_ground")
+		
 	# Coyote Timer
 	if was_on_floor && !is_on_floor():
 		# just jumped
