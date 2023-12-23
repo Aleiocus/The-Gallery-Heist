@@ -16,12 +16,6 @@ var _state_machine : StateMachine = StateMachine.new()
 # Setup signals for camera stability.
 signal is_in_air()
 signal is_on_ground()
-signal face_right()
-signal face_left()
-
-# Establish the score variable and display on ui requires CanvasLayer/ScoreText nodes to be setup.
-var _score : int = 0
-@onready var _score_text : Label = get_node("CanvasLayer/ScoreText")
 
 
 func _ready():
@@ -48,7 +42,6 @@ func _state_normal_ph_precess(delta : float):
 		velocity.x = move_toward(velocity.x, _max_move_speed * direction, _accel * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
-	
 	
 	# Allow player to jump
 	if Input.is_action_just_pressed("jump"):
@@ -82,8 +75,3 @@ func _state_normal_ph_precess(delta : float):
 func game_over():
 	# Currently set to restart level, can be changed easily here.
 	SceneManager.restart_scene()
-	
-func add_score(amount : float):
-	# Enables scorekeeping and calls it "Arts:" can be changed easily.
-	_score += amount
-	_score_text.text = str("Arts: ", _score)

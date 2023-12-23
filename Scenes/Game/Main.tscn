@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bf0h4cvoovrh2"]
+[gd_scene load_steps=16 format=3 uid="uid://bf0h4cvoovrh2"]
 
 [ext_resource type="Texture2D" uid="uid://bwemdou1f7s6l" path="res://Resources/Textures/PLACEHOLDERS/Testtiles V1.png" id="1_qcl3m"]
 [ext_resource type="PackedScene" uid="uid://dveolvcg42tyv" path="res://Scenes/Objects/artwork.tscn" id="3_vwxbb"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://k2awgkbabx7v" path="res://Scenes/Characters/Saul/32x_32_player.tscn" id="9_3cgxl"]
 [ext_resource type="Texture2D" uid="uid://d0f6vjjd1tao8" path="res://Resources/Textures/Artwork/Mountain View (Brianna).png" id="9_3kh2e"]
 [ext_resource type="Texture2D" uid="uid://cp5jukr84ecrt" path="res://Resources/Textures/Artwork/Snowy_day_32_px(June).png" id="10_1jnkv"]
+[ext_resource type="Texture2D" uid="uid://c7k15n6052spa" path="res://Resources/Textures/Artwork/Scorpion (AxelMode).png" id="10_hf5hi"]
+[ext_resource type="Texture2D" uid="uid://c7qup0kqr60tw" path="res://Resources/Textures/Artwork/smoll ufo (Mars1234).png" id="11_tob3f"]
+[ext_resource type="Texture2D" uid="uid://cevcuyittonlh" path="res://Resources/Textures/Artwork/Pond Parasite (DissonantVoid).png" id="12_fjbsr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0136i"]
 texture = ExtResource("1_qcl3m")
@@ -126,32 +129,44 @@ layer_0/tile_data = PackedInt32Array(131074, 131072, 2, 131075, 131072, 2, 13107
 [node name="Art" type="Node2D" parent="."]
 
 [node name="Artwork" parent="Art" instance=ExtResource("3_vwxbb")]
-position = Vector2(548, 0)
+position = Vector2(1273, 0)
 _texture = ExtResource("4_fsxsu")
 
 [node name="Artwork2" parent="Art" instance=ExtResource("3_vwxbb")]
-position = Vector2(248, 11)
+position = Vector2(1027, 0)
 _texture = ExtResource("5_nl1qt")
 
 [node name="Artwork3" parent="Art" instance=ExtResource("3_vwxbb")]
-position = Vector2(427, 0)
+position = Vector2(973, -15)
 _texture = ExtResource("6_s5fdt")
 
 [node name="Artwork4" parent="Art" instance=ExtResource("3_vwxbb")]
-position = Vector2(323, 5)
+position = Vector2(726, -35)
 _texture = ExtResource("7_bk118")
 
 [node name="Artwork5" parent="Art" instance=ExtResource("3_vwxbb")]
-position = Vector2(368, 4)
+position = Vector2(667, -9)
 _texture = ExtResource("8_jwvs0")
 
 [node name="Artwork6" parent="Art" instance=ExtResource("3_vwxbb")]
-position = Vector2(486, 0)
+position = Vector2(890, -11)
 _texture = ExtResource("9_3kh2e")
 
 [node name="Artwork7" parent="Art" instance=ExtResource("3_vwxbb")]
-position = Vector2(282, 5)
+position = Vector2(817, -33)
 _texture = ExtResource("10_1jnkv")
+
+[node name="Artwork8" parent="Art" instance=ExtResource("3_vwxbb")]
+position = Vector2(1061, -8)
+_texture = ExtResource("10_hf5hi")
+
+[node name="Artwork9" parent="Art" instance=ExtResource("3_vwxbb")]
+position = Vector2(1204, -2)
+_texture = ExtResource("11_tob3f")
+
+[node name="Artwork10" parent="Art" instance=ExtResource("3_vwxbb")]
+position = Vector2(1144, 0)
+_texture = ExtResource("12_fjbsr")
 
 [node name="Player" parent="." instance=ExtResource("9_3cgxl")]
 position = Vector2(51, 12)

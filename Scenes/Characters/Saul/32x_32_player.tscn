@@ -41,7 +41,7 @@ script = ExtResource("3_kb11e")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ScoreText" type="Label" parent="CanvasLayer"]
+[node name="_score_text" type="Label" parent="CanvasLayer"]
 offset_left = -106.0
 offset_top = -118.0
 offset_right = -66.0
