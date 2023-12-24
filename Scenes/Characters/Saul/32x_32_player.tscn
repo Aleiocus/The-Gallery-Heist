@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://k2awgkbabx7v"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_8gmhn"]
+[ext_resource type="Texture2D" uid="uid://dyj04axd7scdn" path="res://Resources/Textures/PLACEHOLDERS/Saul_32_px By June.png" id="2_0gp6m"]
+[ext_resource type="Script" path="res://Scenes/Characters/Saul/player_camera.gd" id="3_kb11e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1gbs"]
+size = Vector2(17, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bnsyk"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_8gmhn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_s1gbs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0gp6m")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2(50, -32)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.02
+drag_top_margin = 0.44
+drag_right_margin = 0.02
+editor_draw_drag_margin = true
+script = ExtResource("3_kb11e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="_score_text" type="Label" parent="CanvasLayer"]
+offset_left = -106.0
+offset_top = -118.0
+offset_right = -66.0
+offset_bottom = -95.0
+label_settings = SubResource("LabelSettings_bnsyk")
+
+[connection signal="is_in_air" from="." to="camera" method="_on_player_is_in_air"]
+[connection signal="is_on_ground" from="." to="camera" method="_on_player_is_on_ground"]
