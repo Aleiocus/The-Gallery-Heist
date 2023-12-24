@@ -15,6 +15,7 @@ func _check_facing():
 		facing = new_facing
 		var target_offset = get_viewport_rect().size.x * _look_ahead_factor * facing
 		position.x = target_offset
+		
 func _on_player_is_in_air():
 	drag_vertical_enabled = true
 
