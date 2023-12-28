@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgxdbe1fqpde"
-path="res://.godot/imported/Stormy Cloud (PineappleUDH).png-d04fac426f13654ca028a8f0f032b65f.ctex"
+uid="uid://bwog48d20oq2s"
+path="res://.godot/imported/Template1.png-d87706c1d40d813dc10c29a1c2f26313.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/Artwork/Stormy Cloud (PineappleUDH).png"
-dest_files=["res://.godot/imported/Stormy Cloud (PineappleUDH).png-d04fac426f13654ca028a8f0f032b65f.ctex"]
+source_file="res://Resources/Textures/PLACEHOLDERS/Template1.png"
+dest_files=["res://.godot/imported/Template1.png-d87706c1d40d813dc10c29a1c2f26313.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 
 # Set Variables for overall control feel
-const _max_move_speed : float = 160.0
+const _max_move_speed : float = 175.0
 const _accel : float = 180.0
 const _decel : float = 350.0
 const _jump_force : float = 185.0
