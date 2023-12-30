@@ -12,11 +12,9 @@ const _death_height_y : float = 150.0
 @onready var _coyote_timer : Timer = $CoyoteTimer
 @onready var _jump_buffer_timer : Timer = $JumpBufferTimer
 var _state_machine : StateMachine = StateMachine.new()
-
-# Setup signals for camera stability.
+# Setup signals
 signal is_in_air()
 signal is_on_ground()
-
 
 func _ready():
 	_state_machine.add_state("normal", Callable(), Callable(), Callable(), _state_normal_ph_precess)
@@ -49,8 +47,6 @@ func _state_normal_ph_precess(delta : float):
 			velocity.y = -_jump_force
 		elif is_on_floor() == false:
 			_jump_buffer_timer.start()
-	# Pickup objects
-	
 	# Engage physics engine
 	move_and_slide()
 	
@@ -72,7 +68,6 @@ func _state_normal_ph_precess(delta : float):
 	# Fall too far and die
 	if global_position.y > _death_height_y:
 		game_over()
-
 func game_over():
 	# Currently set to restart level, can be changed easily here.
 	SceneManager.restart_scene()

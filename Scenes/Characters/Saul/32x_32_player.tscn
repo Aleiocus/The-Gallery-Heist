@@ -9,7 +9,7 @@ size = Vector2(17, 32)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bnsyk"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_8gmhn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -47,6 +47,9 @@ offset_top = -118.0
 offset_right = -66.0
 offset_bottom = -95.0
 label_settings = SubResource("LabelSettings_bnsyk")
+
+[node name="ItemPos" type="Node2D" parent="."]
+position = Vector2(0, -22)
 
 [connection signal="is_in_air" from="." to="camera" method="_on_player_is_in_air"]
 [connection signal="is_on_ground" from="." to="camera" method="_on_player_is_on_ground"]
