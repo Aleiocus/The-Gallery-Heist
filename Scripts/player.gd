@@ -49,6 +49,7 @@ func _state_normal_ph_precess(delta : float):
 			velocity.y = -_jump_force
 		elif is_on_floor() == false:
 			_jump_buffer_timer.start()
+	# Pickup objects
 	
 	# Engage physics engine
 	move_and_slide()

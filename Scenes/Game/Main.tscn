@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bf0h4cvoovrh2"]
+[gd_scene load_steps=19 format=3 uid="uid://bf0h4cvoovrh2"]
 
 [ext_resource type="Texture2D" uid="uid://bwog48d20oq2s" path="res://Resources/Textures/PLACEHOLDERS/Template1.png" id="1_t2eun"]
 [ext_resource type="PackedScene" uid="uid://dveolvcg42tyv" path="res://Scenes/Objects/artwork.tscn" id="3_vwxbb"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bip6gmg7uo21f" path="res://Resources/Textures/Artwork/FoxG17 (MiKEY - STUDIO G17).png" id="13_i66l0"]
 [ext_resource type="Texture2D" uid="uid://xojkn21ppik" path="res://Resources/Textures/Artwork/Dude (LavraSource).png" id="14_6618f"]
 [ext_resource type="Texture2D" uid="uid://bd710r1dkqjo2" path="res://Resources/Textures/Artwork/Lightning (PineappleUDH).png" id="15_g3a7u"]
+[ext_resource type="PackedScene" uid="uid://6522yel58fqd" path="res://Scenes/Objects/doughnut.tscn" id="16_207mp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7m7wu"]
 texture = ExtResource("1_t2eun")
@@ -136,3 +137,5 @@ _texture = ExtResource("15_g3a7u")
 
 [node name="Player" parent="." instance=ExtResource("9_3cgxl")]
 position = Vector2(51, 12)
+
+[node name="Doughnut" parent="." instance=ExtResource("16_207mp")]
