@@ -23,7 +23,7 @@ func change_scene(scene_path : String):
 	get_tree().change_scene_to_file(scene_path)
 	
 	# transition out
-	var transition_tween : Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+	var transition_tween : Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	transition_tween.tween_property(
 		_transition_rect.material, "shader_parameter/factor", -1.0, _tween_time
 	)

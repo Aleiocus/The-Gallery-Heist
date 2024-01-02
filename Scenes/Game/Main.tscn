@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bip6gmg7uo21f" path="res://Resources/Textures/Artwork/FoxG17 (MiKEY - STUDIO G17).png" id="13_i66l0"]
 [ext_resource type="Texture2D" uid="uid://xojkn21ppik" path="res://Resources/Textures/Artwork/Dude (LavraSource).png" id="14_6618f"]
 [ext_resource type="Texture2D" uid="uid://bd710r1dkqjo2" path="res://Resources/Textures/Artwork/Lightning (PineappleUDH).png" id="15_g3a7u"]
-[ext_resource type="PackedScene" uid="uid://6522yel58fqd" path="res://Scenes/Objects/doughnut.tscn" id="16_207mp"]
+[ext_resource type="PackedScene" uid="uid://cvgkng5n6b1o3" path="res://Scenes/Objects/doughnut.tscn" id="16_207mp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7m7wu"]
 texture = ExtResource("1_t2eun")

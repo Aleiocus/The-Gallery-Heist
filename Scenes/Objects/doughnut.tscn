@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://6522yel58fqd"]
+[gd_scene load_steps=4 format=3 uid="uid://cvgkng5n6b1o3"]
 
 [ext_resource type="Texture2D" uid="uid://bw46olc43lo4q" path="res://Resources/Textures/PLACEHOLDERS/Doughnut.png" id="1_5321p"]
 [ext_resource type="Script" path="res://Scripts/pickup_item.gd" id="1_b0pqu"]
