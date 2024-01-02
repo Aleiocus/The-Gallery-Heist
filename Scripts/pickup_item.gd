@@ -1,7 +1,12 @@
 extends RigidBody2D
 
-signal _pick_up()
+var _in_hand : bool = false
 
-
-func _pickup_item ():
-	emit_signal("_pick_up")
+func _physics_process(delta):
+	if _in_hand == true:
+		self.position = get_node("../Player/ItemPos").global_position
+func _pickup_item():
+	if _in_hand == false:
+		_in_hand = true
+	elif _in_hand == true:
+		pass

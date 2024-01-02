@@ -54,12 +54,14 @@ func _state_normal_ph_process(delta : float):
 			pass
 		elif left.is_in_group("Pickup"):
 			_holding_item = true
+			left._pickup_item()
 			print ("pickup!")
 		var right = _right_ray.get_collider()
 		if right == null:
 			pass
 		elif right.is_in_group("Pickup"):
 			_holding_item = true
+			right._pickup_item()
 			print ("pickup!")
 	elif Input.is_action_just_pressed("interact") and _holding_item == true:
 		_holding_item = false
