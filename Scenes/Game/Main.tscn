@@ -139,3 +139,4 @@ _texture = ExtResource("15_g3a7u")
 position = Vector2(51, 12)
 
 [node name="Doughnut" parent="." instance=ExtResource("16_207mp")]
+position = Vector2(126, 30)

@@ -1,27 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://6522yel58fqd"]
+[gd_scene load_steps=4 format=3 uid="uid://6522yel58fqd"]
 
 [ext_resource type="Texture2D" uid="uid://bw46olc43lo4q" path="res://Resources/Textures/PLACEHOLDERS/Doughnut.png" id="1_5321p"]
-[ext_resource type="Script" path="res://Scripts/pickupobject.gd" id="1_jepun"]
+[ext_resource type="Script" path="res://Scripts/pickup_item.gd" id="1_b0pqu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1w0xk"]
 radius = 8.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ci27t"]
-size = Vector2(22, 22)
-
-[node name="Doughnut" type="RigidBody2D"]
-script = ExtResource("1_jepun")
+[node name="Doughnut" type="RigidBody2D" groups=["Pickup"]]
+script = ExtResource("1_b0pqu")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1w0xk")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_5321p")
-
-[node name="pickup_zone" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pickup_zone"]
-shape = SubResource("RectangleShape2D_ci27t")
-
-[connection signal="body_entered" from="pickup_zone" to="." method="_on_pickup_zone_body_entered"]
-[connection signal="body_exited" from="pickup_zone" to="." method="_on_pickup_zone_body_exited"]
