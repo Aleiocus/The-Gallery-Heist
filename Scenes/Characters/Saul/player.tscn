@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_8gmhn"]
 [ext_resource type="Texture2D" uid="uid://dyj04axd7scdn" path="res://Resources/Textures/PLACEHOLDERS/Saul_32_px By June.png" id="2_0gp6m"]
-[ext_resource type="Script" path="res://Scenes/Characters/Saul/player_camera.gd" id="3_kb11e"]
+[ext_resource type="Script" path="res://Scripts/player_camera.gd" id="3_kb11e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s1gbs"]
 size = Vector2(17, 32)

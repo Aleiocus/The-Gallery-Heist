@@ -18,5 +18,5 @@ func _process(delta):
 # Call function for body being entered and increase score when collected by player
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
-		body.add_score(1)
 		queue_free()
+		print("collected")
