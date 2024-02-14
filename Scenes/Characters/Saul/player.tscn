@@ -48,18 +48,5 @@ offset_right = -66.0
 offset_bottom = -95.0
 label_settings = SubResource("LabelSettings_bnsyk")
 
-[node name="ItemPos" type="Node2D" parent="."]
-position = Vector2(0, -27)
-
-[node name="RightRay" type="RayCast2D" parent="."]
-position = Vector2(0, 2)
-scale = Vector2(1, 4.84)
-target_position = Vector2(16, 0)
-
-[node name="LeftRay" type="RayCast2D" parent="."]
-position = Vector2(0, 2)
-scale = Vector2(1, 4.84)
-target_position = Vector2(-17, 0)
-
 [connection signal="is_in_air" from="." to="camera" method="_on_player_is_in_air"]
 [connection signal="is_on_ground" from="." to="camera" method="_on_player_is_on_ground"]

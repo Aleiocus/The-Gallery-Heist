@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vv8ikhyjkbuy"
-path="res://.godot/imported/Bounty of the Forest (Val).png-5695ea05f95a3ede07ce5360545a9fca.ctex"
+uid="uid://tkdnv47llpnj"
+path="res://.godot/imported/artwork_atlas-Sheet.png-5140bd2efb967ede14d1040203746e3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/Artwork/Bounty of the Forest (Val).png"
-dest_files=["res://.godot/imported/Bounty of the Forest (Val).png-5695ea05f95a3ede07ce5360545a9fca.ctex"]
+source_file="res://Resources/Textures/Artwork/artwork_atlas-Sheet.png"
+dest_files=["res://.godot/imported/artwork_atlas-Sheet.png-5140bd2efb967ede14d1040203746e3d.ctex"]
 
 [params]
 

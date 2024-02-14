@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SceneManager="*res://Scenes/autoloads/scene_manager.tscn"
+PlayerManager="*res://Scripts/player_manager.gd"
 
 [display]
 
