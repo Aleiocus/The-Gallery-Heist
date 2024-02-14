@@ -27,6 +27,10 @@ one_shot = true
 wait_time = 0.15
 one_shot = true
 
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(50, -32)
 position_smoothing_enabled = true
