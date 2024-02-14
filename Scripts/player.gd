@@ -4,10 +4,10 @@ extends CharacterBody2D
 # Set Variables for overall control feel
 const _max_move_speed : float = 200.0
 const _accel : float = 180.0
-const _decel : float = 375.0
+const _decel : float = 400.0
 const _jump_force : float = 200.0
 var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
-const _slide_speed : float = 20
+const _slide_speed : float = 55
 const _wall_jump_force : float = 200
 const _pushoff_force : float = 100.0
 
