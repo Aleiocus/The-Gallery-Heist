@@ -7,7 +7,7 @@ const _accel : float = 300.0
 const _decel : float = 400.0
 const _jump_force : float = 250.0
 var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
-const _slide_speed : float = 55
+const _slide_speed : float = 60
 const _wall_jump_force : float = 240
 const _pushoff_force : float = 130.0
 const _dash_speed: float = 320
@@ -87,7 +87,10 @@ func _state_normal_ph_process(delta : float):
 	
 	if is_on_wall() == true \
 		and is_on_floor() == false\
-		and _can_slide == true :
+		and _can_slide == true \
+		and direction \
+		and (_detect_left.is_colliding() \
+		or _detect_right.is_colliding()):
 		_state_machine.change_state("wall_slide")
 	
 	# Fall too far and die
@@ -100,6 +103,7 @@ func _state_normal_ph_process(delta : float):
 			_just_dashed.start()
 			_state_machine.change_state("dash")
 	
+	
 
 func _game_over():
 	# Currently set to restart level, can be changed easily here.
@@ -111,9 +115,10 @@ func _state_wall_slide_ph_process(delta: float):
 	if Input.is_action_just_pressed("jump"):
 		_slide_delay.start()
 		_can_slide = false
-		var x_direction : float = Input.get_axis("left", "right")
-		if x_direction :
-			velocity.x = _pushoff_force * x_direction
+		if _detect_left.is_colliding():
+			velocity.x = _pushoff_force
+		elif _detect_right.is_colliding():
+			velocity.x = -_pushoff_force
 		velocity.y = -_wall_jump_force
 		_state_machine.change_state("normal")
 	if is_on_floor() == true:
@@ -145,8 +150,12 @@ func _state_dash_ph_process(delta: float):
 
 
 func _on_just_dashed_timeout():
-	_can_dash = true
+	if is_on_floor():
+		_can_dash = true
+	else:
+		_just_dashed.start()
 
 
 func _on_slide_delay_timeout():
 	_can_slide = true
+

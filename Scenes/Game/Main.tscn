@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bf0h4cvoovrh2"]
+[gd_scene load_steps=6 format=3 uid="uid://bf0h4cvoovrh2"]
 
+[ext_resource type="Script" path="res://Scenes/Game/Main.gd" id="1_nqnqi"]
 [ext_resource type="Texture2D" uid="uid://bwog48d20oq2s" path="res://Resources/Textures/PLACEHOLDERS/Template1.png" id="1_t2eun"]
 [ext_resource type="PackedScene" uid="uid://k2awgkbabx7v" path="res://Scenes/Characters/Saul/player.tscn" id="9_3cgxl"]
 
@@ -65,6 +66,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_7m7wu")
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_nqnqi")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_0b7ta")
@@ -78,3 +80,7 @@ layer_1/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("9_3cgxl")]
 position = Vector2(51, 12)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(621, -249)
+zoom = Vector2(0.25, 0.25)
