@@ -9,6 +9,7 @@ func _process(delta : float):
 	_check_facing()
 	_prev_camera_pos = get_target_position()
 
+
 func _check_facing():
 	var new_facing = sign(get_target_position().x - _prev_camera_pos.x)
 	if new_facing != 0 && _facing != new_facing:

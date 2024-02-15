@@ -10,10 +10,16 @@ var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 const _slide_speed : float = 60
 const _wall_jump_force : float = 240
 const _pushoff_force : float = 130.0
-const _dash_speed: float = 280
+const _dash_speed: float = 300
+const _dash_decel: float = 1000
+
 var _can_dash: bool = true
 var _can_slide: bool = true
 
+var x_direction
+var y_direction
+var last_face_left : bool = false
+var last_face_right: bool = true
 const _death_height_y : float = 150.0
 @onready var _coyote_timer : Timer = $CoyoteTimer
 @onready var _jump_buffer_timer : Timer = $JumpBufferTimer
@@ -38,9 +44,18 @@ func _ready():
 
 func _process(delta : float):
 	_state_machine.state_process(delta)
-	print(_state_machine.get_current_state())
+
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
+	x_direction = Input.get_axis("left", "right")
+	if x_direction > 0:
+		last_face_right = true
+		last_face_left = false
+	if x_direction < 0:
+		last_face_right = false
+		last_face_left = true
+	y_direction = Input.get_axis("up", "down")
+
 
 func _state_normal_switch_from(to : String):
 	_coyote_timer.stop()
@@ -53,9 +68,8 @@ func _state_normal_ph_process(delta : float):
 		velocity.y += _gravity * delta
 	
 	# Movement Control
-	var direction : float = Input.get_axis("left", "right")
-	if direction:
-		velocity.x = move_toward(velocity.x, _max_move_speed * direction, _accel * delta)
+	if x_direction:
+		velocity.x = move_toward(velocity.x, _max_move_speed * x_direction, _accel * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
 		
@@ -88,7 +102,6 @@ func _state_normal_ph_process(delta : float):
 	if is_on_wall() == true \
 		and is_on_floor() == false\
 		and _can_slide == true \
-		and direction \
 		and (_detect_left.is_colliding() \
 		or _detect_right.is_colliding()):
 		_state_machine.change_state("wall_slide")
@@ -131,12 +144,18 @@ func _state_wall_slide_ph_process(delta: float):
 	
 func _state_dash_ph_process(delta: float):
 	
-	var x_direction : float = Input.get_axis("left", "right")
-	if x_direction:
+	if x_direction\
+	or y_direction:
 		velocity.x = _dash_speed * x_direction
-	var y_direction : float = Input.get_axis("up", "down")
-	if y_direction:
 		velocity.y = _dash_speed * y_direction
+	else:
+		if last_face_left == true:
+			velocity.x = -_dash_speed
+		elif last_face_right == true:
+			velocity.x = _dash_speed
+		velocity.x = move_toward(velocity.x, 0.0, _dash_decel * delta)
+		velocity.y = move_toward(velocity.y, 0.0, _dash_decel* delta)
+
 	
 	
 	move_and_slide()
