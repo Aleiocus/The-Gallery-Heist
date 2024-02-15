@@ -3,14 +3,14 @@ extends CharacterBody2D
 
 # Set Variables for overall control feel
 const _max_move_speed : float = 200.0
-const _accel : float = 180.0
+const _accel : float = 300.0
 const _decel : float = 400.0
 const _jump_force : float = 250.0
 var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 const _slide_speed : float = 55
 const _wall_jump_force : float = 240
 const _pushoff_force : float = 130.0
-const _dash_speed: float = 375
+const _dash_speed: float = 500
 
 const _death_height_y : float = 150.0
 @onready var _coyote_timer : Timer = $CoyoteTimer
@@ -106,15 +106,12 @@ func _state_wall_slide_ph_process(delta: float):
 	if is_on_floor() == true:
 		_state_machine.change_state("normal")
 		
-	if Input.is_action_just_pressed("jump") \
-		and Input.is_action_pressed("left"):
+	if Input.is_action_just_pressed("jump"):
+		var x_direction : float = Input.get_axis("left", "right")
+		if x_direction :
 			velocity.y = -_wall_jump_force
-			velocity.x = -_pushoff_force
+			velocity.x = _pushoff_force * x_direction
 			_state_machine.change_state("normal")
-	if Input.is_action_just_pressed("jump") \
-		and Input.is_action_pressed("right"):
-			velocity.y = -_wall_jump_force
-			velocity.x = _pushoff_force
 			_state_machine.change_state("normal")
 
 func _state_dash_ph_process(delta: float):
@@ -126,6 +123,10 @@ func _state_dash_ph_process(delta: float):
 	if y_direction:
 		velocity.y = _dash_speed * y_direction
 		print(y_direction)
+	if x_direction and y_direction:
+		velocity = velocity/2
+	
+	
 	
 	move_and_slide()
 	_dash_timer.start()
