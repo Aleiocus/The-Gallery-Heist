@@ -31,6 +31,15 @@ one_shot = true
 wait_time = 0.15
 one_shot = true
 
+[node name="JustDashed" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="SlideDelay" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(50, -32)
 position_smoothing_enabled = true
@@ -52,5 +61,17 @@ offset_right = -66.0
 offset_bottom = -95.0
 label_settings = SubResource("LabelSettings_bnsyk")
 
+[node name="Detection" type="Node2D" parent="."]
+
+[node name="Right" type="RayCast2D" parent="Detection"]
+position = Vector2(0, -5)
+target_position = Vector2(14, 0)
+
+[node name="Left" type="RayCast2D" parent="Detection"]
+position = Vector2(0, -5)
+target_position = Vector2(-15, 0)
+
 [connection signal="is_in_air" from="." to="camera" method="_on_player_is_in_air"]
 [connection signal="is_on_ground" from="." to="camera" method="_on_player_is_on_ground"]
+[connection signal="timeout" from="JustDashed" to="." method="_on_just_dashed_timeout"]
+[connection signal="timeout" from="SlideDelay" to="." method="_on_slide_delay_timeout"]
