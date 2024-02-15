@@ -10,7 +10,7 @@ var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 const _slide_speed : float = 55
 const _wall_jump_force : float = 240
 const _pushoff_force : float = 130.0
-const _dash_force: float = 375
+const _dash_speed: float = 375
 
 const _death_height_y : float = 150.0
 @onready var _coyote_timer : Timer = $CoyoteTimer
@@ -22,11 +22,6 @@ var _state_machine : StateMachine = StateMachine.new()
 signal is_in_air()
 signal is_on_ground()
 
-# Setup detection
-@onready var _item_pos : Node2D = $ItemPos
-@onready var _right_ray : RayCast2D = $RightRay
-@onready var _left_ray : RayCast2D = $LeftRay
-var _item : PickupItem = null
 
 func _ready():
 	PlayerManager.player = self
@@ -123,13 +118,20 @@ func _state_wall_slide_ph_process(delta: float):
 			_state_machine.change_state("normal")
 
 func _state_dash_ph_process(delta: float):
-	var _direction = global_position.direction_to(get_global_mouse_position())
-	velocity = _direction * _dash_force 
+	
+	var x_direction : float = Input.get_axis("left", "right")
+	if x_direction:
+		velocity.x = _dash_speed * x_direction
+	var y_direction : float = Input.get_axis("up", "down")
+	if y_direction:
+		velocity.y = _dash_speed * y_direction
+		print(y_direction)
+	
+	move_and_slide()
 	_dash_timer.start()
-	var dashing: bool = true
 	if _dash_timer.is_stopped() == false:
 		_state_machine.change_state("normal")
 	if is_on_wall():
 		_state_machine.change_state("wall_slide")
-	move_and_slide()
+
 
