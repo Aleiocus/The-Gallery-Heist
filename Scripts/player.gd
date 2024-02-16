@@ -28,6 +28,7 @@ const _death_height_y : float = 150.0
 @onready var _slide_delay = $SlideDelay
 @onready var _detect_right = $Detection/Right
 @onready var _detect_left = $Detection/Left
+@onready var _label = $Label
 var _state_machine : StateMachine = StateMachine.new()
 
 # Setup signals
@@ -44,6 +45,7 @@ func _ready():
 
 func _process(delta : float):
 	_state_machine.state_process(delta)
+	_label.text = str("State:", _state_machine.get_current_state())
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
