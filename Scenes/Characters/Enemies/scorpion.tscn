@@ -10,6 +10,7 @@ font_size = 12
 script = ExtResource("1_ly3ua")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -43.0
 offset_top = -38.0
 offset_right = 53.0

@@ -16,6 +16,8 @@ const _dash_decel: float = 1000
 var _can_dash: bool = true
 var _can_slide: bool = true
 
+var _player_score = 0
+
 var x_direction
 var y_direction
 var last_face_left : bool = false
@@ -29,6 +31,7 @@ const _death_height_y : float = 150.0
 @onready var _detect_right = $Detection/Right
 @onready var _detect_left = $Detection/Left
 @onready var _label = $Label
+@onready var _score = $Score
 var _state_machine : StateMachine = StateMachine.new()
 
 # Setup signals
@@ -42,6 +45,7 @@ func _ready():
 	_state_machine.add_state("dash", Callable(), Callable(), Callable(), _state_dash_ph_process)
 	_state_machine.add_state("wall_slide", Callable(), Callable(), Callable(), _state_wall_slide_ph_process)
 	_state_machine.change_state("normal")
+	_score.text = str("Score: ", _player_score)
 
 func _process(delta : float):
 	_state_machine.state_process(delta)
@@ -65,6 +69,7 @@ func _state_normal_switch_from(to : String):
 	
 
 func _state_normal_ph_process(delta : float):
+	
 	# Enable gravity.
 	if not is_on_floor():
 		velocity.y += _gravity * delta
@@ -180,3 +185,7 @@ func _on_just_dashed_timeout():
 func _on_slide_delay_timeout():
 	_can_slide = true
 
+func _get_score (amount):
+	_player_score += amount
+	_score.text = str("Score: ", _player_score)
+	

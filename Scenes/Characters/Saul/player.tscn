@@ -1,24 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://k2awgkbabx7v"]
+[gd_scene load_steps=7 format=3 uid="uid://k2awgkbabx7v"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_8gmhn"]
 [ext_resource type="Texture2D" uid="uid://dyj04axd7scdn" path="res://Resources/Textures/PLACEHOLDERS/Saul_32_px By June.png" id="2_0gp6m"]
 [ext_resource type="Script" path="res://Scripts/player_camera.gd" id="3_kb11e"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_lynlw"]
+[sub_resource type="LabelSettings" id="LabelSettings_klmy4"]
 font_size = 12
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0.513726, 0.937255, 0.603922, 0.568627)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s1gbs"]
 size = Vector2(17, 32)
 
+[sub_resource type="LabelSettings" id="LabelSettings_lynlw"]
+font_size = 12
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_8gmhn")
 
-[node name="Label" type="Label" parent="."]
-offset_left = -23.0
-offset_top = -40.0
-offset_right = 17.0
-offset_bottom = -17.0
-label_settings = SubResource("LabelSettings_lynlw")
+[node name="Score" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -35.0
+offset_right = 22.0
+offset_bottom = -12.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_klmy4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
@@ -69,6 +77,14 @@ target_position = Vector2(14, 0)
 [node name="Left" type="RayCast2D" parent="Detection"]
 position = Vector2(0, -5)
 target_position = Vector2(-15, 0)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -23.0
+offset_top = -40.0
+offset_right = 17.0
+offset_bottom = -17.0
+label_settings = SubResource("LabelSettings_lynlw")
 
 [connection signal="is_in_air" from="." to="camera" method="_on_player_is_in_air"]
 [connection signal="is_on_ground" from="." to="camera" method="_on_player_is_on_ground"]
