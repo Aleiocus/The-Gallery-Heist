@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlu817owjdkjq"]
+[gd_scene load_steps=5 format=3 uid="uid://dlu817owjdkjq"]
 
 [ext_resource type="Texture2D" uid="uid://dutytu7jhr5nc" path="res://Resources/Textures/PLACEHOLDERS/Scorpion (AxelMode)-cutoutt.png" id="1_f6vud"]
-[ext_resource type="Script" path="res://Scenes/Characters/Enemies/scorpion.gd" id="1_ly3ua"]
+[ext_resource type="Script" path="res://Scripts/scorpion.gd" id="1_kehhd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0tth2"]
 font_size = 12
 
-[node name="Scorpion" type="CharacterBody2D"]
-script = ExtResource("1_ly3ua")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfry5"]
+size = Vector2(14, 26)
+
+[node name="Scorpion" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_kehhd")
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -23,7 +26,24 @@ vertical_alignment = 1
 texture = ExtResource("1_f6vud")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(0, 11, 11, 11, 11, 2, 11, -1, 8, -4, 10, -8, 10, -13, 7, -16, -4, -16, -8, -14, -11, -11, -13, -7, -13, 1, -13, 3, -13, 11)
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-avoidance_enabled = true
+[node name="Detectors" type="Node2D" parent="."]
+position = Vector2(-13, 0)
+
+[node name="GapDetectLeft" type="RayCast2D" parent="Detectors"]
+target_position = Vector2(0, 15)
+
+[node name="GapDetectRight" type="RayCast2D" parent="Detectors"]
+position = Vector2(24, 0)
+target_position = Vector2(0, 15)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(8, -6)
+
+[node name="Box" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(1, 5)
+shape = SubResource("RectangleShape2D_bfry5")
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

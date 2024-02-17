@@ -1,32 +1,80 @@
-[gd_scene load_steps=7 format=3 uid="uid://k2awgkbabx7v"]
+[gd_scene load_steps=15 format=3 uid="uid://k2awgkbabx7v"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_8gmhn"]
 [ext_resource type="Texture2D" uid="uid://dyj04axd7scdn" path="res://Resources/Textures/PLACEHOLDERS/Saul_32_px By June.png" id="2_0gp6m"]
 [ext_resource type="Script" path="res://Scripts/player_camera.gd" id="3_kb11e"]
+[ext_resource type="Script" path="res://Scenes/Characters/Saul/Hitbox.gd" id="4_buk63"]
+[ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/jump2.wav" id="4_kn1s7"]
+[ext_resource type="AudioStream" uid="uid://dpg46pasbhqyu" path="res://Resources/Audio/SFX/jump1.wav" id="5_4b5h4"]
+[ext_resource type="AudioStream" uid="uid://bxe2502g4y2iv" path="res://Resources/Audio/SFX/dash.wav" id="5_jppin"]
+[ext_resource type="AudioStream" uid="uid://mkt04tcqr0em" path="res://Resources/Audio/SFX/hit_wall.wav" id="6_nryyl"]
+[ext_resource type="AudioStream" uid="uid://d4d6pbcnalx0p" path="res://Resources/Audio/SFX/coin_get.wav" id="7_70joa"]
+[ext_resource type="AudioStream" uid="uid://byyxktqliudlb" path="res://Resources/Audio/SFX/click.wav" id="8_rh76n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_klmy4"]
 font_size = 12
 outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 2
-shadow_color = Color(0.513726, 0.937255, 0.603922, 0.568627)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1gbs"]
-size = Vector2(17, 32)
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_lynlw"]
 font_size = 12
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1gbs"]
+size = Vector2(17, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cb47a"]
+size = Vector2(13.5, 31.5)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_8gmhn")
 
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="Timers"]
+wait_time = 0.15
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="Timers"]
+wait_time = 0.3
+one_shot = true
+
+[node name="JustDashed" type="Timer" parent="Timers"]
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[node name="SlideDelay" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
 [node name="Score" type="Label" parent="."]
-offset_left = -24.0
-offset_top = -35.0
-offset_right = 22.0
-offset_bottom = -12.0
+offset_left = -66.0
+offset_top = -32.0
+offset_right = -20.0
+offset_bottom = -9.0
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_klmy4")
+
+[node name="DashFeedback" type="Label" parent="."]
+offset_left = -103.0
+offset_top = -16.0
+offset_right = -18.0
+offset_bottom = 7.0
+text = "Dash: "
+label_settings = SubResource("LabelSettings_klmy4")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -66.0
+offset_top = -53.0
+offset_right = -26.0
+offset_bottom = -30.0
+label_settings = SubResource("LabelSettings_lynlw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
@@ -35,36 +83,46 @@ shape = SubResource("RectangleShape2D_s1gbs")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0gp6m")
 
-[node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
+[node name="SFX" type="Node2D" parent="."]
 
-[node name="JumpBufferTimer" type="Timer" parent="."]
-wait_time = 0.15
-one_shot = true
+[node name="Jumpsfx" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_4b5h4")
+volume_db = -6.0
 
-[node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.3
-one_shot = true
+[node name="Jumpsfx2" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_kn1s7")
+volume_db = -6.0
 
-[node name="JustDashed" type="Timer" parent="."]
-wait_time = 0.05
-one_shot = true
-autostart = true
+[node name="Dash" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_jppin")
+volume_db = -6.0
 
-[node name="SlideDelay" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
+[node name="HitWall" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_nryyl")
+volume_db = -2.0
+pitch_scale = 2.05
+
+[node name="CoinGet" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_70joa")
+
+[node name="Hurt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("8_rh76n")
+pitch_scale = 1.6
+
+[node name="PieGet" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("8_rh76n")
 
 [node name="camera" type="Camera2D" parent="."]
-position = Vector2(50, -32)
+position = Vector2(102, -36)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.02
-drag_top_margin = 0.44
+drag_top_margin = 0.29
 drag_right_margin = 0.02
+drag_bottom_margin = 0.44
 editor_draw_drag_margin = true
 script = ExtResource("3_kb11e")
 
@@ -78,15 +136,18 @@ target_position = Vector2(14, 0)
 position = Vector2(0, -5)
 target_position = Vector2(-15, 0)
 
-[node name="Label" type="Label" parent="."]
-visible = false
-offset_left = -23.0
-offset_top = -40.0
-offset_right = 17.0
-offset_bottom = -17.0
-label_settings = SubResource("LabelSettings_lynlw")
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(15, 0)
+monitoring = false
+script = ExtResource("4_buk63")
+
+[node name="Hit1" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_cb47a")
+
+[node name="Layers" type="Node2D" parent="."]
 
 [connection signal="is_in_air" from="." to="camera" method="_on_player_is_in_air"]
 [connection signal="is_on_ground" from="." to="camera" method="_on_player_is_on_ground"]
-[connection signal="timeout" from="JustDashed" to="." method="_on_just_dashed_timeout"]
-[connection signal="timeout" from="SlideDelay" to="." method="_on_slide_delay_timeout"]
+[connection signal="timeout" from="Timers/JustDashed" to="." method="_on_just_dashed_timeout"]
+[connection signal="timeout" from="Timers/SlideDelay" to="." method="_on_slide_delay_timeout"]
+[connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_body_entered"]

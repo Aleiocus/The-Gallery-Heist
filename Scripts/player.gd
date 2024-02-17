@@ -4,14 +4,15 @@ extends CharacterBody2D
 # Set Variables for overall control feel
 const _max_move_speed : float = 250.0
 const _accel : float = 300.0
-const _decel : float = 400.0
-const _jump_force : float = 250.0
+const _decel : float = 450.0
+const _jump_force : float = 260.0
 var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 const _slide_speed : float = 60
-const _wall_jump_force : float = 240
-const _pushoff_force : float = 130.0
+const _wall_jump_force : float = 245
+const _pushoff_force : float = 280.0
 const _dash_speed: float = 300
 const _dash_decel: float = 1000
+var _hit_time : float = 0.15
 
 var _can_dash: bool = true
 var _can_slide: bool = true
@@ -23,15 +24,20 @@ var y_direction
 var last_face_left : bool = false
 var last_face_right: bool = true
 const _death_height_y : float = 150.0
-@onready var _coyote_timer : Timer = $CoyoteTimer
-@onready var _jump_buffer_timer : Timer = $JumpBufferTimer
-@onready var _dash_timer = $DashTimer
-@onready var _just_dashed = $JustDashed
-@onready var _slide_delay = $SlideDelay
+@onready var _coyote_timer : Timer = $Timers/CoyoteTimer
+@onready var _jump_buffer_timer : Timer = $Timers/JumpBufferTimer
+@onready var _dash_timer = $Timers/DashTimer
+@onready var _just_dashed = $Timers/JustDashed
+@onready var _slide_delay = $Timers/SlideDelay
 @onready var _detect_right = $Detection/Right
 @onready var _detect_left = $Detection/Left
 @onready var _label = $Label
 @onready var _score = $Score
+@onready var dash_feedback = $DashFeedback
+@onready var hitbox = $Hitbox
+@onready var jumpsfx = $SFX/Jumpsfx
+@onready var sfx = $SFX
+
 var _state_machine : StateMachine = StateMachine.new()
 
 # Setup signals
@@ -44,13 +50,17 @@ func _ready():
 	_state_machine.add_state("normal", Callable(), Callable(), Callable(), _state_normal_ph_process)
 	_state_machine.add_state("dash", Callable(), Callable(), Callable(), _state_dash_ph_process)
 	_state_machine.add_state("wall_slide", Callable(), Callable(), Callable(), _state_wall_slide_ph_process)
+	_state_machine.add_state("attack", Callable(), Callable(), Callable(), _state_attack_ph_process)
 	_state_machine.change_state("normal")
 	_score.text = str("Score: ", _player_score)
+	PlayerManager.current_score = _player_score
 
 func _process(delta : float):
 	_state_machine.state_process(delta)
 	_label.text = str("State:", _state_machine.get_current_state())
-
+	dash_feedback.text = str("Can_Dash: ", _can_dash)
+	
+	
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
 	x_direction = Input.get_axis("left", "right")
@@ -84,6 +94,7 @@ func _state_normal_ph_process(delta : float):
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or not _coyote_timer.is_stopped():
 			velocity.y = -_jump_force
+			jumpsfx.play()
 		elif is_on_floor() == false:
 			_jump_buffer_timer.start()
 	
@@ -111,6 +122,7 @@ func _state_normal_ph_process(delta : float):
 		and _can_slide == true \
 		and (_detect_left.is_colliding() \
 		or _detect_right.is_colliding()):
+		sfx.get_child(3).play()
 		_state_machine.change_state("wall_slide")
 	
 	# Fall too far and die
@@ -121,18 +133,26 @@ func _state_normal_ph_process(delta : float):
 		if _can_dash == true:
 			_can_dash = false
 			_just_dashed.start()
+			sfx.get_child(2).play()
 			_state_machine.change_state("dash")
 	
+	if last_face_right == true:
+		hitbox.position.x = 15
+	if last_face_left == true:
+		hitbox.position.x = -15
 	
-
+	if Input.is_action_just_pressed("Basic Attack"):
+		_state_machine.change_state("attack")
+	
 func _game_over():
-	# Currently set to restart level, can be changed easily here.
+	
 	SceneManager.restart_scene()
 
-func _state_wall_slide_ph_process(delta: float):
 
+func _state_wall_slide_ph_process(delta: float):
 	velocity.y = _slide_speed
 	if Input.is_action_just_pressed("jump"):
+		sfx.get_child(1).play()
 		_slide_delay.start()
 		_can_slide = false
 		if _detect_left.is_colliding():
@@ -188,4 +208,18 @@ func _on_slide_delay_timeout():
 func _get_score (amount):
 	_player_score += amount
 	_score.text = str("Score: ", _player_score)
-	
+	sfx.get_child(4).play()
+	if amount > 1 :
+		sfx.get_child(6).play()
+	PlayerManager.current_score = _player_score
+
+func _state_attack_ph_process(delta: float):
+		# Enable gravity.
+	if not is_on_floor():
+		velocity.y += _gravity * delta
+	hitbox.monitoring = true
+	_hit_time -= 1 * delta
+	if _hit_time <= 0:
+		hitbox.monitoring = false
+		_state_machine.change_state("normal")
+	move_and_slide()

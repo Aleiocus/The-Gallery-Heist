@@ -2,7 +2,7 @@ extends Camera2D
 
 var _in_air : bool
 
-const _look_ahead_factor = 0.2
+const _look_ahead_factor = .1
 var _facing = 0
 @onready var _prev_camera_pos = get_target_position()
 

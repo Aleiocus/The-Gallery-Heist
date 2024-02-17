@@ -7,6 +7,7 @@ const _bob_speed : float = 5.0
 @onready var start_y : float = global_position.y
 var t : float = 0.0
 @export var _score_value: float = 1
+@onready var coin_get = $CoinGet
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
