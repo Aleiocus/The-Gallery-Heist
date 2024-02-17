@@ -53,35 +53,15 @@ autostart = true
 wait_time = 0.2
 one_shot = true
 
-[node name="Score" type="Label" parent="."]
-offset_left = -66.0
-offset_top = -32.0
-offset_right = -20.0
-offset_bottom = -9.0
-text = "Score: 0"
-label_settings = SubResource("LabelSettings_klmy4")
+[node name="Detection" type="Node2D" parent="."]
 
-[node name="DashFeedback" type="Label" parent="."]
-offset_left = -103.0
-offset_top = -16.0
-offset_right = -18.0
-offset_bottom = 7.0
-text = "Dash: "
-label_settings = SubResource("LabelSettings_klmy4")
+[node name="Right" type="RayCast2D" parent="Detection"]
+position = Vector2(0, -5)
+target_position = Vector2(14, 0)
 
-[node name="Label" type="Label" parent="."]
-offset_left = -66.0
-offset_top = -53.0
-offset_right = -26.0
-offset_bottom = -30.0
-label_settings = SubResource("LabelSettings_lynlw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_s1gbs")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_0gp6m")
+[node name="Left" type="RayCast2D" parent="Detection"]
+position = Vector2(0, -5)
+target_position = Vector2(-15, 0)
 
 [node name="SFX" type="Node2D" parent="."]
 
@@ -112,6 +92,36 @@ pitch_scale = 1.6
 [node name="PieGet" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("8_rh76n")
 
+[node name="Score" type="Label" parent="."]
+offset_left = -66.0
+offset_top = -32.0
+offset_right = -20.0
+offset_bottom = -9.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_klmy4")
+
+[node name="DashFeedback" type="Label" parent="."]
+offset_left = -103.0
+offset_top = -16.0
+offset_right = -18.0
+offset_bottom = 7.0
+text = "Dash: "
+label_settings = SubResource("LabelSettings_klmy4")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -66.0
+offset_top = -53.0
+offset_right = -26.0
+offset_bottom = -30.0
+label_settings = SubResource("LabelSettings_lynlw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_s1gbs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0gp6m")
+
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(102, -36)
 zoom = Vector2(2, 2)
@@ -126,16 +136,6 @@ drag_bottom_margin = 0.44
 editor_draw_drag_margin = true
 script = ExtResource("3_kb11e")
 
-[node name="Detection" type="Node2D" parent="."]
-
-[node name="Right" type="RayCast2D" parent="Detection"]
-position = Vector2(0, -5)
-target_position = Vector2(14, 0)
-
-[node name="Left" type="RayCast2D" parent="Detection"]
-position = Vector2(0, -5)
-target_position = Vector2(-15, 0)
-
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(15, 0)
 monitoring = false
@@ -143,8 +143,6 @@ script = ExtResource("4_buk63")
 
 [node name="Hit1" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_cb47a")
-
-[node name="Layers" type="Node2D" parent="."]
 
 [connection signal="is_in_air" from="." to="camera" method="_on_player_is_in_air"]
 [connection signal="is_on_ground" from="." to="camera" method="_on_player_is_on_ground"]
