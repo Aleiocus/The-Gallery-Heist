@@ -105,7 +105,7 @@ position = Vector2(51, 12)
 position = Vector2(636, -288)
 zoom = Vector2(0.85, 0.85)
 
-[node name="Label6" type="Label" parent="."]
+[node name="Label" type="Label" parent="."]
 offset_left = 397.0
 offset_top = -77.0
 offset_right = 525.0

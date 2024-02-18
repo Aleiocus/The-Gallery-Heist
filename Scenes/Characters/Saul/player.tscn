@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://k2awgkbabx7v"]
+[gd_scene load_steps=18 format=3 uid="uid://k2awgkbabx7v"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_8gmhn"]
 [ext_resource type="Texture2D" uid="uid://dyj04axd7scdn" path="res://Resources/Textures/PLACEHOLDERS/Saul_32_px By June.png" id="2_0gp6m"]
 [ext_resource type="Script" path="res://Scripts/player_camera.gd" id="3_kb11e"]
-[ext_resource type="Script" path="res://Scenes/Characters/Saul/Hitbox.gd" id="4_buk63"]
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/jump2.wav" id="4_kn1s7"]
 [ext_resource type="AudioStream" uid="uid://dpg46pasbhqyu" path="res://Resources/Audio/SFX/jump1.wav" id="5_4b5h4"]
 [ext_resource type="AudioStream" uid="uid://bxe2502g4y2iv" path="res://Resources/Audio/SFX/dash.wav" id="5_jppin"]
@@ -13,6 +12,14 @@
 [ext_resource type="AudioStream" uid="uid://byyxktqliudlb" path="res://Resources/Audio/SFX/click.wav" id="8_rh76n"]
 [ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/explosion 3.wav" id="9_o1dav"]
 [ext_resource type="AudioStream" uid="uid://dchgcqkkk4n0j" path="res://Resources/Audio/SFX/explosion 1.wav" id="10_kv2jx"]
+[ext_resource type="Script" path="res://Scenes/Characters/Saul/hitbox.gd" id="13_g8g5b"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2odja"]
+streams_count = 2
+stream_0/stream = ExtResource("5_4b5h4")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_kn1s7")
+stream_1/weight = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_klmy4"]
 font_size = 12
@@ -24,8 +31,7 @@ shadow_color = Color(0, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s1gbs"]
 size = Vector2(13, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cb47a"]
-size = Vector2(13.5, 31.5)
+[sub_resource type="CircleShape2D" id="CircleShape2D_0y4iu"]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_8gmhn")
@@ -67,48 +73,47 @@ target_position = Vector2(14, 0)
 position = Vector2(0, -5)
 target_position = Vector2(-15, 0)
 
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
 [node name="SFX" type="Node2D" parent="."]
 
-[node name="Jumpsfx_0" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("5_4b5h4")
+[node name="Jump" type="AudioStreamPlayer" parent="SFX"]
+stream = SubResource("AudioStreamRandomizer_2odja")
 volume_db = -6.0
 
-[node name="Jumpsfx2_1" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("4_kn1s7")
-volume_db = -6.0
-
-[node name="Dash2" type="AudioStreamPlayer" parent="SFX"]
+[node name="Dash" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_jppin")
 volume_db = -6.0
 
-[node name="HitWall3" type="AudioStreamPlayer" parent="SFX"]
+[node name="HitWall" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_nryyl")
 volume_db = -2.0
 pitch_scale = 2.05
 
-[node name="CoinGet4" type="AudioStreamPlayer" parent="SFX"]
+[node name="CoinPickup" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("7_70joa")
 
-[node name="Hurt5" type="AudioStreamPlayer" parent="SFX"]
+[node name="Hurt" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("8_rh76n")
 pitch_scale = 1.6
 
-[node name="PieGet6" type="AudioStreamPlayer" parent="SFX"]
+[node name="PiePickup" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("8_rh76n")
 
-[node name="Hit7" type="AudioStreamPlayer" parent="SFX"]
+[node name="Hit" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("8_a4e32")
 volume_db = -2.0
 pitch_scale = 1.5
 
-[node name="HitConfirm8" type="AudioStreamPlayer" parent="SFX"]
+[node name="HitConfirm" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("9_o1dav")
 
-[node name="HitPlayer9" type="AudioStreamPlayer" parent="SFX"]
+[node name="Damage" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("10_kv2jx")
 volume_db = -3.0
 
-[node name="GameOver10" type="AudioStreamPlayer" parent="SFX"]
+[node name="GameOver" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("9_o1dav")
 volume_db = 1.0
 pitch_scale = 0.5
@@ -169,13 +174,11 @@ script = ExtResource("3_kb11e")
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(15, 0)
 monitoring = false
-script = ExtResource("4_buk63")
+script = ExtResource("13_g8g5b")
 
 [node name="Hit1" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("RectangleShape2D_cb47a")
+shape = SubResource("CircleShape2D_0y4iu")
 
-[connection signal="is_in_air" from="." to="camera" method="_on_player_is_in_air"]
-[connection signal="is_on_ground" from="." to="camera" method="_on_player_is_on_ground"]
 [connection signal="timeout" from="Timers/JustDashed" to="." method="_on_just_dashed_timeout"]
 [connection signal="timeout" from="Timers/SlideDelay" to="." method="_on_slide_delay_timeout"]
 [connection signal="timeout" from="Timers/TookHit" to="." method="_on_took_hit_timeout"]

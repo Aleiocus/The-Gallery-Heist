@@ -6,13 +6,13 @@ const _bob_speed : float = 5.0
 # Establish Start location and variables for sinwave
 @onready var start_y : float = global_position.y
 var t : float = 0.0
-@export var _score_value: float = 1
+@export var _score_value: float = 1.0
 @onready var sprite_2d = $Sprite2D
 
 
 func _ready():
-	sprite_2d.frame = randi_range(1,8)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	sprite_2d.frame = randi_range(1,7)
+
 func _process(delta):
 	# Calculation for sinwave bob
 	t += delta

@@ -21,6 +21,7 @@ func change_scene(scene_path : String):
 	
 	# change scene
 	get_tree().change_scene_to_file(scene_path)
+	World.clear()
 	
 	# transition out
 	var transition_tween : Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)

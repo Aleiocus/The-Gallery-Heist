@@ -1,24 +1,23 @@
 extends CharacterBody2D
 
-
 @export var _wander_speed : float = 50.0
 var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _state_machine : StateMachine = StateMachine.new()
 @onready var _label = $Label
-var _move_direction 
+var _move_direction
 var _wander_time : float
 @onready var _sprite = $Sprite
 @onready var _gap_detect_left = $Detectors/GapDetectLeft
 @onready var _gap_detect_right = $Detectors/GapDetectRight
 @onready var hurtbox = $Hurtbox
 var _facing_right : bool = true
-@export var _health: float = 2
+@export var _health: float = 2.0
 var _taking_hit : bool = false
 @onready var took_hit = $TookHit
-var _pop_up : float = 60
+const _pop_up : float = 60.0
 var _direction
-@export var _damage : float = 1
-@export var _knockback : float = 80
+@export var _damage : float = 1.0
+@export var _knockback : float = 80.0
 signal _give_score(amount)
 
 func _ready():
@@ -94,7 +93,6 @@ func _randomize_wander():
 	_move_direction = randf_range(-2,2)
 	_wander_time = randf_range(1,7)
 
-
 func _on_hurtbox_body_entered(body):
 	if body.is_in_group("Player"):
 		_taking_hit = true
@@ -102,7 +100,6 @@ func _on_hurtbox_body_entered(body):
 		body._take_damage(_damage, _knockback, _direction)
 		velocity.x = 100 * -_direction
 		velocity.y = -_pop_up
-
 
 func _on_took_hit_timeout():
 	_taking_hit = false
