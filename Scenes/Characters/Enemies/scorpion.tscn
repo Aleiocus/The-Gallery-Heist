@@ -7,7 +7,7 @@
 font_size = 12
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfry5"]
-size = Vector2(14, 26)
+size = Vector2(24.75, 18.5)
 
 [node name="Scorpion" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_kehhd")
@@ -40,10 +40,14 @@ position = Vector2(24, 0)
 target_position = Vector2(0, 15)
 
 [node name="Hurtbox" type="Area2D" parent="."]
-position = Vector2(8, -6)
+position = Vector2(4, -8)
 
 [node name="Box" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(1, 5)
 shape = SubResource("RectangleShape2D_bfry5")
 
+[node name="TookHit" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="timeout" from="TookHit" to="." method="_on_took_hit_timeout"]

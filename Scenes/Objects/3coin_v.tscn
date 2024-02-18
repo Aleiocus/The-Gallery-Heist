@@ -7,7 +7,7 @@
 [node name="Coin2" parent="." instance=ExtResource("2_hrqte")]
 
 [node name="Coin" parent="." instance=ExtResource("2_hrqte")]
-position = Vector2(0, 12)
+position = Vector2(0, 20)
 
 [node name="Coin3" parent="." instance=ExtResource("2_hrqte")]
-position = Vector2(0, -12)
+position = Vector2(0, -20)
