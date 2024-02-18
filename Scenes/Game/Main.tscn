@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://bf0h4cvoovrh2"]
 
-[ext_resource type="Script" path="res://Scenes/Game/Main.gd" id="1_nqnqi"]
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_nqnqi"]
 [ext_resource type="Texture2D" uid="uid://bwog48d20oq2s" path="res://Resources/Textures/PLACEHOLDERS/Template1.png" id="1_t2eun"]
 [ext_resource type="PackedScene" uid="uid://dlu817owjdkjq" path="res://Scenes/Characters/Enemies/scorpion.tscn" id="4_e0olm"]
 [ext_resource type="PackedScene" uid="uid://c1oa5jpq72qev" path="res://Scenes/Objects/coin.tscn" id="5_4smwk"]

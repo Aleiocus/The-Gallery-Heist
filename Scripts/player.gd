@@ -43,6 +43,7 @@ const _death_height_y : float = 150.0
 	"game_over":$SFX/GameOver
 }
 @onready var _took_hit = $Timers/TookHit
+@onready var sprite = $Sprite
 
 var _state_machine : StateMachine = StateMachine.new()
 
@@ -84,6 +85,17 @@ func _state_normal_ph_process(delta : float):
 		velocity.x = move_toward(velocity.x, _max_move_speed * _direction.x, _accel * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
+	
+	if velocity.x != 0 :
+		sprite.play("Run")
+	else:
+		sprite.play("Idle")
+	if velocity.x > 0 :
+		sprite.flip_h = false
+	if velocity.x < 0 :
+		sprite.flip_h = true
+	
+	
 	
 	# Allow player to jump
 	if Input.is_action_just_pressed("jump"):

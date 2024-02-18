@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://k2awgkbabx7v"]
+[gd_scene load_steps=31 format=3 uid="uid://k2awgkbabx7v"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_8gmhn"]
-[ext_resource type="Texture2D" uid="uid://dyj04axd7scdn" path="res://Resources/Textures/PLACEHOLDERS/Saul_32_px By June.png" id="2_0gp6m"]
 [ext_resource type="Script" path="res://Scripts/player_camera.gd" id="3_kb11e"]
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/jump2.wav" id="4_kn1s7"]
 [ext_resource type="AudioStream" uid="uid://dpg46pasbhqyu" path="res://Resources/Audio/SFX/jump1.wav" id="5_4b5h4"]
@@ -13,6 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/explosion 3.wav" id="9_o1dav"]
 [ext_resource type="AudioStream" uid="uid://dchgcqkkk4n0j" path="res://Resources/Audio/SFX/explosion 1.wav" id="10_kv2jx"]
 [ext_resource type="Script" path="res://Scenes/Characters/Saul/hitbox.gd" id="13_g8g5b"]
+[ext_resource type="Texture2D" uid="uid://0r7bmjic63s5" path="res://Resources/Textures/SaulSprites/Idle (AddinSachin).png" id="13_s12og"]
+[ext_resource type="Texture2D" uid="uid://c5v701gol0ddx" path="res://Resources/Textures/SaulSprites/Running.png" id="14_bhdyq"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2odja"]
 streams_count = 2
@@ -32,6 +33,96 @@ shadow_color = Color(0, 0, 0, 1)
 size = Vector2(13, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0y4iu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyasq"]
+atlas = ExtResource("13_s12og")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuuwy"]
+atlas = ExtResource("13_s12og")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb8oe"]
+atlas = ExtResource("13_s12og")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to3br"]
+atlas = ExtResource("13_s12og")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxajn"]
+atlas = ExtResource("13_s12og")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1qdd"]
+atlas = ExtResource("14_bhdyq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqmqh"]
+atlas = ExtResource("14_bhdyq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28m4e"]
+atlas = ExtResource("14_bhdyq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyw3y"]
+atlas = ExtResource("14_bhdyq")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hirh7"]
+atlas = ExtResource("14_bhdyq")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xam5"]
+atlas = ExtResource("14_bhdyq")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4cgds"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyasq")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_tuuwy")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_xb8oe")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_to3br")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_mxajn")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_u1qdd")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_wqmqh")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_28m4e")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_eyw3y")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_hirh7")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_3xam5")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_8gmhn")
@@ -72,9 +163,6 @@ target_position = Vector2(14, 0)
 [node name="Left" type="RayCast2D" parent="Detection"]
 position = Vector2(0, -5)
 target_position = Vector2(-15, 0)
-
-[node name="AudioListener2D" type="AudioListener2D" parent="."]
-current = true
 
 [node name="SFX" type="Node2D" parent="."]
 
@@ -118,6 +206,9 @@ stream = ExtResource("9_o1dav")
 volume_db = 1.0
 pitch_scale = 0.5
 
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
 [node name="Score" type="Label" parent="."]
 offset_left = -102.0
 offset_top = -31.0
@@ -154,9 +245,6 @@ label_settings = SubResource("LabelSettings_klmy4")
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_s1gbs")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_0gp6m")
-
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(102, -36)
 zoom = Vector2(2, 2)
@@ -178,6 +266,12 @@ script = ExtResource("13_g8g5b")
 
 [node name="Hit1" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_0y4iu")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_4cgds")
+animation = &"Run"
+frame_progress = 0.52583
 
 [connection signal="timeout" from="Timers/JustDashed" to="." method="_on_just_dashed_timeout"]
 [connection signal="timeout" from="Timers/SlideDelay" to="." method="_on_slide_delay_timeout"]
