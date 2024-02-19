@@ -65,7 +65,7 @@ func _process(delta : float):
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
-	_direction = round(Input.get_vector("left", "right", "up", "down"))
+	_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 
 func get_direction() -> Vector2:
 	return _direction
