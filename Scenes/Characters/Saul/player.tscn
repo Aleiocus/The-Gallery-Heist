@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://byyxktqliudlb" path="res://Resources/Audio/SFX/click.wav" id="8_rh76n"]
 [ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/explosion 3.wav" id="9_o1dav"]
 [ext_resource type="AudioStream" uid="uid://dchgcqkkk4n0j" path="res://Resources/Audio/SFX/explosion 1.wav" id="10_kv2jx"]
-[ext_resource type="Script" path="res://Scenes/Characters/Saul/hitbox.gd" id="13_g8g5b"]
+[ext_resource type="Script" path="res://Scripts/hitbox.gd" id="12_i5da0"]
 [ext_resource type="Texture2D" uid="uid://0r7bmjic63s5" path="res://Resources/Textures/SaulSprites/Idle (AddinSachin).png" id="13_s12og"]
 [ext_resource type="Texture2D" uid="uid://c5v701gol0ddx" path="res://Resources/Textures/SaulSprites/Running.png" id="14_bhdyq"]
 
@@ -255,14 +255,13 @@ drag_vertical_enabled = true
 drag_left_margin = 0.02
 drag_top_margin = 0.29
 drag_right_margin = 0.02
-drag_bottom_margin = 0.44
 editor_draw_drag_margin = true
 script = ExtResource("3_kb11e")
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(15, 0)
 monitoring = false
-script = ExtResource("13_g8g5b")
+script = ExtResource("12_i5da0")
 
 [node name="Hit1" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_0y4iu")

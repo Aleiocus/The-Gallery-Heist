@@ -65,7 +65,7 @@ func _process(delta : float):
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
-	_direction = Input.get_vector("left", "right", "up", "down")
+	_direction = round(Input.get_vector("left", "right", "up", "down"))
 
 func get_direction() -> Vector2:
 	return _direction
@@ -141,7 +141,7 @@ func _state_normal_ph_process(delta : float):
 		_hitbox.monitoring = true
 		_sfx["hit"].play()
 		_state_machine.change_state("attack")
-		if _direction.y and is_on_floor():
+		if _direction.y > 0 and is_on_floor():
 			velocity.y = -_jump_force
 	
 func _game_over():
