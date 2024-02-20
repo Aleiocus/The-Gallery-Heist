@@ -18,7 +18,7 @@ const _pop_up : float = 60.0
 var _direction
 @export var _damage : float = 1.0
 @export var _knockback : float = 80.0
-signal _give_score(amount)
+signal give_score(amount)
 
 func _ready():
 	_state_machine.add_state("wander", Callable(), Callable(), Callable(),_state_wander_ph_process)
@@ -42,17 +42,17 @@ func _process(delta : float):
 	else:
 		_direction = -1
 	if global_position.y > 100 :
-		_give_score.emit(10)
+		give_score.emit(10)
 		queue_free()
 		
-func _take_damage(amount, force, direction):
+func take_damage(amount, force, direction : float):
 	_taking_hit = true
 	if _health > 0:
 		_health = _health - amount
 		velocity.x = (velocity.x + force) * direction
 		velocity.y = -_pop_up
 	if _health <= 0:
-		_give_score.emit(10)
+		give_score.emit(10)
 		queue_free()
 	took_hit.start()
 	
@@ -62,7 +62,6 @@ func _physics_process(delta : float):
 		velocity.y += _gravity * delta
 	
 func _state_wander_ph_process(delta: float):
-	
 	if _wander_time > 0:
 		_wander_time -= delta
 	
@@ -97,7 +96,7 @@ func _on_hurtbox_body_entered(body):
 	if body.is_in_group("Player"):
 		_taking_hit = true
 		took_hit.start()
-		body._take_damage(_damage, _knockback, _direction)
+		body.take_damage(_damage, _knockback, _direction)
 		velocity.x = 100 * -_direction
 		velocity.y = -_pop_up
 

@@ -8,10 +8,10 @@ var high_score
 
 func _ready():
 	for node in get_tree().get_nodes_in_group("Enemy"):
-		node._give_score.connect(_give_score)
-	
+		node.give_score.connect(_give_score)
+
 func _give_score(amount):
-	player._get_score(amount)
+	player.get_score(amount)
 
 func _process(delta : float):
 	high_score = World.high_score
