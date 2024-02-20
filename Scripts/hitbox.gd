@@ -20,4 +20,4 @@ func _physics_process(delta : float):
 func _on_body_entered(body):
 	if body.is_in_group("Enemy"):
 		hit_confirm_sfx.play()
-		body._take_damage(_damage_amount, _knockback_force, _knockback_direction)
+		body.take_damage(_damage_amount, _knockback_force, _knockback_direction)

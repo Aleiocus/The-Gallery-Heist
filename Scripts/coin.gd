@@ -23,5 +23,5 @@ func _process(delta):
 # Call function for body being entered and increase score when collected by player
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
-		body._get_score(_score_value)
+		body.get_score(_score_value)
 		queue_free()
