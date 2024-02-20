@@ -10,7 +10,7 @@ var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 const _slide_speed : float = 60
 const _wall_jump_force : float = 245
 const _pushoff_force : float = 280.0
-const _dash_speed: float = 300
+const _dash_speed: float = 250
 const _dash_decel: float = 1000
 var _hit_time : float = 0.2
 
@@ -44,6 +44,8 @@ const _death_height_y : float = 150.0
 }
 @onready var _took_hit = $Timers/TookHit
 @onready var sprite = $Sprite
+# TEMPORARY v
+@onready var sprite_2d = $Hitbox/Sprite2D
 
 var _state_machine : StateMachine = StateMachine.new()
 
@@ -86,9 +88,11 @@ func _state_normal_ph_process(delta : float):
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
 	
-	if velocity.x != 0 :
+	if velocity.x != 0 and (velocity.x > 230 or velocity.x < -230) :
 		sprite.play("Run")
-	else:
+	elif velocity.x != 0 and (velocity.x < 230 or velocity.x > -230) :
+		sprite.play("Walk")
+	elif velocity.x == 0:
 		sprite.play("Idle")
 	if velocity.x > 0 :
 		sprite.flip_h = false
@@ -138,6 +142,7 @@ func _state_normal_ph_process(delta : float):
 			_state_machine.change_state("dash")
 	
 	if Input.is_action_just_pressed("Basic Attack"):
+		sprite_2d.visible = true
 		_hitbox.monitoring = true
 		_sfx["hit"].play()
 		_state_machine.change_state("attack")
@@ -169,7 +174,7 @@ func _state_wall_slide_ph_process(delta: float):
 
 func _state_dash_ph_process(delta: float):
 	if _direction.x or _direction.y:
-		velocity.x = _dash_speed * _direction.x
+		velocity.x += _dash_speed * _direction.x
 		velocity.y = _dash_speed * _direction.y
 	else:
 		velocity.x = _dash_speed * _direction.x
@@ -209,6 +214,7 @@ func _state_attack_ph_process(delta: float):
 	_hit_time -= 1 * delta
 	if _hit_time <= 0:
 		_hitbox.monitoring = false
+		sprite_2d.visible = false
 		_state_machine.change_state("normal")
 	move_and_slide()
 

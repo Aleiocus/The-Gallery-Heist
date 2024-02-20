@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5v701gol0ddx"
-path="res://.godot/imported/Running.png-1673a8ff05abd0eb42b32295487e01fe.ctex"
+uid="uid://me1hjfcqsjid"
+path="res://.godot/imported/Walking (AddinSachin).png-d57b29fcb7c4e4f553ceb559cd4f5c8e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/SaulSprites/Running.png"
-dest_files=["res://.godot/imported/Running.png-1673a8ff05abd0eb42b32295487e01fe.ctex"]
+source_file="res://Resources/Textures/SaulSprites/Walking (AddinSachin).png"
+dest_files=["res://.godot/imported/Walking (AddinSachin).png-d57b29fcb7c4e4f553ceb559cd4f5c8e.ctex"]
 
 [params]
 

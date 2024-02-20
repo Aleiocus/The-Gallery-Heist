@@ -135,7 +135,8 @@ offset_top = -71.0
 offset_right = 566.0
 offset_bottom = 4.0
 text = "Enemy AI is a WIP 
-so dodge the scorpions stinger!"
+so dodge the scorpion's stinger!
+Punch them from behind"
 label_settings = SubResource("LabelSettings_0qddb")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -170,6 +171,31 @@ label_settings = SubResource("LabelSettings_swaxh")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label6" type="Label" parent="Lables"]
+offset_left = 413.0
+offset_top = -575.0
+offset_right = 698.0
+offset_bottom = -338.0
+text = "Credits:
+Programing Team:
+DissonantVoid
+Valsprites
+
+Art team:
+AddinSacchin (player sprite)
+AxelMode (scorpion sprite)
+Potent (app icon)
+Valsprites (other bits)
+
+Music by:
+DissonantVoid
+
+SFX by:
+Valsprites"
+label_settings = SubResource("LabelSettings_swaxh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Label5" type="Label" parent="Lables"]
 offset_left = 1002.0
 offset_top = -57.0
@@ -192,16 +218,13 @@ position = Vector2(149, 22)
 position = Vector2(109, 22)
 
 [node name="Coin20" parent="Coins" instance=ExtResource("5_4smwk")]
-position = Vector2(936, -243)
+position = Vector2(967, -212)
 
 [node name="Coin22" parent="Coins" instance=ExtResource("5_4smwk")]
-position = Vector2(937, -185)
+position = Vector2(908, -263)
 
 [node name="Coin36" parent="Coins" instance=ExtResource("5_4smwk")]
-position = Vector2(937, -146)
-
-[node name="Coin37" parent="Coins" instance=ExtResource("5_4smwk")]
-position = Vector2(965, -110)
+position = Vector2(905, -165)
 
 [node name="Coin25" parent="Coins" instance=ExtResource("5_4smwk")]
 position = Vector2(671, -220)
@@ -245,9 +268,6 @@ position = Vector2(360, -212)
 [node name="Coin41" parent="Coins" instance=ExtResource("5_4smwk")]
 position = Vector2(440, -211)
 
-[node name="Coin21" parent="Coins" instance=ExtResource("5_4smwk")]
-position = Vector2(1020, -110)
-
 [node name="3 stack" parent="Coins" instance=ExtResource("6_h4d77")]
 position = Vector2(367, -482)
 
@@ -260,11 +280,20 @@ position = Vector2(526, 28)
 [node name="3 stack5" parent="Coins" instance=ExtResource("6_h4d77")]
 position = Vector2(363, 28)
 
-[node name="3 stack6" parent="Coins" instance=ExtResource("6_h4d77")]
-position = Vector2(1134, -130)
+[node name="3 stack26" parent="Coins" instance=ExtResource("6_h4d77")]
+position = Vector2(1027, -130)
+
+[node name="3 stack27" parent="Coins" instance=ExtResource("6_h4d77")]
+position = Vector2(956, -130)
 
 [node name="3 stack7" parent="Coins" instance=ExtResource("7_bkgpp")]
 position = Vector2(1153, -228)
+
+[node name="3 stack28" parent="Coins" instance=ExtResource("7_bkgpp")]
+position = Vector2(1195, -65)
+
+[node name="3 stack29" parent="Coins" instance=ExtResource("7_bkgpp")]
+position = Vector2(1235, -154)
 
 [node name="3 stack8" parent="Coins" instance=ExtResource("7_bkgpp")]
 position = Vector2(1240, -296)
@@ -285,10 +314,10 @@ position = Vector2(1002, -428)
 position = Vector2(1002, -441)
 
 [node name="3 stack2" parent="Coins" instance=ExtResource("7_bkgpp")]
-position = Vector2(646, -389)
+position = Vector2(646, -385)
 
 [node name="3 stack17" parent="Coins" instance=ExtResource("7_bkgpp")]
-position = Vector2(665, -389)
+position = Vector2(665, -380)
 
 [node name="3 stack12" parent="Coins" instance=ExtResource("6_h4d77")]
 position = Vector2(650, 12)
@@ -335,7 +364,7 @@ position = Vector2(181, 22)
 position = Vector2(443, 29)
 
 [node name="Pie4" parent="Pies" instance=ExtResource("8_ogxep")]
-position = Vector2(936, -219)
+position = Vector2(936, -236)
 
 [node name="Pie2" parent="Pies" instance=ExtResource("8_ogxep")]
 position = Vector2(1196, -294)

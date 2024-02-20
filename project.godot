@@ -13,7 +13,7 @@ config_version=5
 config/name="Project Gallery"
 run/main_scene="res://Scenes/Game/Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://saul_face_emoji (Potent).png"
 
 [autoload]
 
