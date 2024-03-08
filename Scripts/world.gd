@@ -3,6 +3,7 @@ extends Node
 # Global class for dependency management between level objects
 
 var player : Player
+var level_camera : LevelCamera
 var artwork_recoverd : Dictionary
 var current_score : float : 
 	set(value):
@@ -16,6 +17,7 @@ func clear():
 	# NOTE: for now this gets called on scene changed, in the future
 	#       we'd want to call this specificaly when changing to a "Level" scene
 	player = null
+	level_camera = null
 	artwork_recoverd = {}
 	current_score = 0.0
 	high_score = 0.0

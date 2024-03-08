@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://3xg1cdwrnu1c"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/camera_trigger.gd" id="1_2ht2y"]
+
+[node name="CameraTrigger" type="Area2D"]
+monitorable = false
+script = ExtResource("1_2ht2y")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

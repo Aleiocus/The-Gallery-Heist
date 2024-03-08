@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bf0h4cvoovrh2"]
+[gd_scene load_steps=23 format=3 uid="uid://bf0h4cvoovrh2"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_nqnqi"]
 [ext_resource type="Texture2D" uid="uid://bwog48d20oq2s" path="res://Resources/Textures/PLACEHOLDERS/Template1.png" id="1_t2eun"]
+[ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/level_camera.tscn" id="4_2daqr"]
 [ext_resource type="PackedScene" uid="uid://dlu817owjdkjq" path="res://Scenes/Characters/Enemies/scorpion.tscn" id="4_e0olm"]
 [ext_resource type="PackedScene" uid="uid://c1oa5jpq72qev" path="res://Scenes/Objects/coin.tscn" id="5_4smwk"]
+[ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/camera_trigger.tscn" id="5_pal7g"]
 [ext_resource type="PackedScene" uid="uid://dry3qo2qrpmsi" path="res://Scenes/Objects/3coin_h.tscn" id="6_h4d77"]
 [ext_resource type="PackedScene" uid="uid://bjync0nv5kgfk" path="res://Scenes/Objects/3coin_v.tscn" id="7_bkgpp"]
 [ext_resource type="PackedScene" uid="uid://b025nhkacoy05" path="res://Scenes/Objects/Pie.tscn" id="8_ogxep"]
@@ -71,6 +73,21 @@ texture = ExtResource("1_t2eun")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_7m7wu")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nbjd"]
+size = Vector2(20, 174)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxx41"]
+size = Vector2(736, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04mcl"]
+size = Vector2(22, 655)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4eeja"]
+size = Vector2(740, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pa71b"]
+size = Vector2(20, 464)
+
 [sub_resource type="LabelSettings" id="LabelSettings_q3abp"]
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
@@ -100,6 +117,47 @@ layer_1/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("9_3cgxl")]
 position = Vector2(51, 12)
+
+[node name="LevelCamera" parent="." instance=ExtResource("4_2daqr")]
+position = Vector2(28, -131)
+
+[node name="CameraTriggers" type="Node2D" parent="."]
+
+[node name="CameraTrigger" parent="CameraTriggers" instance=ExtResource("5_pal7g")]
+position = Vector2(726, 21)
+_is_starting_state = true
+_trigger_state = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger"]
+position = Vector2(0, -77)
+shape = SubResource("RectangleShape2D_3nbjd")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger"]
+position = Vector2(-358, -154)
+shape = SubResource("RectangleShape2D_hxx41")
+
+[node name="CameraTrigger2" parent="CameraTriggers" instance=ExtResource("5_pal7g")]
+position = Vector2(763, -55)
+_trigger_state = 1
+_target_zoom = Vector2(0.8, 0.8)
+_clamped_limits = Rect2(966, -600, 966, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2"]
+position = Vector2(0, -240.5)
+shape = SubResource("RectangleShape2D_04mcl")
+
+[node name="CameraTrigger3" parent="CameraTriggers" instance=ExtResource("5_pal7g")]
+position = Vector2(379, -170)
+_target_zoom = Vector2(0.5, 0.5)
+_idle_position = Vector2(370, -420)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3"]
+position = Vector2(-9, 0)
+shape = SubResource("RectangleShape2D_4eeja")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3"]
+position = Vector2(351, -222)
+shape = SubResource("RectangleShape2D_pa71b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(636, -288)

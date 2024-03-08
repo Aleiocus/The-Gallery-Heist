@@ -45,7 +45,7 @@ func _process(delta : float):
 		give_score.emit(10)
 		queue_free()
 		
-func _take_damage(amount, force, direction):
+func take_damage(amount, force, direction : float):
 	_taking_hit = true
 	if _health > 0:
 		_health = _health - amount

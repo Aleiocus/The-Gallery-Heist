@@ -61,7 +61,10 @@ func _ready():
 
 func _process(delta : float):
 	_state_machine.state_process(delta)
-	_sprite.flip_h = velocity.x < 0.0
+	if _direction.x == 1:
+		_sprite.flip_h = false
+	elif _direction.x == -1:
+		_sprite.flip_h = true
 	
 	_label.text = str("State: ", _state_machine.get_current_state())
 	_dash_feedback.text = str("Can_Dash: ", _can_dash)
@@ -90,9 +93,6 @@ func take_damage (amount, force, direction : int):
 	if _player_health <= 0:
 		_game_over()
 	_took_hit.start()
-
-func get_direction() -> Vector2:
-	return _direction
 
 func _state_normal_switch_from(to : String):
 	_coyote_timer.stop()
@@ -166,10 +166,6 @@ func _state_normal_ph_process(delta : float):
 		_hitbox.monitoring = true
 		_sfx["hit"].play()
 		_state_machine.change_state("attack")
-		return
-		
-		if _direction.y > 0 and is_on_floor():
-			velocity.y = -_jump_force
 
 func _state_wall_slide_swith_to(from : StringName):
 	_can_dash = true

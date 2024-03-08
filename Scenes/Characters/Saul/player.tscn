@@ -1,7 +1,6 @@
-[gd_scene load_steps=39 format=3 uid="uid://k2awgkbabx7v"]
+[gd_scene load_steps=38 format=3 uid="uid://k2awgkbabx7v"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_8gmhn"]
-[ext_resource type="Script" path="res://Scripts/player_camera.gd" id="3_kb11e"]
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/jump2.wav" id="4_kn1s7"]
 [ext_resource type="AudioStream" uid="uid://dpg46pasbhqyu" path="res://Resources/Audio/SFX/jump1.wav" id="5_4b5h4"]
 [ext_resource type="AudioStream" uid="uid://bxe2502g4y2iv" path="res://Resources/Audio/SFX/dash.wav" id="5_jppin"]
@@ -298,18 +297,6 @@ label_settings = SubResource("LabelSettings_klmy4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_s1gbs")
-
-[node name="camera" type="Camera2D" parent="."]
-position = Vector2(102, -36)
-position_smoothing_enabled = true
-position_smoothing_speed = 6.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.02
-drag_top_margin = 0.29
-drag_right_margin = 0.02
-editor_draw_drag_margin = true
-script = ExtResource("3_kb11e")
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(15, 0)
