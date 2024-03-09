@@ -8,7 +8,7 @@ const _extend_vector : Vector2 = Vector2(15.0, 20.0)
 
 
 func _physics_process(delta : float):
-	var player_direction : Vector2 = World.player.get_direction()
+	var player_direction : Vector2 = World.player.velocity.normalized()
 	if player_direction != Vector2(0,0):
 		position.x = sign(player_direction.x) * _extend_vector.x
 		position.y = sign(player_direction.y) * _extend_vector.y
@@ -20,4 +20,4 @@ func _physics_process(delta : float):
 func _on_body_entered(body):
 	if body.is_in_group("Enemy"):
 		hit_confirm_sfx.play()
-		body._take_damage(_damage_amount, _knockback_force, _knockback_direction)
+		body.take_damage(_damage_amount, _knockback_force, _knockback_direction)

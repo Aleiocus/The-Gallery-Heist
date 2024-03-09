@@ -179,24 +179,23 @@ script = ExtResource("1_8gmhn")
 [node name="Timers" type="Node2D" parent="."]
 
 [node name="CoyoteTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
+wait_time = 0.24
 one_shot = true
 
 [node name="JumpBufferTimer" type="Timer" parent="Timers"]
-wait_time = 0.15
+wait_time = 0.2
 one_shot = true
 
 [node name="DashTimer" type="Timer" parent="Timers"]
-wait_time = 0.3
+wait_time = 0.26
 one_shot = true
 
-[node name="JustDashed" type="Timer" parent="Timers"]
-wait_time = 0.05
+[node name="DashCooldown" type="Timer" parent="Timers"]
+wait_time = 0.2
 one_shot = true
-autostart = true
 
 [node name="SlideDelay" type="Timer" parent="Timers"]
-wait_time = 0.2
+wait_time = 0.15
 one_shot = true
 
 [node name="TookHit" type="Timer" parent="Timers"]
@@ -302,7 +301,6 @@ shape = SubResource("RectangleShape2D_s1gbs")
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(102, -36)
-zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 drag_horizontal_enabled = true
@@ -321,13 +319,11 @@ script = ExtResource("12_i5da0")
 [node name="Hit1" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_0y4iu")
 
-[node name="Sprite2D" type="Sprite2D" parent="Hitbox"]
+[node name="AttackSprite" type="Sprite2D" parent="Hitbox"]
 visible = false
 position = Vector2(-0.5, 4.76837e-07)
 scale = Vector2(1.3125, 1.25)
 texture = ExtResource("13_icoih")
 
-[connection signal="timeout" from="Timers/JustDashed" to="." method="_on_just_dashed_timeout"]
-[connection signal="timeout" from="Timers/SlideDelay" to="." method="_on_slide_delay_timeout"]
 [connection signal="timeout" from="Timers/TookHit" to="." method="_on_took_hit_timeout"]
 [connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_body_entered"]
