@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c1oa5jpq72qev"]
 
-[ext_resource type="Script" path="res://Scripts/Pickups and Interactables/coin.gd" id="1_ihgor"]
+[ext_resource type="Script" path="res://Scripts/Object scripts/coin.gd" id="1_ihgor"]
 [ext_resource type="Texture2D" uid="uid://cb1ay8g75ne4c" path="res://Resources/Textures/PLACEHOLDERS/Coin1-Sheet.png" id="2_8a4nb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ejynf"]

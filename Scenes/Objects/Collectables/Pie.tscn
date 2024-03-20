@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b025nhkacoy05"]
 
-[ext_resource type="Script" path="res://Scripts/Pickups and Interactables/pie.gd" id="1_8lmyo"]
+[ext_resource type="Script" path="res://Scripts/Object scripts/pie.gd" id="1_8lmyo"]
 [ext_resource type="Texture2D" uid="uid://dmidv2u6q32gb" path="res://Resources/Textures/PLACEHOLDERS/Pie-Sheet.png" id="2_a7jnv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0qadq"]

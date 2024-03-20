@@ -9,8 +9,7 @@ region = Rect2(0, 0, 64, 48)
 
 [resource]
 script = ExtResource("1_0hf7b")
-name = "Bounty Of The Forest"
+title = "Bounty of the Park"
 artist = "Val"
 texture = SubResource("AtlasTexture_a2qxy")
 size = Vector2(48, 48)
-tilemap_atlas_loc = Vector2i(0, 0)

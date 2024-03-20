@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://k2awgkbabx7v"]
+[gd_scene load_steps=48 format=3 uid="uid://k2awgkbabx7v"]
 
 [ext_resource type="Script" path="res://Scripts/Player Related/player.gd" id="1_mr0if"]
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/jump2.wav" id="4_kn1s7"]
@@ -10,11 +10,14 @@
 [ext_resource type="AudioStream" uid="uid://byyxktqliudlb" path="res://Resources/Audio/SFX/click.wav" id="8_rh76n"]
 [ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/explosion 3.wav" id="9_o1dav"]
 [ext_resource type="AudioStream" uid="uid://dchgcqkkk4n0j" path="res://Resources/Audio/SFX/explosion 1.wav" id="10_kv2jx"]
+[ext_resource type="Texture2D" uid="uid://buql8wtc73qsp" path="res://Resources/Textures/SaulSprites/WallHang_Extra (AddinSachen).png" id="11_jbq0j"]
 [ext_resource type="Texture2D" uid="uid://0r7bmjic63s5" path="res://Resources/Textures/SaulSprites/Idle (AddinSachen).png" id="11_udw8v"]
+[ext_resource type="Texture2D" uid="uid://dx4s0wm5fe52y" path="res://Resources/Textures/SaulSprites/DashingAnticipation (AddinSachen).png" id="12_47jh6"]
 [ext_resource type="Texture2D" uid="uid://cj43l3mynic37" path="res://Resources/Textures/SaulSprites/Running (AddinSachen).png" id="12_qitmq"]
 [ext_resource type="Texture2D" uid="uid://dq2whk7itu8n4" path="res://Resources/Textures/PLACEHOLDERS/hitcircle.png" id="13_icoih"]
 [ext_resource type="Texture2D" uid="uid://me1hjfcqsjid" path="res://Resources/Textures/SaulSprites/Walking (AddinSachen).png" id="13_kjcqa"]
 [ext_resource type="Script" path="res://Scripts/Player Related/hitbox.gd" id="14_r8w1o"]
+[ext_resource type="Texture2D" uid="uid://fw1h5po3wxnw" path="res://Resources/Textures/SaulSprites/WallSlide (AddinSachen).png" id="15_78jn4"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2odja"]
 streams_count = 2
@@ -22,6 +25,18 @@ stream_0/stream = ExtResource("5_4b5h4")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("4_kn1s7")
 stream_1/weight = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euce1"]
+atlas = ExtResource("11_jbq0j")
+region = Rect2(16, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjd3o"]
+atlas = ExtResource("12_47jh6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcwdh"]
+atlas = ExtResource("12_47jh6")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pyasq"]
 atlas = ExtResource("11_udw8v")
@@ -67,6 +82,22 @@ region = Rect2(128, 0, 32, 32)
 atlas = ExtResource("12_qitmq")
 region = Rect2(160, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbav0"]
+atlas = ExtResource("15_78jn4")
+region = Rect2(11, 12, 21, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dwbo"]
+atlas = ExtResource("15_78jn4")
+region = Rect2(43, 12, 21, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtmyu"]
+atlas = ExtResource("15_78jn4")
+region = Rect2(75, 12, 21, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5o7m"]
+atlas = ExtResource("15_78jn4")
+region = Rect2(107, 12, 21, 36)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xn75"]
 atlas = ExtResource("13_kjcqa")
 region = Rect2(0, 0, 32, 32)
@@ -93,6 +124,25 @@ region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4cgds"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euce1")
+}],
+"loop": true,
+"name": &"Cling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjd3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcwdh")
+}],
+"loop": true,
+"name": &"DashingAnticipation",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pyasq")
@@ -137,6 +187,23 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbav0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dwbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtmyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5o7m")
+}],
+"loop": true,
+"name": &"Sliding",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 0.7,
 "texture": SubResource("AtlasTexture_1xn75")
 }, {
@@ -158,6 +225,11 @@ animations = [{
 "loop": true,
 "name": &"Walk",
 "speed": 6.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
 }]
 
 [sub_resource type="LabelSettings" id="LabelSettings_klmy4"]
@@ -199,6 +271,9 @@ one_shot = true
 
 [node name="TookHit" type="Timer" parent="Timers"]
 wait_time = 0.5
+one_shot = true
+
+[node name="ClingTime" type="Timer" parent="Timers"]
 one_shot = true
 
 [node name="Detection" type="Node2D" parent="."]
@@ -259,7 +334,9 @@ current = true
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_4cgds")
-animation = &"Idle"
+animation = &"Sliding"
+frame = 1
+frame_progress = 0.820838
 
 [node name="Score" type="Label" parent="."]
 offset_left = -102.0

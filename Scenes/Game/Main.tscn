@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://bf0h4cvoovrh2"]
 
-[ext_resource type="Script" path="res://Scripts/Levels/Main.gd" id="1_nqnqi"]
+[ext_resource type="Script" path="res://Scripts/Level Scripts/Main.gd" id="1_nqnqi"]
 [ext_resource type="Texture2D" uid="uid://bwog48d20oq2s" path="res://Resources/Textures/PLACEHOLDERS/Template1.png" id="1_t2eun"]
 [ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/level_camera.tscn" id="4_2daqr"]
 [ext_resource type="PackedScene" uid="uid://dlu817owjdkjq" path="res://Scenes/Characters/Enemies/scorpion.tscn" id="4_e0olm"]

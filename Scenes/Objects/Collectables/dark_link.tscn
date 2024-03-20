@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://mrrt0oghq1dc"]
 
-[ext_resource type="Script" path="res://Scripts/Pickups and Interactables/sinwavebobcomponent.gd" id="1_iy78q"]
-[ext_resource type="Script" path="res://Scripts/Pickups and Interactables/dark_link_text.gd" id="2_fuull"]
+[ext_resource type="Script" path="res://Scripts/Object scripts/sinwavebobcomponent.gd" id="1_iy78q"]
+[ext_resource type="Script" path="res://Scripts/Object scripts/dark_link_text.gd" id="2_fuull"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hu1cd"]
 size = Vector2(51, 8)

@@ -6,9 +6,10 @@ var _knockback_direction: float = 1.0
 const _extend_vector : Vector2 = Vector2(15.0, 20.0)
 @onready var hit_confirm_sfx = $"../SFX/HitConfirm"
 
-
+#with the hitbox based on velocity I will be punching down because I am falling, so instead
+#this will set to respond to player input
 func _physics_process(delta : float):
-	var player_direction : Vector2 = World.player.velocity.normalized()
+	var player_direction : Vector2 = World.player.get_direction()
 	if player_direction != Vector2(0,0):
 		position.x = sign(player_direction.x) * _extend_vector.x
 		position.y = sign(player_direction.y) * _extend_vector.y

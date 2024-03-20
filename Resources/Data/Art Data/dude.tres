@@ -9,8 +9,7 @@ region = Rect2(128, 0, 64, 48)
 
 [resource]
 script = ExtResource("1_h3evv")
-name = "Dude"
+title = "Dude"
 artist = "LavraSource"
 texture = SubResource("AtlasTexture_wmo5q")
 size = Vector2(17, 17)
-tilemap_atlas_loc = Vector2i(0, 0)

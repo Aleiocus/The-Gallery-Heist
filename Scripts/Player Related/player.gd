@@ -8,12 +8,13 @@ const _decel : float = 600.0
 const _jump_force : float = 260.0
 const _run_anim_threshold : float = 230.0
 var _gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
-const _wall_jump_force : float = 245
-const _pushoff_force : float = 280.0
+const _wall_jump_force : float = 260
+const _pushoff_force : float = 200.0
 var _hit_time : float = 0.2
 
 var _can_dash : bool = true
 const _dash_speed: float = 300
+const _dash_decel: float = 1000
 
 const _slide_speed : float = 60
 var _pop_up : float = 50
@@ -22,8 +23,10 @@ var _player_health = 2
 var _player_score = 0
 
 var _direction : Vector2
+var _last_direction : Vector2
 var _taking_hit : bool = false
 const _death_height_y : float = 150.0
+@onready var _cling_time = $Timers/ClingTime
 @onready var _coyote_timer : Timer = $Timers/CoyoteTimer
 @onready var _jump_buffer_timer : Timer = $Timers/JumpBufferTimer
 @onready var _dash_cooldown = $Timers/DashCooldown
@@ -52,7 +55,7 @@ var _state_machine : StateMachine = StateMachine.new()
 func _ready():
 	World.player = self
 	_state_machine.add_state("normal", Callable(), Callable(), _state_normal_process, _state_normal_ph_process)
-	_state_machine.add_state("dash", _state_dash_swith_to, Callable(), Callable(), _state_dash_ph_process)
+	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
 	_state_machine.add_state("wall_slide", _state_wall_slide_switch_to, Callable(), Callable(), _state_wall_slide_ph_process)
 	_state_machine.add_state("attack", Callable(), Callable(), Callable(), _state_attack_ph_process)
 	_state_machine.change_state("normal")
@@ -61,10 +64,11 @@ func _ready():
 
 func _process(delta : float):
 	_state_machine.state_process(delta)
-	if _direction.x == 1:
+	if velocity.x > 0 :
 		_sprite.flip_h = false
-	elif _direction.x == -1:
+	if velocity.x < 0 :
 		_sprite.flip_h = true
+	
 	
 	_label.text = str("State: ", _state_machine.get_current_state())
 	_dash_feedback.text = str("Can_Dash: ", _can_dash)
@@ -72,6 +76,9 @@ func _process(delta : float):
 
 func _physics_process(delta : float):
 	_state_machine.state_physics_process(delta)
+#putting direction here because it is used in multiple instances and I can't find a
+#easy way to pass it through states.
+	_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 
 func get_score(amount : float):
 	_player_score += amount
@@ -100,12 +107,13 @@ func _state_normal_switch_from(to : String):
 
 func _state_normal_process(delta : float):
 	# animation
-	if velocity.x == 0:
-		_sprite.play("Idle")
-	elif abs(velocity.x) > _run_anim_threshold:
-		_sprite.play("Run")
-	else:
-		_sprite.play("Walk")
+	if is_on_floor():
+		if velocity.x == 0:
+			_sprite.play("Idle")
+		elif abs(velocity.x) > _run_anim_threshold:
+			_sprite.play("Run")
+		else:
+			_sprite.play("Walk")
 
 func _state_normal_ph_process(delta : float):
 	# Enable gravity.
@@ -113,7 +121,6 @@ func _state_normal_ph_process(delta : float):
 		velocity.y += _gravity * delta
 	
 	# Movement Control
-	_direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 	if _direction.x and _taking_hit == false:
 		velocity.x = move_toward(velocity.x, _max_move_speed * sign(_direction.x), _accel * delta)
 	else:
@@ -156,8 +163,8 @@ func _state_normal_ph_process(delta : float):
 	if _can_dash == false && _dash_cooldown.is_stopped() && is_on_floor():
 		_can_dash = true
 	
-	if Input.is_action_just_pressed("dash") && _can_dash:
-		_sfx["dash"].play()
+	if Input.is_action_just_pressed("dash") && _can_dash && is_on_floor() == false && _direction:
+		_last_direction = _direction
 		_state_machine.change_state("dash")
 		return
 	
@@ -169,9 +176,14 @@ func _state_normal_ph_process(delta : float):
 
 func _state_wall_slide_switch_to(from : StringName):
 	_can_dash = true
-
+	_sprite.play("Cling")
+	_cling_time.start()
+	velocity = Vector2(0,0)
+	
 func _state_wall_slide_ph_process(delta: float):
-	velocity.y = _slide_speed
+	if _cling_time.is_stopped():
+		_sprite.play("Sliding")
+		velocity.y = _slide_speed
 	if Input.is_action_just_pressed("jump"):
 		_sfx["jump"].play()
 		_slide_delay.start()
@@ -190,20 +202,25 @@ func _state_wall_slide_ph_process(delta: float):
 	
 	move_and_slide()
 
-func _state_dash_swith_to(from : StringName):
-	_dash_cooldown.start()
+func _state_dash_switch_to(from : StringName):
+	_sfx["dash"].play()
 	_dash_timer.start()
+	velocity = Vector2(0,0)
 	_can_dash = false
-	velocity = Vector2.ZERO
 
 func _state_dash_ph_process(delta: float):
-	velocity = _dash_speed * _direction
+	velocity.x = _dash_speed * _last_direction.x
+	velocity.y = (_dash_speed * _last_direction.y) * 0.8
+	
 	move_and_slide()
 	
 	if _dash_timer.is_stopped() or is_on_floor() or is_on_wall():
 		_dash_timer.stop()
 		_state_machine.change_state("normal")
 		return
+
+func _state_dash_switch_from(to: StringName):
+	_dash_cooldown.start()
 
 func _game_over():
 	_sfx["game_over"].play()
@@ -221,6 +238,12 @@ func _state_attack_ph_process(delta: float):
 		_attack_sprite.visible = false
 		_state_machine.change_state("normal")
 	move_and_slide()
+
+#This is in place to pass the input value to other things that players expect to respond to input
+#such as attack direction
+func get_direction() -> Vector2:
+	print(_direction)
+	return _direction
 
 func _on_took_hit_timeout():
 	_taking_hit = false
