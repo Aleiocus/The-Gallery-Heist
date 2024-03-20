@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://mrrt0oghq1dc"]
+
+[ext_resource type="Script" path="res://Scripts/Pickups and Interactables/sinwavebobcomponent.gd" id="1_iy78q"]
+[ext_resource type="Script" path="res://Scripts/Pickups and Interactables/dark_link_text.gd" id="2_fuull"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hu1cd"]
+size = Vector2(51, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pcery"]
+font_size = 10
+font_color = Color(0, 0, 0, 1)
+outline_size = 2
+outline_color = Color(1, 0, 0, 1)
+
+[node name="DarkLink" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-15.5, -3)
+shape = SubResource("RectangleShape2D_hu1cd")
+
+[node name="PickupBob" type="Node2D" parent="."]
+script = ExtResource("1_iy78q")
+
+[node name="Darklinktext" type="Node2D" parent="."]
+script = ExtResource("2_fuull")
+
+[node name="text" type="Label" parent="Darklinktext"]
+offset_left = -40.0
+offset_top = -9.0
+offset_right = 39.0
+offset_bottom = 6.0
+text = "http://******"
+label_settings = SubResource("LabelSettings_pcery")
+metadata/_edit_use_anchors_ = true
+
+[node name="scrambletimer" type="Timer" parent="Darklinktext"]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Darklinktext/scrambletimer" to="Darklinktext" method="_on_scrambletimer_timeout"]

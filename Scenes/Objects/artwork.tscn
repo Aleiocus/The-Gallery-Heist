@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dveolvcg42tyv"]
 
-[ext_resource type="Script" path="res://Scripts/artwork.gd" id="1_3ok18"]
+[ext_resource type="Script" path="res://Scripts/Artwork System/artwork.gd" id="1_3ok18"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0mhbf"]
 resource_local_to_scene = true

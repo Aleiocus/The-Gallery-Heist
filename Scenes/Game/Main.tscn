@@ -1,14 +1,14 @@
 [gd_scene load_steps=23 format=3 uid="uid://bf0h4cvoovrh2"]
 
-[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_nqnqi"]
+[ext_resource type="Script" path="res://Scripts/Levels/Main.gd" id="1_nqnqi"]
 [ext_resource type="Texture2D" uid="uid://bwog48d20oq2s" path="res://Resources/Textures/PLACEHOLDERS/Template1.png" id="1_t2eun"]
 [ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/level_camera.tscn" id="4_2daqr"]
 [ext_resource type="PackedScene" uid="uid://dlu817owjdkjq" path="res://Scenes/Characters/Enemies/scorpion.tscn" id="4_e0olm"]
-[ext_resource type="PackedScene" uid="uid://c1oa5jpq72qev" path="res://Scenes/Objects/coin.tscn" id="5_4smwk"]
+[ext_resource type="PackedScene" uid="uid://c1oa5jpq72qev" path="res://Scenes/Objects/Collectables/coin.tscn" id="5_4smwk"]
 [ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/camera_trigger.tscn" id="5_pal7g"]
-[ext_resource type="PackedScene" uid="uid://dry3qo2qrpmsi" path="res://Scenes/Objects/3coin_h.tscn" id="6_h4d77"]
-[ext_resource type="PackedScene" uid="uid://bjync0nv5kgfk" path="res://Scenes/Objects/3coin_v.tscn" id="7_bkgpp"]
-[ext_resource type="PackedScene" uid="uid://b025nhkacoy05" path="res://Scenes/Objects/Pie.tscn" id="8_ogxep"]
+[ext_resource type="PackedScene" uid="uid://dry3qo2qrpmsi" path="res://Scenes/Objects/Collectables/3coin_h.tscn" id="6_h4d77"]
+[ext_resource type="PackedScene" uid="uid://bjync0nv5kgfk" path="res://Scenes/Objects/Collectables/3coin_v.tscn" id="7_bkgpp"]
+[ext_resource type="PackedScene" uid="uid://b025nhkacoy05" path="res://Scenes/Objects/Collectables/Pie.tscn" id="8_ogxep"]
 [ext_resource type="PackedScene" uid="uid://k2awgkbabx7v" path="res://Scenes/Characters/Saul/player.tscn" id="9_3cgxl"]
 [ext_resource type="AudioStream" uid="uid://d1xj5v2xumqvm" path="res://Resources/Audio/Music/saul_gallery_theme.mp3" id="9_ei4y4"]
 
@@ -240,7 +240,7 @@ DissonantVoid
 Valsprites
 
 Art team:
-AddinSacchin (player sprite)
+AddinSachen (player sprite)
 AxelMode (scorpion sprite)
 Potent (app icon)
 Valsprites (other bits)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dlu817owjdkjq"]
 
 [ext_resource type="Texture2D" uid="uid://dutytu7jhr5nc" path="res://Resources/Textures/PLACEHOLDERS/Scorpion (AxelMode)-cutoutt.png" id="1_f6vud"]
-[ext_resource type="Script" path="res://Scripts/scorpion.gd" id="1_kehhd"]
+[ext_resource type="Script" path="res://Scripts/Enemy behavior/scorpion.gd" id="1_kehhd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0tth2"]
 font_size = 12

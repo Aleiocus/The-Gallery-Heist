@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ArtData" load_steps=4 format=3 uid="uid://feajbn6smcl2"]
 
-[ext_resource type="Script" path="res://Scripts/art_data.gd" id="1_h3evv"]
+[ext_resource type="Script" path="res://Scripts/Artwork System/art_data.gd" id="1_h3evv"]
 [ext_resource type="Texture2D" uid="uid://tkdnv47llpnj" path="res://Resources/Textures/Artwork/artwork_atlas-Sheet.png" id="2_iyuud"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmo5q"]
