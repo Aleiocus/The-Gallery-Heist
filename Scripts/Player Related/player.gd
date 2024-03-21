@@ -114,6 +114,8 @@ func _state_normal_process(delta : float):
 			_sprite.play("Run")
 		else:
 			_sprite.play("Walk")
+	if velocity.y > 0:
+		_sprite.play("Falling")
 
 func _state_normal_ph_process(delta : float):
 	# Enable gravity.
@@ -126,10 +128,12 @@ func _state_normal_ph_process(delta : float):
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, _decel * delta)
 	
+	
 	# Allow player to jump
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or not _coyote_timer.is_stopped():
 			velocity.y = -_jump_force
+			_sprite.play("Jump")
 			_sfx["jump"].play()
 		elif is_on_floor() == false:
 			_jump_buffer_timer.start()
@@ -146,6 +150,8 @@ func _state_normal_ph_process(delta : float):
 		# jump landed
 		if _jump_buffer_timer.is_stopped() == false:
 			velocity.y = -_jump_force
+	
+	
 	
 	if is_on_wall() == true \
 		and is_on_floor() == false\
@@ -184,10 +190,10 @@ func _state_wall_slide_ph_process(delta: float):
 	if _cling_time.is_stopped():
 		_sprite.play("Sliding")
 		velocity.y = _slide_speed
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") :
 		_sfx["jump"].play()
 		_slide_delay.start()
-		
+		_sprite.play("Wall Jump")
 		if _detect_left.is_colliding():
 			velocity.x = _pushoff_force
 		elif _detect_right.is_colliding():
