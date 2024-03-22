@@ -1,6 +1,7 @@
-[gd_scene load_steps=66 format=3 uid="uid://k2awgkbabx7v"]
+[gd_scene load_steps=68 format=3 uid="uid://k2awgkbabx7v"]
 
 [ext_resource type="Script" path="res://Scripts/Player Related/player.gd" id="1_mr0if"]
+[ext_resource type="PackedScene" uid="uid://cb26tuqlw5urm" path="res://Scenes/Objects/dash_trail.tscn" id="2_5f8fx"]
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/jump2.wav" id="4_kn1s7"]
 [ext_resource type="AudioStream" uid="uid://dpg46pasbhqyu" path="res://Resources/Audio/SFX/jump1.wav" id="5_4b5h4"]
 [ext_resource type="AudioStream" uid="uid://bxe2502g4y2iv" path="res://Resources/Audio/SFX/dash.wav" id="5_jppin"]
@@ -35,6 +36,10 @@ stream_1/weight = 1.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_euce1"]
 atlas = ExtResource("11_jbq0j")
 region = Rect2(16, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ep6a"]
+atlas = ExtResource("12_qitmq")
+region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qjd3o"]
 atlas = ExtResource("12_47jh6")
@@ -184,6 +189,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"Cling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ep6a")
+}],
+"loop": true,
+"name": &"Dashing",
 "speed": 5.0
 }, {
 "frames": [{
@@ -357,6 +370,8 @@ size = Vector2(13, 33)
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_mr0if")
 
+[node name="DashTrail" parent="." instance=ExtResource("2_5f8fx")]
+
 [node name="Timers" type="Node2D" parent="."]
 
 [node name="CoyoteTimer" type="Timer" parent="Timers"]
@@ -445,7 +460,7 @@ current = true
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_4cgds")
-animation = &"Sliding"
+animation = &"Dashing"
 
 [node name="Score" type="Label" parent="."]
 offset_left = -102.0

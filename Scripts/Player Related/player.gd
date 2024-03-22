@@ -26,6 +26,7 @@ var _direction : Vector2
 var _last_direction : Vector2
 var _taking_hit : bool = false
 const _death_height_y : float = 150.0
+const _dash_trail = preload("res://Scenes/Objects/dash_trail.tscn")
 @onready var _cling_time = $Timers/ClingTime
 @onready var _coyote_timer : Timer = $Timers/CoyoteTimer
 @onready var _jump_buffer_timer : Timer = $Timers/JumpBufferTimer
@@ -117,6 +118,11 @@ func _state_normal_process(delta : float):
 	if velocity.y > 0:
 		_sprite.play("Falling")
 
+# BUG not yet working =(
+	var _velocity = velocity
+	if _velocity > velocity and velocity != Vector2(0,0):
+		_sprite.play("Skidding")
+
 func _state_normal_ph_process(delta : float):
 	# Enable gravity.
 	if not is_on_floor():
@@ -148,6 +154,7 @@ func _state_normal_ph_process(delta : float):
 		_coyote_timer.start()
 	elif was_on_floor == false && is_on_floor():
 		# jump landed
+		_sprite.play("Landing")
 		if _jump_buffer_timer.is_stopped() == false:
 			velocity.y = -_jump_force
 	
@@ -215,10 +222,14 @@ func _state_dash_switch_to(from : StringName):
 	_can_dash = false
 
 func _state_dash_ph_process(delta: float):
+	
+	# Trying to reduce the power of vertical dashes, which affect diagonal 
+	# dashes
 	velocity.x = _dash_speed * _last_direction.x
 	velocity.y = (_dash_speed * _last_direction.y) * 0.8
 	
 	move_and_slide()
+	
 	
 	if _dash_timer.is_stopped() or is_on_floor() or is_on_wall():
 		_dash_timer.stop()
@@ -245,10 +256,9 @@ func _state_attack_ph_process(delta: float):
 		_state_machine.change_state("normal")
 	move_and_slide()
 
-#This is in place to pass the input value to other things that players expect to respond to input
-#such as attack direction
+# This is in place to pass the input value to other things that players expect to
+# respond to input such as attack direction
 func get_direction() -> Vector2:
-	print(_direction)
 	return _direction
 
 func _on_took_hit_timeout():

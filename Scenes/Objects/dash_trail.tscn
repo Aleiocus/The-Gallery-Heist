@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb26tuqlw5urm"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/dash_trail.gd" id="1_cb0hb"]
+
+[node name="DashTrail" type="Line2D"]
+script = ExtResource("1_cb0hb")
