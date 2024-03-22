@@ -11,13 +11,13 @@ enum ShakeLevel {low, medium, high}
 @onready var _shake_timer : Timer = $ShakeTimer
 
 var _curr_state : CameraState
-const _speed : float = 90.0
+const _speed : float = 110.0
 const _zoom_speed : float = 1.6
 var _target_zoom : Vector2 = Vector2.ONE
 
 const _look_ahead_offset : float = 22.0
-const _player_velocity_factor : float = 2.0
-const _distance_factor : float = 1.2
+const _player_velocity_factor : float = 0.6
+const _distance_factor : float = 1.4
 var _target_position : Vector2
 var _clamp_limits : Rect2
 
@@ -61,7 +61,7 @@ func _process(delta : float):
 		var velocity_offset : float = World.player.velocity.length() * _player_velocity_factor
 		target_position = Vector2(
 			World.player.global_position.x + sign(World.player.velocity.x) * (_look_ahead_offset + velocity_offset),
-			World.player.global_position.y + sign(World.player.velocity.y) * (_look_ahead_offset + velocity_offset)
+			World.player.global_position.y + sign(World.player.velocity.y) * (velocity_offset)
 		)
 	
 	if _curr_state == CameraState.clamped:

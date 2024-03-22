@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cb26tuqlw5urm"]
+[gd_scene load_steps=2 format=3 uid="uid://yxxgx3h82w35"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/dash_trail.gd" id="1_cb0hb"]
 
 [node name="DashTrail" type="Line2D"]
+joint_mode = 2
+begin_cap_mode = 1
+end_cap_mode = 2
+antialiased = true
 script = ExtResource("1_cb0hb")
+
+[node name="PointTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="PointTimer" to="." method="_on_point_timer_timeout"]

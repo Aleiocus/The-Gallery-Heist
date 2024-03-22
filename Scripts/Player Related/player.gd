@@ -30,12 +30,12 @@ var _player_score = 0
 var _direction : Vector2
 var _last_direction : Vector2
 var _taking_hit : bool = false
-const _dash_trail = preload("res://Scenes/Objects/dash_trail.tscn")
 @onready var _cling_time = $Timers/ClingTime
 @onready var _coyote_timer : Timer = $Timers/CoyoteTimer
 @onready var _jump_buffer_timer : Timer = $Timers/JumpBufferTimer
 @onready var _dash_cooldown = $Timers/DashCooldown
-@onready var _dash_timer = $Timers/DashTimer
+@onready var _dash_timer : Timer = $Timers/DashTimer
+@onready var _dash_trail : Line2D = $DashTrail
 @onready var _slide_delay = $Timers/SlideDelay
 @onready var _detect_right = $Detection/Right
 @onready var _detect_left = $Detection/Left
@@ -228,11 +228,16 @@ func _state_wall_slide_ph_process(delta: float):
 	move_and_slide()
 
 func _state_dash_switch_to(from : StringName):
-	_sfx["dash"].play()
 	World.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
+	_sfx["dash"].play()
+	_dash_trail.set_active(true)
 	_dash_timer.start()
 	velocity = Vector2(0,0)
 	_can_dash = false
+
+func _state_dash_switch_from(to: StringName):
+	_dash_cooldown.start()
+	_dash_trail.set_active(false)
 
 func _state_dash_ph_process(delta: float):
 	# Trying to reduce the power of vertical dashes, which affect diagonal 
@@ -242,13 +247,10 @@ func _state_dash_ph_process(delta: float):
 	
 	move_and_slide()
 	
-	if _dash_timer.is_stopped() or is_on_floor() or is_on_wall():
+	if _dash_timer.is_stopped() or is_on_wall():
 		_dash_timer.stop()
 		_state_machine.change_state("normal")
 		return
-
-func _state_dash_switch_from(to: StringName):
-	_dash_cooldown.start()
 
 func _state_attack_ph_process(delta: float):
 	# Enable gravity.

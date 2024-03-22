@@ -2,7 +2,7 @@ class_name Level
 extends Node2D
 
 # TODO: level should handles:
-#       score
+#       UI and score
 #       dialogue player object
 #       music
 #       pausing

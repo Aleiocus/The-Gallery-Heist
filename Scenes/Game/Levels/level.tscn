@@ -7,6 +7,8 @@
 [node name="Level" type="Node2D"]
 script = ExtResource("1_b5vho")
 
+[node name="UI" type="CanvasLayer" parent="."]
+
 [node name="TileMap" type="TileMap" parent="."]
 format = 2
 

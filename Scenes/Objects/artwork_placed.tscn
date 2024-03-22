@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/Artwork System/artwork_placed.gd" id="1_1jdq5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpp5v"]
+resource_local_to_scene = true
+size = Vector2(32, 32)
 
 [node name="Artwork" type="Area2D"]
 script = ExtResource("1_1jdq5")
