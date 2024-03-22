@@ -14,6 +14,7 @@ extends Area2D
 
 func _ready():
 	if Engine.is_editor_hint() == false && _is_starting_state:
+		await get_tree().current_scene.ready
 		_apply_camera_state()
 
 func _on_body_entered(body : Node2D):

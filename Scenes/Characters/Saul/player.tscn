@@ -1,7 +1,7 @@
 [gd_scene load_steps=68 format=3 uid="uid://k2awgkbabx7v"]
 
 [ext_resource type="Script" path="res://Scripts/Player Related/player.gd" id="1_mr0if"]
-[ext_resource type="PackedScene" uid="uid://cb26tuqlw5urm" path="res://Scenes/Objects/dash_trail.tscn" id="2_5f8fx"]
+[ext_resource type="PackedScene" path="res://Scenes/Objects/dash_trail.tscn" id="2_5f8fx"]
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/jump2.wav" id="4_kn1s7"]
 [ext_resource type="AudioStream" uid="uid://dpg46pasbhqyu" path="res://Resources/Audio/SFX/jump1.wav" id="5_4b5h4"]
 [ext_resource type="AudioStream" uid="uid://bxe2502g4y2iv" path="res://Resources/Audio/SFX/dash.wav" id="5_jppin"]
@@ -387,7 +387,7 @@ wait_time = 0.26
 one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="Timers"]
-wait_time = 0.2
+wait_time = 0.3
 one_shot = true
 
 [node name="SlideDelay" type="Timer" parent="Timers"]
@@ -460,7 +460,7 @@ current = true
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_4cgds")
-animation = &"Dashing"
+animation = &"Idle"
 
 [node name="Score" type="Label" parent="."]
 offset_left = -102.0

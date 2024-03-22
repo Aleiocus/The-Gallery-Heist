@@ -3,3 +3,6 @@
 
 # Build folder
 Build/
+
+# Godot temp files problem https://github.com/godotengine/godot/issues/82270
+*.TMP

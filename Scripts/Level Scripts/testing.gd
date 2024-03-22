@@ -1,12 +1,14 @@
-extends Node2D
+extends "res://Scripts/Level Scripts/level.gd"
 
 @onready var camera_2d : Camera2D = $Camera2D
 @onready var label : Label = $Label
 @onready var player : Player = $Player
 @onready var main_theme : AudioStreamPlayer2D = $MainTheme
-var high_score
+var high_score : float
+
 
 func _ready():
+	super._ready()
 	for node in get_tree().get_nodes_in_group("Enemy"):
 		node.give_score.connect(_give_score)
 
@@ -14,6 +16,7 @@ func _give_score(amount):
 	player.get_score(amount)
 
 func _process(delta : float):
+	super._process(delta)
 	high_score = World.high_score
 	label.text = str("High Score: ", high_score, "0")
 

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b84n1i2bwxbmr"]
+
+[ext_resource type="Script" path="res://Scripts/Level Scripts/level.gd" id="1_b5vho"]
+[ext_resource type="PackedScene" uid="uid://k2awgkbabx7v" path="res://Scenes/Characters/Saul/player.tscn" id="2_ghitf"]
+[ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/level_camera.tscn" id="3_ro6gx"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_b5vho")
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Collectables" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_ghitf")]
+
+[node name="LevelCamera" parent="." instance=ExtResource("3_ro6gx")]
+
+[node name="CameraTriggers" type="Node2D" parent="."]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqcoj2pw1t8kn"]
+[gd_scene load_steps=14 format=3 uid="uid://dqcoj2pw1t8kn"]
 
 [ext_resource type="Texture2D" uid="uid://d2quxmbdmd2h3" path="res://Resources/Textures/ParkLvlAssets/ParktilesCurrentSet (valsprites).png" id="1_pmq7c"]
 [ext_resource type="PackedScene" uid="uid://k2awgkbabx7v" path="res://Scenes/Characters/Saul/player.tscn" id="2_7dccf"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bguo6g3g027s4" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax2.png" id="7_k4fid"]
 [ext_resource type="Texture2D" uid="uid://c4y4xtxjxhoyk" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax1.png" id="8_qnqqs"]
 [ext_resource type="AudioStream" uid="uid://vdc06qge10bb" path="res://Resources/Textures/ParkLvlAssets/ofmiceandmistrustv5.wav" id="9_tilf5"]
+[ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/level_camera.tscn" id="10_houm6"]
+[ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/camera_trigger.tscn" id="11_cns1i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_53npw"]
 texture = ExtResource("1_pmq7c")
@@ -185,5 +187,8 @@ stream = ExtResource("9_tilf5")
 [node name="Player" parent="." instance=ExtResource("2_7dccf")]
 position = Vector2(-78, 31)
 
-[node name="LevelCamera" type="Camera2D" parent="."]
-position = Vector2(33, -106)
+[node name="LevelCamera" parent="." instance=ExtResource("10_houm6")]
+
+[node name="CameraTrigger" parent="LevelCamera" instance=ExtResource("11_cns1i")]
+_is_starting_state = true
+_trigger_state = 2
