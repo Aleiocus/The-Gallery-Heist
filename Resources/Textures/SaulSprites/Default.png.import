@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bidt6eq0b5jih"
-path="res://.godot/imported/DashingAnticipation (AddinSachen).png-04c21454e195a65d26435bdd39e6ca81.ctex"
+uid="uid://bub4c30sbpgw1"
+path="res://.godot/imported/Default.png-4335b6394296052b927cea6f618a6c15.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/SaulSprites/DashingAnticipation (AddinSachen).png"
-dest_files=["res://.godot/imported/DashingAnticipation (AddinSachen).png-04c21454e195a65d26435bdd39e6ca81.ctex"]
+source_file="res://Resources/Textures/SaulSprites/Default.png"
+dest_files=["res://.godot/imported/Default.png-4335b6394296052b927cea6f618a6c15.ctex"]
 
 [params]
 

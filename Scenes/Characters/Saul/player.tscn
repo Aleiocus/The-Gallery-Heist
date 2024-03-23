@@ -1,7 +1,8 @@
-[gd_scene load_steps=68 format=3 uid="uid://k2awgkbabx7v"]
+[gd_scene load_steps=71 format=3 uid="uid://k2awgkbabx7v"]
 
 [ext_resource type="Script" path="res://Scripts/Player Related/player.gd" id="1_mr0if"]
 [ext_resource type="PackedScene" uid="uid://yxxgx3h82w35" path="res://Scenes/Objects/dash_trail.tscn" id="2_5f8fx"]
+[ext_resource type="Texture2D" uid="uid://bub4c30sbpgw1" path="res://Resources/Textures/SaulSprites/Default.png" id="3_l6q1r"]
 [ext_resource type="AudioStream" uid="uid://cqinx1if47psh" path="res://Resources/Audio/SFX/jump2.wav" id="4_kn1s7"]
 [ext_resource type="AudioStream" uid="uid://dpg46pasbhqyu" path="res://Resources/Audio/SFX/jump1.wav" id="5_4b5h4"]
 [ext_resource type="AudioStream" uid="uid://bxe2502g4y2iv" path="res://Resources/Audio/SFX/dash.wav" id="5_jppin"]
@@ -13,7 +14,6 @@
 [ext_resource type="AudioStream" uid="uid://dchgcqkkk4n0j" path="res://Resources/Audio/SFX/explosion 1.wav" id="10_kv2jx"]
 [ext_resource type="Texture2D" uid="uid://buql8wtc73qsp" path="res://Resources/Textures/SaulSprites/WallHang_Extra (AddinSachen).png" id="11_jbq0j"]
 [ext_resource type="Texture2D" uid="uid://0r7bmjic63s5" path="res://Resources/Textures/SaulSprites/Idle (AddinSachen).png" id="11_udw8v"]
-[ext_resource type="Texture2D" uid="uid://dx4s0wm5fe52y" path="res://Resources/Textures/SaulSprites/DashingAnticipation (AddinSachen).png" id="12_47jh6"]
 [ext_resource type="Texture2D" uid="uid://cj43l3mynic37" path="res://Resources/Textures/SaulSprites/Running (AddinSachen).png" id="12_qitmq"]
 [ext_resource type="Texture2D" uid="uid://dq2whk7itu8n4" path="res://Resources/Textures/PLACEHOLDERS/hitcircle.png" id="13_icoih"]
 [ext_resource type="Texture2D" uid="uid://me1hjfcqsjid" path="res://Resources/Textures/SaulSprites/Walking (AddinSachen).png" id="13_kjcqa"]
@@ -25,6 +25,11 @@
 [ext_resource type="Texture2D" uid="uid://fw1h5po3wxnw" path="res://Resources/Textures/SaulSprites/WallSlide (AddinSachen).png" id="19_8f801"]
 [ext_resource type="Texture2D" uid="uid://drod5aixx84ru" path="res://Resources/Textures/SaulSprites/Skidding (AddinSachen).png" id="19_dfoq3"]
 [ext_resource type="Texture2D" uid="uid://djjnknhd3px7v" path="res://Resources/Textures/SaulSprites/Wall_Jump (AddinSachen)-Sheet.png" id="21_gdhq3"]
+[ext_resource type="PackedScene" uid="uid://l5aj8nwgghqe" path="res://Scenes/Objects/dust_trail.tscn" id="26_2xccu"]
+
+[sub_resource type="Curve" id="Curve_7ja0l"]
+_data = [Vector2(0, 0.622642), 0.0, 0.116019, 0, 0, Vector2(0.525, 0.954717), -0.234801, -0.234801, 0, 0, Vector2(1, 1), 1.2938, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2odja"]
 streams_count = 2
@@ -41,12 +46,14 @@ region = Rect2(16, 16, 16, 32)
 atlas = ExtResource("12_qitmq")
 region = Rect2(160, 0, 32, 32)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_78ayj"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qjd3o"]
-atlas = ExtResource("12_47jh6")
+atlas = SubResource("CompressedTexture2D_78ayj")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hcwdh"]
-atlas = ExtResource("12_47jh6")
+atlas = SubResource("CompressedTexture2D_78ayj")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5hpc"]
@@ -371,7 +378,12 @@ size = Vector2(13, 33)
 script = ExtResource("1_mr0if")
 
 [node name="DashTrail" parent="." instance=ExtResource("2_5f8fx")]
-_max_length = 10
+width = 20.0
+width_curve = SubResource("Curve_7ja0l")
+default_color = Color(0.0431373, 0.541176, 0.560784, 1)
+texture = ExtResource("3_l6q1r")
+texture_mode = 2
+_max_length = 20
 
 [node name="Timers" type="Node2D" parent="."]
 
@@ -464,6 +476,7 @@ sprite_frames = SubResource("SpriteFrames_4cgds")
 animation = &"Idle"
 
 [node name="Score" type="Label" parent="."]
+visible = false
 offset_left = -102.0
 offset_top = -31.0
 offset_right = -56.0
@@ -472,6 +485,7 @@ text = "Score: 0"
 label_settings = SubResource("LabelSettings_klmy4")
 
 [node name="DashFeedback" type="Label" parent="."]
+visible = false
 offset_left = -103.0
 offset_top = -16.0
 offset_right = -18.0
@@ -480,6 +494,7 @@ text = "Dash: "
 label_settings = SubResource("LabelSettings_klmy4")
 
 [node name="HealthFeedback" type="Label" parent="."]
+visible = false
 offset_left = -102.0
 offset_top = -46.0
 offset_right = -17.0
@@ -488,6 +503,7 @@ text = "Health:"
 label_settings = SubResource("LabelSettings_klmy4")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -102.0
 offset_top = 1.0
 offset_right = -62.0
@@ -512,6 +528,12 @@ visible = false
 position = Vector2(-0.5, 4.76837e-07)
 scale = Vector2(1.3125, 1.25)
 texture = ExtResource("13_icoih")
+
+[node name="DustTrail" parent="." instance=ExtResource("26_2xccu")]
+visible = false
+position = Vector2(0, 15)
+amount = 30
+emission_sphere_radius = 4.0
 
 [connection signal="timeout" from="Timers/TookHit" to="." method="_on_took_hit_timeout"]
 [connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_body_entered"]

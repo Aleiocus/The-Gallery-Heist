@@ -36,6 +36,7 @@ var _taking_hit : bool = false
 @onready var _dash_cooldown = $Timers/DashCooldown
 @onready var _dash_timer : Timer = $Timers/DashTimer
 @onready var _dash_trail : Line2D = $DashTrail
+@onready var _dust_trail = $DustTrail
 @onready var _slide_delay = $Timers/SlideDelay
 @onready var _detect_right = $Detection/Right
 @onready var _detect_left = $Detection/Left
@@ -142,7 +143,7 @@ func _state_normal_process(delta : float):
 			_play_animation("Falling", true)
 		else:
 			_play_animation("Jump", true)
-
+	
 func _state_normal_ph_process(delta : float):
 	# Enable gravity.
 	if not is_on_floor():

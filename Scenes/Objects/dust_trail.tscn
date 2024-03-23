@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://l5aj8nwgghqe"]
+
+[node name="DustTrail" type="CPUParticles2D"]
+amount = 15
+lifetime = 2.0
+speed_scale = 2.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(-1, 0)
+gravity = Vector2(-50, 0)
