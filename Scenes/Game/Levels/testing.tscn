@@ -450,7 +450,7 @@ shape = SubResource("RectangleShape2D_rbrgu")
 position = Vector2(762, -231)
 _trigger_state = 1
 _target_zoom = Vector2(0.8, 0.8)
-_clamped_limits = Rect2(966, -600, 966, 0)
+_clamped_limits = Rect2(966, -655, 966, -212)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2" index="0"]
 position = Vector2(0, -240.5)
@@ -459,7 +459,7 @@ shape = SubResource("RectangleShape2D_qfciy")
 [node name="CameraTrigger3" parent="CameraTriggers" index="2" instance=ExtResource("3_guy7c")]
 position = Vector2(378, -346)
 _target_zoom = Vector2(0.5, 0.5)
-_idle_position = Vector2(370, -420)
+_idle_position = Vector2(370, -541)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3" index="0"]
 position = Vector2(-9, 0)

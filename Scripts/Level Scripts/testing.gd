@@ -16,7 +16,6 @@ func _give_score(amount):
 	player.get_score(amount)
 
 func _process(delta : float):
-	super._process(delta)
 	high_score = World.high_score
 	label.text = str("High Score: ", high_score, "0")
 

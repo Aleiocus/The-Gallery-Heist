@@ -1,11 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://yxxgx3h82w35"]
+[gd_scene load_steps=4 format=3 uid="uid://yxxgx3h82w35"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/dash_trail.gd" id="1_cb0hb"]
+[ext_resource type="Texture2D" uid="uid://bub4c30sbpgw1" path="res://Resources/Textures/SaulSprites/Default.png" id="1_f3gxo"]
+
+[sub_resource type="Curve" id="Curve_42f35"]
+_data = [Vector2(0, 0.622642), 0.0, 0.116019, 0, 0, Vector2(0.525, 0.954717), -0.234801, -0.234801, 0, 0, Vector2(1, 1), 1.2938, 0.0, 0, 0]
+point_count = 3
 
 [node name="DashTrail" type="Line2D"]
+width = 20.0
+width_curve = SubResource("Curve_42f35")
+default_color = Color(0.0431373, 0.541176, 0.560784, 1)
+texture = ExtResource("1_f3gxo")
+texture_mode = 2
 begin_cap_mode = 1
 end_cap_mode = 1
 script = ExtResource("1_cb0hb")
+_max_length = 20
 
 [node name="PointTimer" type="Timer" parent="."]
 wait_time = 0.05

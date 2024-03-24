@@ -1,8 +1,8 @@
 @tool
 extends Area2D
 
-@onready var sprite = $Sprite
-@onready var shape = $Shape
+@onready var sprite : Sprite2D = $Sprite
+@onready var shape : CollisionShape2D = $Shape
 @export var art_data : ArtData : 
 	set(value):
 		if art_data != null:

@@ -1,10 +1,18 @@
-[gd_scene format=3 uid="uid://l5aj8nwgghqe"]
+[gd_scene load_steps=2 format=3 uid="uid://l5aj8nwgghqe"]
 
-[node name="DustTrail" type="CPUParticles2D"]
-amount = 15
-lifetime = 2.0
-speed_scale = 2.0
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v2bda"]
+particle_flag_disable_z = true
 emission_shape = 1
-emission_sphere_radius = 10.0
-direction = Vector2(-1, 0)
-gravity = Vector2(-50, 0)
+emission_sphere_radius = 4.0
+direction = Vector3(-1, 0, 0)
+spread = 5.0
+initial_velocity_min = 100.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+damping_min = 70.0
+damping_max = 70.0
+
+[node name="DustTrail" type="GPUParticles2D"]
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_v2bda")
+lifetime = 2.0
