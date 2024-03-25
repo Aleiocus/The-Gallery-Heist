@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvik7v57h3mcf"]
+
+[ext_resource type="PackedScene" uid="uid://j6dd7mgd0p3w" path="res://Scenes/Characters/Enemies/enemy.tscn" id="1_p5n53"]
+[ext_resource type="Script" path="res://Scripts/Characters/enemy_patrolling.gd" id="2_0h1ht"]
+[ext_resource type="Texture2D" uid="uid://dutytu7jhr5nc" path="res://Resources/Textures/PLACEHOLDERS/Scorpion (AxelMode)-cutoutt.png" id="3_6kuqm"]
+[ext_resource type="PackedScene" uid="uid://d4hvse6k4r8rh" path="res://Scenes/Objects/debug_vars_visualizer.tscn" id="4_qxwfe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mm7tx"]
+size = Vector2(25, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtgo8"]
+size = Vector2(30, 12.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6y5y"]
+size = Vector2(7, 17)
+
+[node name="EnemyPatrolling" instance=ExtResource("1_p5n53")]
+script = ExtResource("2_0h1ht")
+_wander_speed = 50.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_mm7tx")
+
+[node name="HurtBox" parent="." index="1"]
+knockback = 100.0
+
+[node name="Top" type="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_mtgo8")
+
+[node name="Side" type="CollisionShape2D" parent="HurtBox" index="1"]
+position = Vector2(12, 5.6875)
+shape = SubResource("RectangleShape2D_p6y5y")
+
+[node name="Sprite" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("3_6kuqm")
+
+[node name="Detectors" type="Node2D" parent="." index="3"]
+position = Vector2(-13, 0)
+
+[node name="GapDetectLeft" type="RayCast2D" parent="Detectors" index="0"]
+position = Vector2(-5, 0)
+target_position = Vector2(0, 18)
+
+[node name="GapDetectRight" type="RayCast2D" parent="Detectors" index="1"]
+position = Vector2(25, 0)
+target_position = Vector2(0, 18)
+
+[node name="TookHit" type="Timer" parent="." index="4"]
+wait_time = 0.5
+one_shot = true
+
+[node name="DebugVarsVisualizer" parent="." index="6" instance=ExtResource("4_qxwfe")]
+offset_left = 20.0
+offset_top = -15.0
+offset_right = 28.0
+offset_bottom = -7.0
+
+[connection signal="timeout" from="TookHit" to="." method="_on_took_hit_timeout"]

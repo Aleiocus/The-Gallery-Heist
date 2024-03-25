@@ -89,22 +89,22 @@ func shake(shake_level : ShakeLevel, duration : float):
 func get_state() -> CameraState:
 	return _curr_state
 
-func change_state_idle(position : Vector2, zoom : Vector2):
+func change_state_idle(position_ : Vector2, zoom_ : Vector2):
 	if _debug_force_free: return
 	
-	_target_position = position
-	_target_zoom = zoom
+	_target_position = position_
+	_target_zoom = zoom_
 	_curr_state = CameraState.idle
 
-func change_state_clamped(limits : Rect2, zoom : Vector2):
+func change_state_clamped(limits : Rect2, zoom_ : Vector2):
 	if _debug_force_free: return
 	
 	_clamp_limits = limits
-	_target_zoom = zoom
+	_target_zoom = zoom_
 	_curr_state = CameraState.clamped
 
-func change_state_free(zoom : Vector2):
-	_target_zoom = zoom
+func change_state_free(zoom_ : Vector2):
+	_target_zoom = zoom_
 	_curr_state = CameraState.free
 
 func _on_shake_timer_timeout():

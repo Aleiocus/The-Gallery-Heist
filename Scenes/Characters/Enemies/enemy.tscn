@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://j6dd7mgd0p3w"]
+
+[ext_resource type="PackedScene" uid="uid://bb8fvvxo2nhq1" path="res://Scenes/Characters/character.tscn" id="1_j8sk8"]
+[ext_resource type="Script" path="res://Scripts/Characters/enemy.gd" id="2_8m8ud"]
+
+[node name="Enemy" instance=ExtResource("1_j8sk8")]
+script = ExtResource("2_8m8ud")
+
+[node name="HurtBox" parent="." index="1"]
+_target_player_only = true

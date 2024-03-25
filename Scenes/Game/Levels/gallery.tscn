@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbgah45f5xn5c"]
+
+[ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Game/Levels/level.tscn" id="1_esp2y"]
+
+[node name="Gallery" instance=ExtResource("1_esp2y")]
+
+[node name="Saul" parent="Characters" index="0"]
+position = Vector2(0, -17)

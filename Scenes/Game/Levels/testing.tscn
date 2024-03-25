@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://Scripts/Level Scripts/testing.gd" id="2_qem0p"]
 [ext_resource type="Texture2D" uid="uid://bwog48d20oq2s" path="res://Resources/Textures/PLACEHOLDERS/Template1.png" id="2_ys7fm"]
 [ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/camera_trigger.tscn" id="3_guy7c"]
+[ext_resource type="PackedScene" uid="uid://dvik7v57h3mcf" path="res://Scenes/Characters/Enemies/enemy_patrolling.tscn" id="4_3y8bi"]
 [ext_resource type="PackedScene" uid="uid://c1oa5jpq72qev" path="res://Scenes/Objects/Collectables/coin.tscn" id="4_jedpn"]
 [ext_resource type="PackedScene" uid="uid://dry3qo2qrpmsi" path="res://Scenes/Objects/Collectables/3coin_h.tscn" id="5_s8ymi"]
 [ext_resource type="PackedScene" uid="uid://bjync0nv5kgfk" path="res://Scenes/Objects/Collectables/3coin_v.tscn" id="6_2es2q"]
 [ext_resource type="PackedScene" uid="uid://b025nhkacoy05" path="res://Scenes/Objects/Collectables/Pie.tscn" id="7_hlryh"]
-[ext_resource type="PackedScene" uid="uid://dlu817owjdkjq" path="res://Scenes/Characters/Enemies/scorpion.tscn" id="8_nmev4"]
 [ext_resource type="AudioStream" uid="uid://d1xj5v2xumqvm" path="res://Resources/Audio/Music/saul_gallery_theme.mp3" id="9_7cnyk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7m7wu"]
@@ -111,6 +111,24 @@ layer_0/tile_data = PackedInt32Array(262113, 65536, 1, 327649, 65536, 1, 393185,
 layer_1/name = "Art"
 layer_1/tile_data = PackedInt32Array()
 
+[node name="Saul" parent="Characters" index="0"]
+position = Vector2(54, -145)
+
+[node name="EnemyPatrolling" parent="Characters" index="1" instance=ExtResource("4_3y8bi")]
+position = Vector2(191, -556)
+
+[node name="EnemyPatrolling2" parent="Characters" index="2" instance=ExtResource("4_3y8bi")]
+position = Vector2(407, -145)
+
+[node name="EnemyPatrolling3" parent="Characters" index="3" instance=ExtResource("4_3y8bi")]
+position = Vector2(400, -679)
+
+[node name="EnemyPatrolling4" parent="Characters" index="4" instance=ExtResource("4_3y8bi")]
+position = Vector2(801, -712)
+
+[node name="EnemyPatrolling5" parent="Characters" index="5" instance=ExtResource("4_3y8bi")]
+position = Vector2(1045, -610)
+
 [node name="Lables" type="Node2D" parent="." index="3"]
 modulate = Color(1, 1, 1, 0.435294)
 
@@ -212,8 +230,41 @@ text = "High Score:"
 label_settings = SubResource("LabelSettings_anlf8")
 vertical_alignment = 1
 
-[node name="Player" parent="." index="6"]
-position = Vector2(49, -152)
+[node name="CameraTrigger" parent="CameraTriggers" index="0" instance=ExtResource("3_guy7c")]
+position = Vector2(725, -155)
+_is_starting_state = true
+_trigger_state = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="0"]
+position = Vector2(0, -77)
+shape = SubResource("RectangleShape2D_uqgan")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="1"]
+position = Vector2(-358, -154)
+shape = SubResource("RectangleShape2D_rbrgu")
+
+[node name="CameraTrigger2" parent="CameraTriggers" index="1" instance=ExtResource("3_guy7c")]
+position = Vector2(762, -231)
+_trigger_state = 1
+_target_zoom = Vector2(0.8, 0.8)
+_clamped_limits = Rect2(966, -655, 966, -212)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2" index="0"]
+position = Vector2(0, -240.5)
+shape = SubResource("RectangleShape2D_qfciy")
+
+[node name="CameraTrigger3" parent="CameraTriggers" index="2" instance=ExtResource("3_guy7c")]
+position = Vector2(378, -346)
+_target_zoom = Vector2(0.5, 0.5)
+_idle_position = Vector2(370, -541)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3" index="0"]
+position = Vector2(-9, 0)
+shape = SubResource("RectangleShape2D_0bf6u")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3" index="1"]
+position = Vector2(351, -222)
+shape = SubResource("RectangleShape2D_el05e")
 
 [node name="Camera2D" type="Camera2D" parent="." index="8"]
 position = Vector2(624, -465)
@@ -403,28 +454,11 @@ position = Vector2(847, -490)
 [node name="Pie10" parent="Pies" index="10" instance=ExtResource("7_hlryh")]
 position = Vector2(400, -408)
 
-[node name="Enemies2" type="Node" parent="." index="11"]
-
-[node name="Scorpion" parent="Enemies2" index="0" instance=ExtResource("8_nmev4")]
-position = Vector2(406, -145)
-
-[node name="Scorpion2" parent="Enemies2" index="1" instance=ExtResource("8_nmev4")]
-position = Vector2(1045, -610)
-
-[node name="Scorpion3" parent="Enemies2" index="2" instance=ExtResource("8_nmev4")]
-position = Vector2(801, -712)
-
-[node name="Scorpion4" parent="Enemies2" index="3" instance=ExtResource("8_nmev4")]
-position = Vector2(191, -556)
-
-[node name="Scorpion5" parent="Enemies2" index="4" instance=ExtResource("8_nmev4")]
-position = Vector2(400, -679)
-
-[node name="MainTheme" type="AudioStreamPlayer2D" parent="." index="12"]
+[node name="MainTheme" type="AudioStreamPlayer2D" parent="." index="11"]
 stream = ExtResource("9_7cnyk")
 autoplay = true
 
-[node name="Button" type="Button" parent="." index="13"]
+[node name="Button" type="Button" parent="." index="12"]
 offset_left = 36.0
 offset_top = -99.0
 offset_right = 145.0
@@ -432,41 +466,5 @@ offset_bottom = -68.0
 scale = Vector2(0.644563, 0.847448)
 toggle_mode = true
 text = "Toggle Tunes"
-
-[node name="CameraTrigger" parent="CameraTriggers" index="0" instance=ExtResource("3_guy7c")]
-position = Vector2(725, -155)
-_is_starting_state = true
-_trigger_state = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="0"]
-position = Vector2(0, -77)
-shape = SubResource("RectangleShape2D_uqgan")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="1"]
-position = Vector2(-358, -154)
-shape = SubResource("RectangleShape2D_rbrgu")
-
-[node name="CameraTrigger2" parent="CameraTriggers" index="1" instance=ExtResource("3_guy7c")]
-position = Vector2(762, -231)
-_trigger_state = 1
-_target_zoom = Vector2(0.8, 0.8)
-_clamped_limits = Rect2(966, -655, 966, -212)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2" index="0"]
-position = Vector2(0, -240.5)
-shape = SubResource("RectangleShape2D_qfciy")
-
-[node name="CameraTrigger3" parent="CameraTriggers" index="2" instance=ExtResource("3_guy7c")]
-position = Vector2(378, -346)
-_target_zoom = Vector2(0.5, 0.5)
-_idle_position = Vector2(370, -541)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3" index="0"]
-position = Vector2(-9, 0)
-shape = SubResource("RectangleShape2D_0bf6u")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3" index="1"]
-position = Vector2(351, -222)
-shape = SubResource("RectangleShape2D_el05e")
 
 [connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

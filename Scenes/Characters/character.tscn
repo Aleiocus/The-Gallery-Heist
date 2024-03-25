@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb8fvvxo2nhq1"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/character.gd" id="1_xfsue"]
+[ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/hurtbox.tscn" id="2_6ny8n"]
+[ext_resource type="AudioStream" uid="uid://dftb7ej7uoibk" path="res://Resources/Audio/SFX/explosion 3.wav" id="3_iixss"]
+
+[node name="Character" type="CharacterBody2D"]
+script = ExtResource("1_xfsue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="HurtBox" parent="." instance=ExtResource("2_6ny8n")]
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Damaged" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("3_iixss")

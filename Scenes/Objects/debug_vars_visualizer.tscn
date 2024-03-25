@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4hvse6k4r8rh"]
+
+[ext_resource type="Script" path="res://Scripts/Object scripts/debug_vars_visualizer.gd" id="1_dp741"]
+
+[node name="DebugVarsVisualizer" type="PanelContainer"]
+visible = false
+modulate = Color(1, 1, 1, 0.588235)
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_dp741")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2

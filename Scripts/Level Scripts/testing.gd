@@ -2,7 +2,6 @@ extends "res://Scripts/Level Scripts/level.gd"
 
 @onready var camera_2d : Camera2D = $Camera2D
 @onready var label : Label = $Label
-@onready var player : Player = $Player
 @onready var main_theme : AudioStreamPlayer2D = $MainTheme
 var high_score : float
 
@@ -13,7 +12,7 @@ func _ready():
 		node.give_score.connect(_give_score)
 
 func _give_score(amount):
-	player.get_score(amount)
+	World.player.get_score(amount)
 
 func _process(delta : float):
 	high_score = World.high_score
