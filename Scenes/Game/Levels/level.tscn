@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b84n1i2bwxbmr"]
+[gd_scene load_steps=5 format=3 uid="uid://b84n1i2bwxbmr"]
 
 [ext_resource type="Script" path="res://Scripts/Level Scripts/level.gd" id="1_b5vho"]
+[ext_resource type="Script" path="res://Scripts/Level Scripts/level_pause_manager.gd" id="2_at6do"]
 [ext_resource type="PackedScene" uid="uid://crjtftvmkahqx" path="res://Scenes/Characters/Saul/saul.tscn" id="2_wyn7p"]
 [ext_resource type="PackedScene" uid="uid://dhssfh3cjjl5q" path="res://Scenes/Objects/level_camera.tscn" id="3_ro6gx"]
 
@@ -8,6 +9,45 @@
 script = ExtResource("1_b5vho")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PauseManager" type="MarginContainer" parent="UI"]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_at6do")
+
+[node name="ColorRect" type="ColorRect" parent="UI/PauseManager"]
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseManager"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="UI/PauseManager/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 80
+text = "Paused"
+
+[node name="Resume" type="Button" parent="UI/PauseManager/VBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+text = "Resume"
+
+[node name="Quit" type="Button" parent="UI/PauseManager/VBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+text = "Quit"
 
 [node name="TileMap" type="TileMap" parent="."]
 format = 2
@@ -23,3 +63,6 @@ format = 2
 [node name="CameraTriggers" type="Node2D" parent="."]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="UI/PauseManager/VBoxContainer/Resume" to="UI/PauseManager" method="_on_resume_pressed"]
+[connection signal="pressed" from="UI/PauseManager/VBoxContainer/Quit" to="UI/PauseManager" method="_on_quit_pressed"]

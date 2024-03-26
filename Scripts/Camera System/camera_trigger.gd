@@ -14,21 +14,21 @@ extends Area2D
 
 func _ready():
 	if Engine.is_editor_hint() == false && _is_starting_state:
-		await get_tree().current_scene.ready
+		await get_tree().process_frame
 		_apply_camera_state()
 
 func _on_body_entered(body : Node2D):
-	if body is Player && _trigger_state != World.level_camera.get_state():
+	if body is Player && _trigger_state != World.level.level_camera.get_state():
 		_apply_camera_state()
 
 func _apply_camera_state():
 	match _trigger_state:
 		LevelCamera.CameraState.idle:
-			World.level_camera.change_state_idle(_idle_position, _target_zoom)
+			World.level.level_camera.change_state_idle(_idle_position, _target_zoom)
 		LevelCamera.CameraState.clamped:
-			World.level_camera.change_state_clamped(_clamped_limits, _target_zoom)
+			World.level.level_camera.change_state_clamped(_clamped_limits, _target_zoom)
 		LevelCamera.CameraState.free:
-			World.level_camera.change_state_free(_target_zoom)
+			World.level.level_camera.change_state_free(_target_zoom)
 
 func _validate_property(property: Dictionary):
 	# TODO: hide properties instead of disabling them

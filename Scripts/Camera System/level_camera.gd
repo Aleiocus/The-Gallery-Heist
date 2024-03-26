@@ -30,8 +30,6 @@ var _curr_shake_level : ShakeLevel
 
 
 func _ready():
-	World.level_camera = self
-	
 	if _debug_force_free:
 		change_state_free(Vector2.ONE)
 
@@ -40,6 +38,7 @@ func _process(delta : float):
 	if zoom != _target_zoom:
 		zoom.x = move_toward(zoom.x, _target_zoom.x, _zoom_speed * delta)
 		zoom.y = move_toward(zoom.y, _target_zoom.y, _zoom_speed * delta)
+	var player : Player = World.level.player
 	
 	# calc camera movement speed
 	var distance_speed_modifier : float
@@ -50,7 +49,7 @@ func _process(delta : float):
 		final_speed = (_speed + distance_speed_modifier) * delta
 	elif _curr_state == CameraState.clamped || _curr_state == CameraState.free:
 		distance_speed_modifier =\
-			global_position.distance_to(World.player.global_position) * _distance_factor
+			global_position.distance_to(player.global_position) * _distance_factor
 		final_speed = (_speed + distance_speed_modifier) * delta
 	
 	# calc destination
@@ -58,10 +57,10 @@ func _process(delta : float):
 	if _curr_state == CameraState.idle:
 		target_position = _target_position
 	elif _curr_state == CameraState.clamped || _curr_state == CameraState.free:
-		var velocity_offset : float = World.player.velocity.length() * _player_velocity_factor
+		var velocity_offset : float = player.velocity.length() * _player_velocity_factor
 		target_position = Vector2(
-			World.player.global_position.x + sign(World.player.velocity.x) * (_look_ahead_offset + velocity_offset),
-			World.player.global_position.y + sign(World.player.velocity.y) * (velocity_offset)
+			player.global_position.x + sign(player.velocity.x) * (_look_ahead_offset + velocity_offset),
+			player.global_position.y + sign(player.velocity.y) * (velocity_offset)
 		)
 	
 	if _curr_state == CameraState.clamped:

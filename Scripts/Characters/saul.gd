@@ -53,7 +53,6 @@ func _ready():
 	_max_health = 2
 	_health = _max_health
 	
-	World.player = self
 	_state_machine.add_state("normal", Callable(), Callable(), _state_normal_process, _state_normal_ph_process)
 	_state_machine.add_state("dash", _state_dash_switch_to, _state_dash_switch_from, Callable(), _state_dash_ph_process)
 	_state_machine.add_state("wall_slide", _state_wall_slide_switch_to, Callable(), Callable(), _state_wall_slide_ph_process)
@@ -106,7 +105,7 @@ func _damage_taken(damage : int, die : bool):
 		_sfx["game_over"].play()
 		died.emit()
 	else:
-		World.level_camera.shake(LevelCamera.ShakeLevel.low, _damage_shake_duration)
+		World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _damage_shake_duration)
 		_damaged_sfx.play()
 
 # use instead of _sprite.play() to avoid replaying the same animation from the start when it's already playing
@@ -193,7 +192,7 @@ func _state_normal_ph_process(delta : float):
 		_state_machine.change_state("dash")
 		return
 	
-	if Input.is_action_just_pressed("Basic Attack"):
+	if Input.is_action_just_pressed("attack_basic"):
 		_state_machine.change_state("attack")
 
 func _state_wall_slide_switch_to(from : StringName):
@@ -223,7 +222,7 @@ func _state_wall_slide_ph_process(delta: float):
 	move_and_slide()
 
 func _state_dash_switch_to(from : StringName):
-	World.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
+	World.level.level_camera.shake(LevelCamera.ShakeLevel.low, _dash_shake_duration)
 	_sfx["dash"].play()
 	_dash_trail.set_active(true)
 	_dash_timer.start()

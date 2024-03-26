@@ -16,6 +16,7 @@ shader_parameter/factor = 1.0
 shader_parameter/noise = SubResource("NoiseTexture2D_7ksfy")
 
 [node name="SceneManager" type="CanvasLayer"]
+process_mode = 3
 layer = 99
 script = ExtResource("1_2ux1k")
 

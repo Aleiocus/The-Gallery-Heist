@@ -1,11 +1,10 @@
 extends Node
 
-# Global class for dependency management between level objects
+# global data
 
 var level : Level
-var player : Player
-var level_camera : LevelCamera
 var artwork_recoverd : Dictionary
+var unlocked_levels : Array
 var current_score : float : 
 	set(value):
 		current_score = value
@@ -14,12 +13,12 @@ var current_score : float :
 
 var high_score : float
 
-func clear():
-	# NOTE: for now this gets called on scene changed, in the future
-	#       we'd want to call this specificaly when changing to a "Level" scene
-	level = null
-	player = null
-	level_camera = null
-	artwork_recoverd = {}
-	current_score = 0.0
-	high_score = 0.0
+func _ready():
+	SceneManager.scene_changed.connect(_on_scene_changed)
+	_on_scene_changed() # call for starting scene
+
+func _on_scene_changed():
+	if get_tree().current_scene is Level:
+		level = get_tree().current_scene
+	else:
+		level = null

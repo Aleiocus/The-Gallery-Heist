@@ -5,13 +5,15 @@ extends Node2D
 #       UI and score
 #       dialogue player object
 #       music
-#       pausing
 const death_height_y : float = 0.0
+
+# level dependencies
+@onready var player : Player = $Characters/Saul
+@onready var level_camera : LevelCamera = $LevelCamera
 
 
 func _ready():
-	World.level = self
-	World.player.died.connect(_on_player_died)
+	player.died.connect(_on_player_died)
 
 func _on_player_died():
 	SceneManager.restart_scene()

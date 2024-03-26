@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal scene_changed
+
 @onready var _transition_rect : TextureRect = $ScreenTransition
 
 const _tween_time : float = 1.2
@@ -21,7 +23,11 @@ func change_scene(scene_path : String):
 	
 	# change scene
 	get_tree().change_scene_to_file(scene_path)
-	World.clear()
+	get_tree().process_frame.connect(
+		# there is no emit_deferred, so we do it manually
+		func(): scene_changed.emit(),
+		CONNECT_ONE_SHOT
+	)
 	
 	# transition out
 	var transition_tween : Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
