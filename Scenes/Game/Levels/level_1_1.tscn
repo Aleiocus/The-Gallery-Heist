@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://du51n87yesd30"]
+[gd_scene load_steps=12 format=3 uid="uid://du51n87yesd30"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1i2bwxbmr" path="res://Scenes/Game/Levels/level.tscn" id="1_884p5"]
 [ext_resource type="Texture2D" uid="uid://d2quxmbdmd2h3" path="res://Resources/Textures/ParkLvlAssets/ParktilesCurrentSet (valsprites).png" id="2_2ohjl"]
 [ext_resource type="AudioStream" uid="uid://vdc06qge10bb" path="res://Resources/Textures/ParkLvlAssets/ofmiceandmistrustv5.wav" id="2_psurl"]
-[ext_resource type="PackedScene" uid="uid://3xg1cdwrnu1c" path="res://Scenes/Objects/camera_trigger.tscn" id="3_acenh"]
 [ext_resource type="Texture2D" uid="uid://cstvbl7tuuk5w" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax6.png" id="3_np2bd"]
 [ext_resource type="Texture2D" uid="uid://dxu2tprf7w3ya" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax5.png" id="4_ced8t"]
 [ext_resource type="Texture2D" uid="uid://cp5cqkjhhem27" path="res://Resources/Textures/ParkLvlAssets/Background/ParkBGParalax4.png" id="5_mh25a"]
@@ -118,9 +117,8 @@ layer_0/tile_data = PackedInt32Array(-327701, 65536, 1, -262165, 65536, 1, -1966
 [node name="Saul" parent="Characters" index="0"]
 position = Vector2(-201, -66)
 
-[node name="CameraTrigger" parent="CameraTriggers" index="0" instance=ExtResource("3_acenh")]
-_is_starting_state = true
-_trigger_state = 2
+[node name="LevelCamera" parent="." index="4" node_paths=PackedStringArray("_starting_trigger")]
+_starting_trigger = NodePath("")
 
 [node name="MusicPlayer" parent="." index="6"]
 stream = ExtResource("2_psurl")

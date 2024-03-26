@@ -230,10 +230,15 @@ text = "High Score:"
 label_settings = SubResource("LabelSettings_anlf8")
 vertical_alignment = 1
 
+[node name="LevelCamera" parent="." index="6" node_paths=PackedStringArray("_starting_trigger")]
+_starting_trigger = NodePath("../CameraTriggers/CameraTrigger")
+
 [node name="CameraTrigger" parent="CameraTriggers" index="0" instance=ExtResource("3_guy7c")]
 position = Vector2(725, -155)
-_is_starting_state = true
-_trigger_state = 2
+_change_state = true
+_change_zoom = true
+_change_lock = true
+_trigger_state = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger" index="0"]
 position = Vector2(0, -77)
@@ -245,9 +250,12 @@ shape = SubResource("RectangleShape2D_rbrgu")
 
 [node name="CameraTrigger2" parent="CameraTriggers" index="1" instance=ExtResource("3_guy7c")]
 position = Vector2(762, -231)
+_change_state = true
+_change_zoom = true
+_change_lock = true
 _trigger_state = 1
-_target_zoom = Vector2(0.8, 0.8)
-_clamped_limits = Rect2(966, -655, 966, -212)
+_release_x_bound = false
+_x_bound = Vector2(1010, 1010)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger2" index="0"]
 position = Vector2(0, -240.5)
@@ -255,8 +263,11 @@ shape = SubResource("RectangleShape2D_qfciy")
 
 [node name="CameraTrigger3" parent="CameraTriggers" index="2" instance=ExtResource("3_guy7c")]
 position = Vector2(378, -346)
-_target_zoom = Vector2(0.5, 0.5)
+_change_state = true
+_change_zoom = true
+_change_lock = true
 _idle_position = Vector2(370, -541)
+_zoom = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTriggers/CameraTrigger3" index="0"]
 position = Vector2(-9, 0)
