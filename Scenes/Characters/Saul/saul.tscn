@@ -253,10 +253,10 @@ animations = [{
 "speed": 6.0
 }, {
 "frames": [{
-"duration": 0.2,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_4pghy")
 }, {
-"duration": 0.5,
+"duration": 0.8,
 "texture": SubResource("AtlasTexture_piyu3")
 }],
 "loop": false,
@@ -427,7 +427,7 @@ current = true
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="6"]
 position = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_vg3q4")
-animation = &"Idle"
+animation = &"Landing"
 
 [node name="DebugVarsVisualizer" parent="." index="7" instance=ExtResource("16_kmr8y")]
 offset_left = 13.0

@@ -165,10 +165,10 @@ func _state_normal_ph_process(delta : float):
 	move_and_slide()
 	
 	# Coyote Timer
-	if was_on_floor && is_on_floor() == false:
+	if was_on_floor and is_on_floor() == false and velocity.y >= 0:
 		# just jumped
 		_coyote_timer.start()
-	elif was_on_floor == false && is_on_floor():
+	elif was_on_floor == false and is_on_floor():
 		# jump landed
 		_play_animation("Landing")
 		if _jump_buffer_timer.is_stopped() == false:
