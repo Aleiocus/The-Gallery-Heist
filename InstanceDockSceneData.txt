@@ -3,9 +3,9 @@
 "scenes": [{
 "scene": "res://Scenes/Objects/Affordances/checkpoint.tscn"
 }, {
-"scene": "res://Scenes/Objects/Affordances/launch_pad.tscn"
-}, {
 "scene": "res://Scenes/Objects/Affordances/launch_pad_path_object.tscn"
+}, {
+"scene": "res://Scenes/Objects/Affordances/launch_pad.tscn"
 }, {
 "scene": "res://Scenes/Objects/Affordances/platform_path_object.tscn"
 }, {
