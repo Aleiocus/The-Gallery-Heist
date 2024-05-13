@@ -20,7 +20,8 @@ var _state_machine : StateMachine = StateMachine.new()
 const _acceleration : float = 280.0
 const _deceleration : float = 80.0
 const _max_speed : float = 160.0
-const _spawn_min_distance : float = 16.0
+const _idle_min_spawn_distance : float = 16.0
+const _water_enter_max_speed : float = 90.0
 
 const _hop_force : float = 200.0
 
@@ -35,7 +36,7 @@ func _ready():
 	_health = _max_health
 	_knockback = 130.0
 	
-	_state_machine.add_state("normal", Callable(), Callable(), _state_normal_process, _state_normal_ph_process)
+	_state_machine.add_state("normal", _state_normal_switch_to, Callable(), _state_normal_process, _state_normal_ph_process)
 	_state_machine.add_state("outside_water", _state_outside_water_switch_to, _state_outside_water_switch_from, Callable(), _state_outside_water_ph_process)
 	_state_machine.change_state("normal")
 
@@ -65,6 +66,10 @@ func _on_detection_area_body_exited(body : Node2D):
 func _on_out_of_water_damage_timer_timeout():
 	take_damage(1, Vector2.UP)
 
+func _state_normal_switch_to(from : String):
+	# damp effect when entering water
+	velocity = velocity.clamp(Vector2.ONE * -_water_enter_max_speed, Vector2.ONE * _water_enter_max_speed)
+
 func _state_normal_process(delta : float):
 	if _is_player_detected:
 		_sprite.play("attack")
@@ -77,7 +82,7 @@ func _state_normal_ph_process(delta : float):
 		_direction = (World.level.player.global_position - global_position).normalized()
 	else:
 		# go back to spawn point
-		if global_position.distance_to(_starting_position) > _spawn_min_distance:
+		if global_position.distance_to(_starting_position) > _idle_min_spawn_distance:
 			_direction = (_starting_position - global_position).normalized()
 		else:
 			_direction = Vector2.ZERO

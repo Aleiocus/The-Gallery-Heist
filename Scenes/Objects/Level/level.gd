@@ -35,10 +35,6 @@ func _ready():
 	# initial checkpoint is spawn point
 	_player_starting_position = player.global_position
 
-func _input(event : InputEvent):
-	if event.is_action_pressed("pause"):
-		pause_manager.pause(true)
-
 func add_score(amount : int = 1):
 	_score += amount
 	interface.set_score(_score)

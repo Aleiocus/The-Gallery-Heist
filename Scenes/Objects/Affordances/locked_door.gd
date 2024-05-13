@@ -13,7 +13,7 @@ extends StaticBody2D
 			_required_keys = [] as Array[LockedDoorKey]
 		
 		# ensure new array has no duplicates
-		var value_no_duplicates : Array[LockedDoorKey]
+		var value_no_duplicates : Array[LockedDoorKey] = []
 		for v in value:
 			if v == null || value_no_duplicates.has(v) == false:
 				value_no_duplicates.append(v)
@@ -43,6 +43,7 @@ extends StaticBody2D
 
 @onready var _sprites_container : Node2D = $Sprites
 @onready var _collider : CollisionShape2D = $CollisionShape2D
+@onready var _lock_sprite : AnimatedSprite2D = $Lock
 @onready var _detection_collider : CollisionShape2D = $DetectionArea/CollisionShape2D
 @onready var _status_label : Label = $Status
 
@@ -110,6 +111,10 @@ func _build_door():
 			elif w > 0 && w < _size.x-1 && h == _size.y-1: # bottom center
 				sprite.texture.region.position = Vector2(World.level.tile_size, World.level.tile_size * 2)
 	
+	# lock sprite
+	_lock_sprite.position = _size * World.level.tile_size / 2.0
+	_lock_sprite.scale = Vector2.ONE * min(_size.x / 2.0, _size.y / 2.0)
+	
 	var door_size : Vector2 = _size * World.level.tile_size
 	_detection_collider.shape.radius = _detection_radius
 	_detection_collider.position = door_size / 2.0
@@ -131,5 +136,6 @@ func _update_door():
 	
 	if _required_keys.size() == 0:
 		# all keys inserted!
-		# TODO: animation
+		_lock_sprite.play("unlock")
+		await _lock_sprite.animation_finished
 		queue_free()

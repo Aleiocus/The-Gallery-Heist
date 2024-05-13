@@ -12,9 +12,13 @@ extends AnimatableBody2D
 		_max_extent = max(value, 0.0)
 		_build_crusher()
 ## speed of the crush
-@export var _crush_speed : float = 50.0
+@export var _crush_time : float = 1.0 :
+	set(value):
+		_crush_time = max(value, 0.1)
 ## speed of the retraction after cushing
-@export var _retract_speed : float = 30.0
+@export var _retract_time : float = 1.0 :
+	set(value):
+		_retract_time = max(value, 0.1)
 ## cooldown time after a crush (x) and retraction (y) where the crusher will not move
 @export var _cooldown_time : Vector2 = Vector2.ONE :
 	set(value):
@@ -25,8 +29,6 @@ extends AnimatableBody2D
 	set(value):
 		_starting_offset_factor = value
 		_build_crusher()
-
-enum _State {crushing, cooldown, retracting}
 
 @onready var _chain_sprites : Node2D = $ChainSprites
 @onready var _base_sprites : Node2D = $BaseSprites
@@ -40,7 +42,6 @@ var _textures : Dictionary # {name:AtlasTexture}
 const _hurtbox_height : float = World.level.tile_size / 4.0
 const _half_tile : Vector2 = Vector2.ONE * World.level.tile_size / 2.0
 
-var _state : _State = _State.crushing
 @onready var _starting_pos : Vector2 = global_position
 var _end_pos : Vector2
 var _animation_offset_sign : int = 1
@@ -82,60 +83,65 @@ func _ready():
 	#       shows the out of sync, it only happens at the very start for some reason and only
 	#       when a scene containing the crusher is the starting scene. waiting for a bit
 	#       before starting the crusher seems to fix it but it's hacky and stupid
-	set_process(false)
 	await get_tree().process_frame
 	await get_tree().process_frame
 	await get_tree().process_frame
 	await get_tree().process_frame
-	set_process(true)
-
-func _process(delta : float):
-	if Engine.is_editor_hint(): return
 	
-	if _state == _State.crushing || _state == _State.retracting:
-		# position
-		var speed : float =\
-			(_crush_speed if _state == _State.crushing else _retract_speed) * delta
-		var target_pos : Vector2 = _end_pos if _state == _State.crushing else _starting_pos
-		global_position = global_position.move_toward(target_pos, speed)
+	var is_initial_crush : bool = true
+	var initial_crush_time : float = remap(
+		global_position.length_squared(), _starting_pos.length_squared(), _end_pos.length_squared(), _crush_time, 0.0
+	)
+	
+	while true:
+		# crush
+		_damage_area_collider.disabled = false
+		var crush_time : float = initial_crush_time if is_initial_crush else _crush_time
+		is_initial_crush = false
+		var tween : Tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+		tween.tween_method(_tween_movement, global_position, _end_pos, crush_time)
+		await tween.finished
+		_damage_area_collider.disabled = true
 		
-		# don't move chain and base sprites containers
-		_chain_sprites.global_position = _starting_pos
-		_base_sprites.global_position = _starting_pos
+		# cooldown
+		if _cooldown_time.x:
+			_cooldown_timer.wait_time = _cooldown_time.x
+			_cooldown_timer.start()
+			await _cooldown_timer.timeout
 		
-		# move chain sprites individually
-		# we instantiated all potential sprites at start so we don't remove and add sprites at runtime
-		for i in range(0, _chain_sprites.get_child_count(), 2):
-			for j in 2:
-				var chain_sprite : Sprite2D = _chain_sprites.get_child(i+j)
-				chain_sprite.position = Vector2(
-					0 if j == 0 else (_width-1) * World.level.tile_size,
-					min((i / 2.0) * World.level.tile_size, (global_position - _starting_pos).length())
-				)
+		# retract
+		tween = create_tween()
+		tween.tween_method(_tween_movement, global_position, _starting_pos, _retract_time)
+		await tween.finished
 		
-		var starting_pos_diff : Vector2 = global_position - _starting_pos
-		# expand collider to prevent passing through chains
-		_collider.shape.size.y = World.level.tile_size + starting_pos_diff.length()
-		_collider.position = -starting_pos_diff.rotated(-rotation) - _half_tile + _collider.shape.size / 2.0
-		
-		if global_position == target_pos:
-			if _state == _State.crushing && _cooldown_time.x:
-				_cooldown_timer.wait_time = _cooldown_time.x
-				_cooldown_timer.start()
-			elif _state == _State.retracting && _cooldown_time.y:
-				_cooldown_timer.wait_time = _cooldown_time.y
-				_cooldown_timer.start()
-			
-			_state = _State.cooldown
-		
-	elif _state ==_State.cooldown:
-		if _cooldown_timer.is_stopped():
-			if global_position == _starting_pos:
-				# crush
-				_state = _State.crushing
-			else:
-				# retract
-				_state = _State.retracting
+		# coodown
+		if _cooldown_time.y:
+			_cooldown_timer.wait_time = _cooldown_time.y
+			_cooldown_timer.start()
+			await _cooldown_timer.timeout
+
+func _tween_movement(target_pos : Vector2):
+	# position
+	global_position = target_pos
+	
+	# don't move chain and base sprites containers
+	_chain_sprites.global_position = _starting_pos
+	_base_sprites.global_position = _starting_pos
+	
+	# move chain sprites individually
+	# we instantiated all potential sprites at start so we don't remove and add sprites at runtime
+	for i in range(0, _chain_sprites.get_child_count(), 2):
+		for j in 2:
+			var chain_sprite : Sprite2D = _chain_sprites.get_child(i+j)
+			chain_sprite.position = Vector2(
+				0 if j == 0 else (_width-1) * World.level.tile_size,
+				min((i / 2.0) * World.level.tile_size, (global_position - _starting_pos).length())
+			)
+	
+	var starting_pos_diff : Vector2 = global_position - _starting_pos
+	# expand collider to prevent passing through chains
+	_collider.shape.size.y = World.level.tile_size + starting_pos_diff.length()
+	_collider.position = -starting_pos_diff.rotated(-rotation) - _half_tile + _collider.shape.size / 2.0
 
 func _physics_process(delta : float):
 	if Engine.is_editor_hint(): return
@@ -145,38 +151,36 @@ func _physics_process(delta : float):
 	#       count collisions after the solver moves the body out of geometry so we can't detect
 	#       both crusher and tilemap at the same time. delaying this to another time to save my sanity
 	#       for now the crusher kills on contact
-	#if _state == _State.crushing:
-		#for node in _damage_area.get_overlapping_bodies():
-			#if node is Character:
-				#if node.get_slide_collision_count() >= 2:
-					#var collision_normals : Dictionary = {} # {body:combined_col_normal, ..}
-					#for i in node.get_slide_collision_count():
-						#var col : KinematicCollision2D = node.get_slide_collision(i)
-						#if collision_normals.has(col.get_collider()) == false:
-							#collision_normals[col.get_collider()] = Vector2.ZERO
-						#collision_normals[col.get_collider()] += col.get_normal()
-					#
-					#for collider in collision_normals.keys():
-						#collision_normals[collider] = collision_normals[collider].normalized()
-					#
-					#var collision_magnitudes : Vector2 = Vector2.ZERO
-					#for collider in collision_normals.keys():
-						#collision_magnitudes += collision_normals[collider]
-					
-					#if collision_normals.keys().size() > 1:
-						#prints(
-							#node.get_slide_collision_count(), 
-							#collision_magnitudes, 
-							#collision_magnitudes.length()
-						#)
-					
-					#if collision_magnitudes.length() < 0.5:
-					#	node.take_damage(0, _knockback_direction, true)
+	#for node in _damage_area.get_overlapping_bodies():
+		#if node is Character:
+			#if node.get_slide_collision_count() >= 2:
+				#var collision_normals : Dictionary = {} # {body:combined_col_normal, ..}
+				#for i in node.get_slide_collision_count():
+					#var col : KinematicCollision2D = node.get_slide_collision(i)
+					#if collision_normals.has(col.get_collider()) == false:
+						#collision_normals[col.get_collider()] = Vector2.ZERO
+					#collision_normals[col.get_collider()] += col.get_normal()
+				#
+				#for collider in collision_normals.keys():
+					#collision_normals[collider] = collision_normals[collider].normalized()
+				#
+				#var collision_magnitudes : Vector2 = Vector2.ZERO
+				#for collider in collision_normals.keys():
+					#collision_magnitudes += collision_normals[collider]
+				
+				#if collision_normals.keys().size() > 1:
+					#prints(
+						#node.get_slide_collision_count(), 
+						#collision_magnitudes, 
+						#collision_magnitudes.length()
+					#)
+				
+				#if collision_magnitudes.length() < 0.5:
+				#	node.take_damage(0, _knockback_direction, true)
 	
-	if _state == _State.crushing:
-		for node in _damage_area.get_overlapping_bodies():
-			if node is Character:
-				node.take_damage(0, _knockback_direction, true)
+	for node in _damage_area.get_overlapping_bodies():
+		if node is Character:
+			node.take_damage(0, _knockback_direction, true)
 
 func _draw():
 	if Engine.is_editor_hint() == false: return

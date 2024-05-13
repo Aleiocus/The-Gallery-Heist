@@ -17,7 +17,7 @@ func _collected(player : Player):
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_collected_sfx.play()
 	_sprite.speed_scale = _collected_anim_scale
-	World.level.pause_manager.pause()
+	World.level.pause_manager.set_gameplay_pause(true)
 	World.level.level_camera.shake(LevelCamera.ShakeLevel.medium, _collected_shake_time)
 	
 	var camera : Camera2D = get_viewport().get_camera_2d()
@@ -27,7 +27,7 @@ func _collected(player : Player):
 	
 	await tween.finished
 	World.level.level_camera.shake(LevelCamera.ShakeLevel.medium, _collected_shake_time)
-	World.level.pause_manager.unpause()
+	World.level.pause_manager.set_gameplay_pause(false)
 	World.level.found_letter(_letter)
 	_persistent_node.detach()
 	super._collected(player)

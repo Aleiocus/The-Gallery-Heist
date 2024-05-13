@@ -180,9 +180,9 @@ func take_damage(damage : int, knockback_direction : Vector2, is_deadly : bool =
 	if applied:
 		_play_animation("Damaged")
 		World.level.interface.set_health(old_health, _health)
-		World.level.pause_manager.pause()
+		World.level.pause_manager.set_gameplay_pause(true)
 		get_tree().create_timer(_damage_pause_time).timeout.connect(
-			func(): World.level.pause_manager.unpause()
+			func(): World.level.pause_manager.set_gameplay_pause(false)
 		)
 	
 	return applied
@@ -368,9 +368,9 @@ func _state_normal_ph_process(delta : float):
 		if _jump_buffer_timer.is_stopped() == false:
 			just_jumped = true
 			_jump(_jump_force)
-	elif was_on_floor and is_on_floor() == false and just_jumped == false:
+	elif was_on_floor and is_on_floor() == false and just_jumped == false && velocity.y >= 0.0:
 		# just fell off
-		_coyote_timer.start()
+		_coyote_timer.start() 
 	
 	# wall slide
 	if (is_on_floor() == false and Input.is_action_pressed("wall_grab") and
@@ -479,7 +479,6 @@ func _state_swim_switch_to(from : String):
 	_set_can_dash(false)
 	
 	_sfx["water_ambience"].play()
-	# TODO: muffle sounds, should separate audio buses for at least Music and UI sounds
 	AudioServer.add_bus_effect(_master_bus_idx, _water_muffle_effect)
 
 func _state_swim_switch_from(to : String):

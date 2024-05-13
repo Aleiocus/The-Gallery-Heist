@@ -27,7 +27,7 @@ extends "res://Scenes/Objects/Triggers/trigger.gd"
 		queue_redraw()
 		notify_property_list_changed()
 ## the global position where the camera will idle at
-@export var _idle_position : Vector2 :
+@export var _idle_position : Vector2 : # TODO: make this a relative position
 	set(value):
 		_idle_position = value
 		queue_redraw()
@@ -58,6 +58,17 @@ extends "res://Scenes/Objects/Triggers/trigger.gd"
 const _preview_color : Color = Color("ffffff64")
 
 
+func _ready():
+	if Engine.is_editor_hint() == false: return
+	set_notify_transform(true)
+
+func _notification(what : int):
+	if Engine.is_editor_hint() == false: return
+	
+	if what == NOTIFICATION_TRANSFORM_CHANGED:
+		# trigger moved, update preview
+		queue_redraw()
+
 func _draw():
 	if Engine.is_editor_hint() == false: return
 	
@@ -76,14 +87,14 @@ func _draw():
 		)
 	
 	# TODO: visialize axis lock, and take it into accout when visualizing idle state rect
-	#       also queue a redraw when global position changes
 
 # TODO: if player enters trigger A and then enters trigger B while
 #       also partly inside trigger A, B will apply but if the player
 #       immediately goes back to the direction of trigger A, A won't
 #       apply back because _player_entered will not be called since the player
-#       never left trigger A. with me so far? this can happen if the distance
-#       between A and B is smaller than player collider size.
+#       never left trigger A. this can happen if the distance between A and B is smaller than player collider size.
+#       one solution it to keep a queue of all triggers that player is inside
+#       and when player leaves the active trigger we apply the next trigger in queue
 func apply_camera_state():
 	var camera : LevelCamera = World.level.level_camera
 	

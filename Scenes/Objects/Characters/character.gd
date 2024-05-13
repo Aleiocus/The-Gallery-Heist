@@ -22,7 +22,8 @@ var _knockback : float = 0.0
 
 func _process(delta : float):
 	if _damage_cooldown_timer.is_stopped() == false:
-		# TODO: should only modulate sprite rather than everything
+		# TODO: should only modulate character sprite rather than every node
+		#       this can be fixed by having a sprite in this class for all characters
 		modulate.a = (sin(_damage_cooldown_timer.time_left * 10.0) + 1.0) / 2.0
 
 # override

@@ -15,6 +15,7 @@ enum State {idle, follow, insert}
 var _owner_door : LockedDoor = null
 var _state : State = State.idle
 const _keys_avoidance_offset : float = 400.0
+const _min_player_distance : float = 14.0
 const _follow_lerp_factor : float = 2.0
 const _insert_tween_time : float = 1.2
 
@@ -59,12 +60,15 @@ func _process(delta : float):
 	if Engine.is_editor_hint(): return
 	
 	if _state == State.follow:
-		var target_pos : Vector2 = World.level.player.global_position
-		for area in get_overlapping_areas():
-			if area is LockedDoorKey:
-				target_pos += (global_position - area.global_position).normalized() * _keys_avoidance_offset * delta
-		
-		global_position = lerp(global_position, target_pos, _follow_lerp_factor * delta)
+		var player_distance : float = global_position.distance_to(World.level.player.global_position)
+		if player_distance >= _min_player_distance:
+			var target_pos : Vector2 = World.level.player.global_position
+			for area in get_overlapping_areas():
+				if area is LockedDoorKey:
+					# avoid other keys
+					target_pos += (global_position - area.global_position).normalized() * _keys_avoidance_offset * delta
+			
+			global_position = lerp(global_position, target_pos, _follow_lerp_factor * delta)
 
 func _draw():
 	if Engine.is_editor_hint() == false: return
