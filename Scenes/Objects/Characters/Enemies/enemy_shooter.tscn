@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://ce4h136bmjo5y"]
+
+[ext_resource type="PackedScene" uid="uid://j6dd7mgd0p3w" path="res://Scenes/Objects/Characters/Enemies/enemy.tscn" id="1_nm536"]
+[ext_resource type="Script" path="res://Scenes/Objects/Characters/Enemies/enemy_shooter.gd" id="2_nm4hd"]
+[ext_resource type="Texture2D" uid="uid://cnjoqd3xmo1p4" path="res://Resources/Textures/Characters/Enemies/Frog_Idle.png" id="3_00mw2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47jpg"]
+size = Vector2(24, 26)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_warbq"]
+radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yw7ub"]
+atlas = ExtResource("3_00mw2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uegmk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yw7ub")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s7tif"]
+resource_local_to_scene = true
+radius = 80.0
+
+[node name="EnemyShooter" instance=ExtResource("1_nm536")]
+script = ExtResource("2_nm4hd")
+_shoot_direction = 3
+_detection_radius = 80.0
+_shooting_cooldown = 0.1
+_projectile_force = 64.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_47jpg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape2D_warbq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_uegmk")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="DetectionArea" type="Area2D" parent="." index="5"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0"]
+shape = SubResource("CircleShape2D_s7tif")
+
+[node name="ShootCooldown" type="Timer" parent="." index="6"]
+one_shot = true
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

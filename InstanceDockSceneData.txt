@@ -61,6 +61,8 @@
 "scene": "res://Scenes/Objects/Characters/Enemies/enemy_platform_hugger.tscn"
 }, {
 "scene": "res://Scenes/Objects/Characters/Enemies/enemy_fish.tscn"
+}, {
+"scene": "res://Scenes/Objects/Characters/Enemies/enemy_shooter.tscn"
 }]
 }, {
 "name": "Triggers",

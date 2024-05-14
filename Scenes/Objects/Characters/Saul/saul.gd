@@ -6,6 +6,7 @@ signal interacted
 
 @onready var _cling_timer : Timer = $Timers/ClingTime
 @onready var _coyote_timer : Timer = $Timers/CoyoteTimer
+@onready var _variable_jump_timer : Timer = $Timers/VariableJumpTimer
 @onready var _jump_buffer_timer : Timer = $Timers/JumpBufferTimer
 @onready var _dash_cooldown : Timer = $Timers/DashCooldown
 @onready var _dash_timer : Timer = $Timers/DashTimer
@@ -39,7 +40,8 @@ const _max_move_speed : float = 250.0
 const _max_fall_speed : float = 860.0
 const _accel : float = 450.0
 const _decel : float = 1000.0
-const _jump_force : float = 260.0
+const _jump_force : float = 300.0
+const _variable_jump_cutoff : float = 0.5
 const _run_anim_threshold : float = 150.0
 const _slide_speed : float = 60.0
 const _slide_speed_fast : float = 120.0
@@ -233,6 +235,7 @@ func _jump(force : float, replace_veloctiy : bool = false):
 		velocity.y = -force
 	else:
 		velocity.y = Utilities.soft_clamp(velocity.y, -force, force)
+	_variable_jump_timer.start()
 	_jump_particles.restart()
 	_sfx["jump"].play()
 
@@ -366,11 +369,19 @@ func _state_normal_ph_process(delta : float):
 	if was_on_floor == false and is_on_floor():
 		# just landed
 		if _jump_buffer_timer.is_stopped() == false:
+			_jump_buffer_timer.stop()
 			just_jumped = true
 			_jump(_jump_force)
 	elif was_on_floor and is_on_floor() == false and just_jumped == false && velocity.y >= 0.0:
 		# just fell off
 		_coyote_timer.start() 
+	
+	# variable jump cutoff
+	if Input.is_action_just_released("jump") && _variable_jump_timer.is_stopped() == false:
+		_variable_jump_timer.stop()
+		if velocity.y < 0.0:
+			# multiply y velocity by a limiting factor to cutoff the jump force
+			velocity.y *= _variable_jump_cutoff
 	
 	# wall slide
 	if (is_on_floor() == false and Input.is_action_pressed("wall_grab") and
@@ -487,10 +498,11 @@ func _state_swim_switch_from(to : String):
 		# changing. this kicks the player up when they leave
 		velocity.y = Utilities.soft_clamp(velocity.y, -_out_of_water_push, _out_of_water_push)
 		_collider.shape.size = _default_collider_size
-		_bubbles_particles.emitting = false
 		World.level.interface.set_air_active(false)
 		World.level.interface.set_air(_air, _max_air)
 		_set_can_dash(true)
+		_jump_buffer_timer.stop()
+		_bubbles_particles.emitting = false
 		_air = _max_air
 		_water_timer.stop()
 		_sfx["water_ambience"].stop()
@@ -517,8 +529,6 @@ func _state_swim_ph_process(delta : float):
 	else:
 		_play_animation("Water Idle")
 	
-	move_and_slide()
-	
 	# surface
 	var is_on_surface : bool =\
 		World.level.is_breathable_tile(global_position - Vector2(0.0, World.level.tile_size))
@@ -527,9 +537,18 @@ func _state_swim_ph_process(delta : float):
 	
 	_bubbles_particles.emitting = (is_on_surface == false and is_3_tiles_from_surface == false)
 	
-	if is_3_tiles_from_surface && Input.is_action_just_pressed("jump"):
-		# TODO: repurpose jump buffer timer for this
-		_jump(_jump_force)
+	if Input.is_action_just_pressed("jump"):
+		if is_3_tiles_from_surface:
+			_jump(_jump_force)
+		else:
+			_jump_buffer_timer.start()
+	else:
+		if is_3_tiles_from_surface && _jump_buffer_timer.is_stopped() == false:
+			# apply jump buffer
+			_jump_buffer_timer.stop()
+			_jump(_jump_force)
+	
+	move_and_slide()
 	
 	if is_on_surface:
 		if _was_on_water_surface == false:

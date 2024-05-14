@@ -9,6 +9,7 @@ extends Area2D
 		_damage = max(value, 0)
 @export var _gravity : float
 @export var _damping : float = 1.0
+@export var _ignore_solid_objects : bool = false
 @export var _rotate_to_face_direction : bool = true
 
 @onready var _lifetime_timer : Timer = $Lifetime
@@ -38,7 +39,7 @@ func _physics_process(delta : float):
 	
 	_velocity.y += _gravity
 	_velocity *= _damping
-	position += _velocity
+	position += _velocity * delta
 	
 	if _rotate_to_face_direction:
 		rotation = _velocity.angle()
@@ -54,9 +55,11 @@ func _on_body_entered(body : Node2D):
 	if body in _ignore:
 		return
 	
-	if body is PhysicsBody2D || body is TileMap:
-		if body is Character:
+	if body is Character:
+		var damage_taken : bool =\
 			body.take_damage(_damage, (body.global_position - global_position).normalized())
+		if damage_taken:
 			_impact(body)
-		else:
-			_impact(null)
+	
+	elif _ignore_solid_objects == false:
+		_impact(null)

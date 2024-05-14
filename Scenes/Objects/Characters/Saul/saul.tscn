@@ -754,34 +754,38 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[node name="DashTimer" type="Timer" parent="Timers" index="2"]
+[node name="VariableJumpTimer" type="Timer" parent="Timers" index="2"]
+wait_time = 0.6
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="Timers" index="3"]
 wait_time = 0.26
 one_shot = true
 
-[node name="DashCooldown" type="Timer" parent="Timers" index="3"]
+[node name="DashCooldown" type="Timer" parent="Timers" index="4"]
 wait_time = 0.3
 one_shot = true
 
-[node name="ClingTime" type="Timer" parent="Timers" index="4"]
+[node name="ClingTime" type="Timer" parent="Timers" index="5"]
 wait_time = 0.5
 one_shot = true
 
-[node name="FootstepTimer" type="Timer" parent="Timers" index="6"]
+[node name="FootstepTimer" type="Timer" parent="Timers" index="7"]
 one_shot = true
 
-[node name="CancelSlideDelay" type="Timer" parent="Timers" index="7"]
+[node name="CancelSlideDelay" type="Timer" parent="Timers" index="8"]
 wait_time = 0.1
 one_shot = true
 
-[node name="WallGrabCooldown" type="Timer" parent="Timers" index="8"]
+[node name="WallGrabCooldown" type="Timer" parent="Timers" index="9"]
 wait_time = 0.06
 one_shot = true
 
-[node name="WaterTimer" type="Timer" parent="Timers" index="9"]
+[node name="WaterTimer" type="Timer" parent="Timers" index="10"]
 wait_time = 2.2
 one_shot = true
 
-[node name="LookOffsetTimer" type="Timer" parent="Timers" index="10"]
+[node name="LookOffsetTimer" type="Timer" parent="Timers" index="11"]
 wait_time = 0.4
 one_shot = true
 
