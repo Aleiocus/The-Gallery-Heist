@@ -16,6 +16,11 @@ const _transition_positions : Dictionary = {
 var _transition_tween : Tween
 const _tween_time : float = 0.8
 const _transition_tex_scale : Vector2 = Vector2.ONE * 4.0
+const _transition_tex_size : Vector2 = Vector2(320, 320) # based on transition template size
+
+func _ready():
+	position = _transition_positions["center"]
+	scale = _transition_tex_scale
 
 func transition():
 	# setup
@@ -41,7 +46,6 @@ func transition():
 			_transition_tween.tween_property(self, "position", _transition_positions["center"], _tween_time)\
 				.from(_transition_positions["down"])
 		_TransitionDirection.scaled:
-			# TODO: if the first ever transition is a scale transition, the rect starts in a wrong position
 			_transition_tween.tween_property(self, "scale", _transition_tex_scale, _tween_time)\
 				.from(Vector2.ZERO)
 	await _transition_tween.finished

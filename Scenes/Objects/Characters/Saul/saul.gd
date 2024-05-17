@@ -470,7 +470,7 @@ func _state_dash_switch_from(to: String):
 func _state_dash_ph_process(delta: float):
 	move_and_slide()
 	
-	if _dash_timer.is_stopped() or is_on_wall():
+	if _dash_timer.is_stopped():
 		_state_machine.change_state("normal")
 		return
 	
@@ -496,16 +496,19 @@ func _state_swim_switch_from(to : String):
 	if to != "dummy":
 		# if player leaves water with a slow speed they'll fall right back leading to state continuously
 		# changing. this kicks the player up when they leave
+		# TODO: only push when leaving the water while going up, level designers have proven
+		#       that they'll break logic and make it possible to exit from under or side of the water tile
 		velocity.y = Utilities.soft_clamp(velocity.y, -_out_of_water_push, _out_of_water_push)
 		_collider.shape.size = _default_collider_size
+		_sfx["water_ambience"].stop()
+		
 		World.level.interface.set_air_active(false)
 		World.level.interface.set_air(_air, _max_air)
-		_set_can_dash(true)
+		_air = _max_air
 		_jump_buffer_timer.stop()
 		_bubbles_particles.emitting = false
-		_air = _max_air
+		_set_can_dash(true)
 		_water_timer.stop()
-		_sfx["water_ambience"].stop()
 	
 	AudioServer.remove_bus_effect(0, 0)
 

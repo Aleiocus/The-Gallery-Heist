@@ -83,6 +83,7 @@ func _on_detection_body_entered(body : Node2D):
 		_timer.wait_time = _destroy_time / _stages_count
 		_on_timer_timeout()
 
+# TODO: account for export timers being 0.0
 func _on_timer_timeout():
 	match _current_state:
 		_State.destoy:

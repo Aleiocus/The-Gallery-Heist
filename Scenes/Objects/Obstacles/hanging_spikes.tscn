@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ks2b8lp58x7d"]
 
-[ext_resource type="Script" path="res://Scenes/Objects/Obstacles/HangingSpikes.gd" id="1_j1map"]
+[ext_resource type="Script" path="res://Scenes/Objects/Obstacles/hanging_spikes.gd" id="1_j1map"]
 [ext_resource type="Texture2D" uid="uid://cqp8wwddxyo2h" path="res://Resources/Textures/hanging_spikes (Petit Renard).png" id="2_sxgk4"]
 [ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/Characters/hurtbox.tscn" id="3_tjkxt"]
 

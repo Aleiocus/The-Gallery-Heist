@@ -101,6 +101,10 @@ func _ready():
 		var tween : Tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 		tween.tween_method(_tween_movement, global_position, _end_pos, crush_time)
 		await tween.finished
+		# wait 2 physics frames before disabling to allow collider time to update bodies in range
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+		await get_tree().physics_frame
 		_damage_area_collider.disabled = true
 		
 		# cooldown
@@ -261,6 +265,8 @@ func _build_crusher():
 	
 	queue_redraw()
 
+# TODO: only animate chains when the crusher is moving, gonna need a different
+#       approach to animating
 func _on_animation_timer_timeout():
 	# manual animation using _animation_offset_sign as a shift multiplier
 	# that's what I get for wanting maximum customization

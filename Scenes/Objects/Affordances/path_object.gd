@@ -18,8 +18,15 @@ class_name PathObject
 ## the start factor between the start and end position
 @onready var _path_follow : PathFollow2D = $PathFollow2D
 
+# TODO: "zero length interval" error in some levels. doesn't seem to be because
+#       curve resource is missing or has no points
+
 func _ready():
 	if Engine.is_editor_hint(): return
+	
+	if curve == null:
+		push_error("Path object has no curve set")
+		return
 	
 	# speed is in pixel rather than ratio in order to easily control it and so
 	# that changing path length doesn't affect it

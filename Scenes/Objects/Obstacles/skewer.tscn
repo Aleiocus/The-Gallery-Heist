@@ -1,0 +1,119 @@
+[gd_scene load_steps=15 format=3 uid="uid://hpgje3i7vp2d"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Obstacles/skewer.gd" id="1_nwku5"]
+[ext_resource type="Texture2D" uid="uid://dksribt4e3rgg" path="res://Resources/Textures/Skewer-Sheet.png" id="2_0qxw5"]
+[ext_resource type="PackedScene" uid="uid://caabhgsckx3p8" path="res://Scenes/Objects/Characters/hurtbox.tscn" id="2_q6xao"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ah20y"]
+atlas = ExtResource("2_0qxw5")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdv4r"]
+atlas = ExtResource("2_0qxw5")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rox1n"]
+atlas = ExtResource("2_0qxw5")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqi6l"]
+atlas = ExtResource("2_0qxw5")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gecu"]
+atlas = ExtResource("2_0qxw5")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vuei"]
+atlas = ExtResource("2_0qxw5")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx1w3"]
+atlas = ExtResource("2_0qxw5")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ba5i6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ah20y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdv4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rox1n")
+}],
+"loop": false,
+"name": &"extend",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqi6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gecu")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"retract",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vuei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx1w3")
+}],
+"loop": false,
+"name": &"stab",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5xtm"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yke3"]
+atlas = ExtResource("2_0qxw5")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0x04"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[node name="Skewer" type="Area2D"]
+script = ExtResource("1_nwku5")
+_height = 1
+_sprite_frames = SubResource("SpriteFrames_ba5i6")
+
+[node name="HurtBox" parent="." instance=ExtResource("2_q6xao")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_h5xtm")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = SubResource("AtlasTexture_1yke3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_e0x04")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

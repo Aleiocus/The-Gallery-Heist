@@ -1,43 +1,13 @@
 --- Search Cheat-Sheet ---
 
+TODO: unfinished, see empty entries bellow
+
 - Finding your scene -
 labyrinth_*yourname*
 
-Note: You can find all tools bellow in the "Instances" tab in the bottom left panel for ease of use.
+Note: You can find all tools and enemies in the "Instances" tab in the editor for ease of use.
 
-- Affordances -
-checkpoint
-launch_pad
-platform_path_object
-launch_pad_path_object
-trap_path_object
-spikes
-spikes_path_object
-dash_disabler
-hanging_spikes
-unstable_platform
-teleporter
-
-- Collectables -
-collectable_stack
-collectable_coin
-collectable_curry
-collectable_dash_refiller
-collectable_egg
-collectable_SAUL
-collectable_dark_link
-
-- Enemies -
-enemy_patrolling
-enemy_flying
-enemy_platform_hugger
-
-- Other Tools -
-trigger_camera
-trigger_music
-
-
---- Now, Explainations ---
+--- Explainations of available mechanics ---
 
 - Affordances -
 checkpoint === place these to give Saul a place to re-start from, I feel like most people know what this is.
@@ -62,6 +32,10 @@ unstable_platform === platforms that crumble when Saul stands on them, use Count
 
 teleporter === drag and drop another teleporter into the target slot and when the player interacts with this object Saul will teleport! just don't move him more than 1000 pixels away at a time (glitches occur)
 
+crusher === 
+
+scewer ===
+
 - Collectables -
 collectable_coin === a basic staple of the platformer, use these to help guide the player around. (tap into their gamer instincts)
 
@@ -84,7 +58,13 @@ enemy_flying === This enemy will need a path2d in order to move and after you cr
 
 enemy_platform_hugger === This enemy will stick to whatever platform you place it on and cling to it as it moves ever forward.
 
+enemy_fish === 
+
+enemy_shooter === 
+
 - Other Tools -
 trigger_camera === Place a trigger camera to change the camera state. You may want a fixed or a moving camera, or change between each for your designs. You will need to add a collision shape as a child to the trigger for it to work, There are a lot of settings for the camera state and we might make it a little easier in the future, for now ask Void or Val in the discord for help getting it right.
 
 trigger_music === Same as the camera just for music, more music to be added soon. (if you have a contribution that is not some copywrite or other work that will cause us issues feel free to help out)
+
+trigger_dialogue === 

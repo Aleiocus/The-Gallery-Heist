@@ -1442,25 +1442,17 @@ _count = 42
 [node name="Obstacles#UnstablePlatform" parent="." index="99" instance=ExtResource("14_nssuu")]
 position = Vector2(1012, -257)
 _count = 3
-_destroy_time = 3.2
-_restore_time = 1.6
 
 [node name="Obstacles#UnstablePlatform3" parent="." index="100" instance=ExtResource("14_nssuu")]
 position = Vector2(744, -337)
-_destroy_time = 3.2
-_restore_time = 1.6
 
 [node name="Obstacles#UnstablePlatform4" parent="." index="101" instance=ExtResource("14_nssuu")]
 position = Vector2(834, -287)
 _count = 4
-_destroy_time = 3.2
-_restore_time = 1.6
 
 [node name="Obstacles#UnstablePlatform5" parent="." index="102" instance=ExtResource("14_nssuu")]
 position = Vector2(729, -238)
 _count = 3
-_destroy_time = 3.2
-_restore_time = 1.6
 
 [node name="Obstacles#DashDisabler" parent="." index="103" instance=ExtResource("17_ntf35")]
 position = Vector2(3019, -801)

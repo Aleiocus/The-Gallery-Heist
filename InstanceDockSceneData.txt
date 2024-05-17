@@ -32,6 +32,8 @@
 }, {
 "scene": "res://Scenes/Objects/Obstacles/crusher.tscn"
 }, {
+"scene": "res://Scenes/Objects/Obstacles/skewer.tscn"
+}, {
 "scene": "res://Scenes/Objects/Obstacles/killzone.tscn"
 }]
 }, {
