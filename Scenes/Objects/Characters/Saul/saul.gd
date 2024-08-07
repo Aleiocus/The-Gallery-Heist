@@ -38,8 +38,8 @@ var _default_collider_size : Vector2
 var _facing : Vector2 = Vector2.RIGHT
 const _max_move_speed : float = 250.0
 const _max_fall_speed : float = 860.0
-const _accel : float = 450.0
-const _decel : float = 1000.0
+const _accel : float = 680.0
+const _decel : float = 500.0
 const _jump_force : float = 300.0
 const _variable_jump_cutoff : float = 0.5
 const _run_anim_threshold : float = 150.0
@@ -314,13 +314,13 @@ func _state_normal_ph_process(delta : float):
 	
 	if _direction.x:
 		velocity.x = Utilities.soft_clamp(velocity.x, _accel * delta * sign(_direction.x), _max_move_speed)
-	else:
+	
 		# TODO: decel exploit. we only apply horizontal decel if no vertical input is held which leads
 		#       to decel working differently when releasing movement key vs holding key of other direction
 		#       this leads to weird precision and an exploit with wall jumping while moving towards the wall.
 		#       the solution is to apply deceleration at all times like in real life. it will also requires
 		#       increasing speed values to acount for the constant deceleration
-		velocity.x = Utilities.soft_clamp(velocity.x, _decel * delta * -sign(velocity.x), 0.0)
+	velocity.x = Utilities.soft_clamp(velocity.x, _decel * delta * -sign(velocity.x), 0.0)
 	
 	_walk_dust_particles.emitting = is_on_floor() and velocity.x > 230 or is_on_floor() and velocity.x < -230
 	
